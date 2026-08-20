@@ -21,47 +21,47 @@
   --red:#b42318;
   --redbg:#fff0ef;
   --shadow:0 8px 28px rgba(18,31,53,.07);
-  --r:18px
+  --r:18px;
 }
 
 *{
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 body{
   margin:0;
   background:var(--bg);
   color:var(--text);
-  font:14px Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif
+  font:14px Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
 }
 
 .container{
   max-width:1180px;
   margin:auto;
-  padding:24px 18px 60px
+  padding:24px 18px 60px;
 }
 
 nav{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:28px
+  margin-bottom:28px;
 }
 
 .logo{
   font-size:22px;
   font-weight:850;
-  letter-spacing:-.7px
+  letter-spacing:-.7px;
 }
 
 .logo span{
-  color:var(--blue)
+  color:var(--blue);
 }
 
 .navright{
   display:flex;
   gap:8px;
-  align-items:center
+  align-items:center;
 }
 
 .pill{
@@ -70,11 +70,11 @@ nav{
   border-radius:999px;
   padding:8px 12px;
   color:var(--muted);
-  font-size:12px
+  font-size:12px;
 }
 
 .hero{
-  margin-bottom:22px
+  margin-bottom:22px;
 }
 
 .eyebrow{
@@ -82,27 +82,27 @@ nav{
   font-size:12px;
   font-weight:800;
   text-transform:uppercase;
-  letter-spacing:.09em
+  letter-spacing:.09em;
 }
 
 h1{
   font-size:38px;
   line-height:1.05;
   letter-spacing:-1.5px;
-  margin:7px 0
+  margin:7px 0;
 }
 
 .sub{
   max-width:760px;
   color:var(--muted);
   font-size:15px;
-  line-height:1.55
+  line-height:1.55;
 }
 
 .grid{
   display:grid;
   grid-template-columns:1.1fr .9fr;
-  gap:16px
+  gap:16px;
 }
 
 .card{
@@ -110,11 +110,11 @@ h1{
   border:1px solid var(--line);
   border-radius:var(--r);
   box-shadow:var(--shadow);
-  padding:20px
+  padding:20px;
 }
 
 .full{
-  grid-column:1/-1
+  grid-column:1/-1;
 }
 
 .label{
@@ -122,53 +122,53 @@ h1{
   color:var(--muted);
   font-weight:750;
   letter-spacing:.06em;
-  text-transform:uppercase
+  text-transform:uppercase;
 }
 
 .big{
   font-size:46px;
   font-weight:850;
   letter-spacing:-2px;
-  margin:4px 0
+  margin:4px 0;
 }
 
 .small{
   color:var(--muted);
-  font-size:12px
+  font-size:12px;
 }
 
 .good{
-  color:var(--green)
+  color:var(--green);
 }
 
 .warn{
-  color:var(--amber)
+  color:var(--amber);
 }
 
 .bad{
-  color:var(--red)
+  color:var(--red);
 }
 
 .status{
   display:flex;
   gap:9px;
   align-items:center;
-  margin:10px 0 2px
+  margin:10px 0 2px;
 }
 
 .dot{
   width:10px;
   height:10px;
   border-radius:50%;
-  background:var(--green)
+  background:var(--green);
 }
 
 .statusText{
-  font-weight:800
+  font-weight:800;
 }
 
 .rows{
-  margin-top:15px
+  margin-top:15px;
 }
 
 .row{
@@ -176,17 +176,17 @@ h1{
   justify-content:space-between;
   gap:15px;
   padding:10px 0;
-  border-bottom:1px solid var(--line)
+  border-bottom:1px solid var(--line);
 }
 
 .row:last-child{
-  border:0
+  border:0;
 }
 
 h2{
   font-size:18px;
   letter-spacing:-.4px;
-  margin:0 0 14px
+  margin:0 0 14px;
 }
 
 input,
@@ -197,17 +197,17 @@ select{
   border-radius:11px;
   background:#fff;
   font-size:14px;
-  color:var(--text)
+  color:var(--text);
 }
 
 .field{
-  margin-bottom:11px
+  margin-bottom:11px;
 }
 
 .formgrid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px
+  gap:10px;
 }
 
 button{
@@ -215,24 +215,24 @@ button{
   border-radius:11px;
   padding:11px 14px;
   font-weight:800;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .primary{
   background:var(--blue);
-  color:#fff
+  color:#fff;
 }
 
 .secondary{
   background:#eef1f5;
-  color:var(--text)
+  color:var(--text);
 }
 
 .actions{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
-  margin-top:13px
+  margin-top:13px;
 }
 
 .tag{
@@ -242,17 +242,17 @@ button{
   font-size:11px;
   font-weight:800;
   background:var(--greenbg);
-  color:var(--green)
+  color:var(--green);
 }
 
 .tag.amber{
   background:var(--amberbg);
-  color:var(--amber)
+  color:var(--amber);
 }
 
 .tag.red{
   background:var(--redbg);
-  color:var(--red)
+  color:var(--red);
 }
 
 .scenario{
@@ -260,24 +260,24 @@ button{
   padding:14px;
   border:1px solid var(--line);
   background:#fafbfc;
-  border-radius:14px
+  border-radius:14px;
 }
 
 .scenarioGrid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px
+  gap:10px;
 }
 
 .scenarioBox{
   padding:12px;
   border-radius:12px;
   background:#fff;
-  border:1px solid var(--line)
+  border:1px solid var(--line);
 }
 
 .scenarioBox b{
-  font-size:21px
+  font-size:21px;
 }
 
 .chart{
@@ -285,7 +285,7 @@ button{
   display:flex;
   align-items:flex-end;
   gap:10px;
-  padding:14px 2px 0
+  padding:14px 2px 0;
 }
 
 .barwrap{
@@ -297,18 +297,18 @@ button{
   align-items:center;
   gap:6px;
   color:var(--muted);
-  font-size:10px
+  font-size:10px;
 }
 
 .bar{
   width:100%;
   max-width:42px;
   border-radius:7px 7px 3px 3px;
-  background:#9bbcf5
+  background:#9bbcf5;
 }
 
 .bar.save{
-  background:#77c893
+  background:#77c893;
 }
 
 .rec{
@@ -316,24 +316,24 @@ button{
   border:1px solid #d5e3ff;
   padding:14px;
   border-radius:14px;
-  line-height:1.5
+  line-height:1.5;
 }
 
 .note{
   color:var(--muted);
   line-height:1.5;
-  font-size:12px
+  font-size:12px;
 }
 
 .plus{
   border:1px dashed #b8c9ec;
-  background:#fbfdff
+  background:#fbfdff;
 }
 
 .plus ul{
   padding-left:18px;
   color:var(--muted);
-  line-height:1.8
+  line-height:1.8;
 }
 
 .locked{
@@ -344,47 +344,47 @@ button{
   padding:16px;
   border:1px dashed #c8d5eb;
   border-radius:14px;
-  background:#fff
+  background:#fff;
 }
 
 .lock{
   font-size:20px;
-  margin-bottom:5px
+  margin-bottom:5px;
 }
 
 .footer{
   text-align:center;
   color:var(--muted);
   font-size:11px;
-  margin-top:18px
+  margin-top:18px;
 }
 
 @media(max-width:820px){
 
   .grid{
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
   }
 
   .full{
-    grid-column:auto
+    grid-column:auto;
   }
 
   h1{
-    font-size:32px
+    font-size:32px;
   }
 
   .formgrid,
   .scenarioGrid{
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
   }
 
   .navright .pill{
-    display:none
+    display:none;
   }
 
   .locked{
     align-items:flex-start;
-    flex-direction:column
+    flex-direction:column;
   }
 }
 </style>
@@ -393,8 +393,6 @@ button{
 <body>
 
 <div class="container">
-
-<!-- NAVIGATION -->
 
 <nav>
 
@@ -416,8 +414,6 @@ button{
 
 </nav>
 
-
-<!-- HERO -->
 
 <section class="hero">
 
@@ -586,7 +582,6 @@ button{
     Test a purchase before you commit. Replace the example with any purchase you are considering.
   </p>
 
-
   <div class="formgrid">
 
     <div class="field">
@@ -649,11 +644,9 @@ button{
 
   </div>
 
-
   <button class="primary" onclick="runScenario()">
     Run What-If
   </button>
-
 
   <div class="scenario" id="scenario">
 
@@ -670,7 +663,6 @@ button{
     </div>
 
   </div>
-
 
   <p class="note">
     Free users get limited What-If scenarios. ClearSpend Plus will include unlimited scenarios and deeper projections.
@@ -698,7 +690,6 @@ button{
     Based on this month's inputs, you have room for flexible spending while still funding your stated savings allocation.
 
   </div>
-
 
   <div class="actions">
 
@@ -729,7 +720,6 @@ button{
 
   </div>
 
-
   <div class="chart">
 
     <div class="barwrap">
@@ -759,7 +749,6 @@ button{
 
   </div>
 
-
   <div class="rows">
 
     <div class="row">
@@ -778,7 +767,6 @@ button{
     </div>
 
   </div>
-
 
   <p class="note">
     Plus will add deeper history, category trends, future projections and more detailed insights.
@@ -880,11 +868,7 @@ button{
     ClearSpend Plus — Coming Soon
   </h2>
 
-
   <div class="scenarioGrid">
-
-
-    <!-- FREE -->
 
     <div class="scenarioBox">
 
@@ -914,8 +898,6 @@ button{
 
     </div>
 
-
-    <!-- PLUS -->
 
     <div class="scenarioBox">
 
@@ -955,7 +937,6 @@ button{
 
   </div>
 
-
   <p>
     <b>
       $9.99/month target price
@@ -973,9 +954,7 @@ button{
 
 
 <div class="footer">
-
   ClearSpend · Educational planning tool, not financial advice.
-
 </div>
 
 </div>
@@ -1032,18 +1011,14 @@ function updateAll(){
   document.getElementById('safe').textContent =
     money(safe);
 
-
   document.getElementById('incomeOut').textContent =
     money(v.income);
-
 
   document.getElementById('billsOut').textContent =
     '−' + money(v.bills);
 
-
   document.getElementById('savingsOut').textContent =
     '−' + money(v.savings);
-
 
   document.getElementById('lifeOut').textContent =
     '−' + money(v.life);
@@ -1052,10 +1027,8 @@ function updateAll(){
   const status =
     document.getElementById('status');
 
-
   const reason =
     document.getElementById('statusReason');
-
 
   const dot =
     document.querySelector('.dot');
@@ -1145,15 +1118,12 @@ function runScenario(){
 
   updateAll();
 
-
   const v =
     vals();
-
 
   const monthly =
     (+document.getElementById('payment').value || 0) +
     (+document.getElementById('extra').value || 0);
-
 
   const current =
     Math.max(
@@ -1164,22 +1134,18 @@ function runScenario(){
       v.life
     );
 
-
   const after =
     Math.max(
       0,
       current - monthly
     );
 
-
   const name =
     document.getElementById('purchaseName').value ||
     'Purchase';
 
-
   const price =
     +document.getElementById('price').value || 0;
-
 
   const impact =
     current
@@ -1188,7 +1154,6 @@ function runScenario(){
 
 
   let tag;
-
 
   if(impact <= 35){
 
@@ -1336,138 +1301,3 @@ runScenario();
 
 </body>
 </html>
-<div class="grid">
-<section class="card">
-<div class="label">Safe to spend before next paycheck</div>
-<div class="big good" id="safe">$910</div>
-<div class="status"><span class="dot"></span><span class="statusText" id="status">Comfortable</span></div>
-<div class="small" id="statusReason">Your planned commitments leave healthy flexible spending room.</div>
-<div class="rows">
-<div class="row"><span>Next paycheck</span><b id="incomeOut">$2,100</b></div>
-<div class="row"><span>Bills before payday</span><b id="billsOut">−$740</b></div>
-<div class="row"><span>Savings allocation</span><b id="savingsOut">−$200</b></div>
-<div class="row"><span>Food & gas</span><b id="lifeOut">−$250</b></div>
-</div>
-</section>
-
-<section class="card">
-<h2>Quick inputs</h2>
-<div class="formgrid">
-<div class="field"><div class="label">Next paycheck</div><input id="income" type="number" value="2100"></div>
-<div class="field"><div class="label">Bills before payday</div><input id="bills" type="number" value="740"></div>
-<div class="field"><div class="label">Savings this pay</div><input id="savings" type="number" value="200"></div>
-<div class="field"><div class="label">Food & gas</div><input id="life" type="number" value="250"></div>
-</div>
-<button class="primary" onclick="updateAll()">Update ClearSpend</button>
-<p class="note">ClearSpend uses manual inputs only. No financial data are collected.</p>
-</section>
-
-<section class="card">
-<h2>What if I buy something?</h2>
-<p class="note">Test a purchase before you commit. ClearSpend compares your current flexibility with the modeled monthly impact.</p>
-<div class="formgrid">
-<div class="field"><div class="label">Purchase</div><input id="purchaseName" value="New car"></div>
-<div class="field"><div class="label">Monthly payment</div><input id="payment" type="number" value="720"></div>
-<div class="field"><div class="label">Extra insurance + fuel</div><input id="extra" type="number" value="180"></div>
-<div class="field"><div class="label">Upfront cost</div><input id="upfront" type="number" value="8000"></div>
-</div>
-<button class="primary" onclick="runScenario()">Run What-If</button>
-<div class="scenario" id="scenario">
-<span class="tag amber">Big decision</span>
-<div style="margin-top:9px"><b>New car</b> would reduce monthly flexible spending by <b>$900</b>.</div>
-</div>
-</section>
-
-<section class="card">
-<h2>ClearSpend recommendation</h2>
-<div class="rec" id="rec"><b>🟢 You're in a comfortable position.</b><br>Based on this month's inputs, you have room for flexible spending while still funding your stated savings allocation.</div>
-<div class="actions"><button class="secondary" onclick="runScenario()">See purchase impact</button></div>
-</section>
-
-<section class="card full">
-<h2>Monthly money trend</h2>
-<div class="note">The goal isn't to give you more charts. It's to answer: <b>am I getting better or worse?</b></div>
-<div class="chart">
-<div class="barwrap"><div class="bar" style="height:58%"></div><span>Apr</span></div>
-<div class="barwrap"><div class="bar" style="height:51%"></div><span>May</span></div>
-<div class="barwrap"><div class="bar" style="height:65%"></div><span>Jun</span></div>
-<div class="barwrap"><div class="bar save" style="height:49%"></div><span>Jul</span></div>
-<div class="barwrap"><div class="bar save" style="height:75%"></div><span>Aug</span></div>
-</div>
-<div class="rows">
-<div class="row"><span>August income</span><b>$4,800 ↑ 3%</b></div>
-<div class="row"><span>August spending</span><b>$3,620 ↓ 7%</b></div>
-<div class="row"><span>August savings</span><b class="good">$1,180 ↑ 18%</b></div>
-</div>
-</section>
-
-<section class="card">
-<h2>Goals</h2>
-<div class="goal">
-<div style="display:flex;justify-content:space-between"><b>Emergency fund</b><span class="small">$6,500 / $10,000</span></div>
-<div class="progress"><i style="width:65%"></i></div>
-<div class="small">At $400/month → estimated completion <b>June 2027</b></div>
-</div>
-<div class="goal">
-<div style="display:flex;justify-content:space-between"><b>Vacation</b><span class="small">$1,200 / $2,500</span></div>
-<div class="progress"><i style="width:48%"></i></div>
-<div class="small">At $260/month → estimated completion <b>January 2027</b></div>
-</div>
-<div class="actions"><button class="secondary" onclick="alert('Goal creation is planned for the next build step.')">+ Add goal</button></div>
-</section>
-
-<section class="card">
-<h2>Recurring expenses</h2>
-<div class="rows" style="margin-top:0">
-<div class="row"><span>Insurance</span><b>$180/mo</b></div>
-<div class="row"><span>Phone</span><b>$95/mo</b></div>
-<div class="row"><span>Internet</span><b>$70/mo</b></div>
-<div class="row"><span>Subscriptions</span><b>$58/mo</b></div>
-<div class="row"><b>Total recurring</b><b>$403/mo</b></div>
-</div>
-<p class="note">Potential annual recurring spend: <b>$4,836</b>.</p>
-</section>
-
-<section class="card plus full">
-<h2>ClearSpend Plus — </h2>
-<div class="scenarioGrid">
-<div class="scenarioBox"><span class="tag">Free</span><p>Safe-to-spend, basic trends, one goal and limited What-If scenarios.</p></div>
-<div class="scenarioBox"><span class="tag">Plus</span><p>Unlimited scenarios, goals, projections, history and deeper financial insights.</p></div>
-</div>
-<p style="margin-bottom:0"><b>ClearSpend Plus — Coming Soon · $9.99/month</b> · </p>
-</section>
-</div>
-
-<div class="footer">ClearSpend · Educational planning tool, not financial advice.</div>
-</div>
-
-<script>
-const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n||0);
-function vals(){return {income:+incomeEl().value||0,bills:+billsEl().value||0,savings:+savingsEl().value||0,life:+lifeEl().value||0}}
-function incomeEl(){return document.getElementById('income')}function billsEl(){return document.getElementById('bills')}function savingsEl(){return document.getElementById('savings')}function lifeEl(){return document.getElementById('life')}
-function updateAll(){
- const v=vals(), safe=Math.max(0,v.income-v.bills-v.savings-v.life);
- document.getElementById('safe').textContent=money(safe);
- document.getElementById('incomeOut').textContent=money(v.income);
- document.getElementById('billsOut').textContent='−'+money(v.bills);
- document.getElementById('savingsOut').textContent='−'+money(v.savings);
- document.getElementById('lifeOut').textContent='−'+money(v.life);
- const status=document.getElementById('status'), reason=document.getElementById('statusReason'), dot=document.querySelector('.dot');
- status.className='statusText';
- if(safe>=v.income*.30){status.textContent='Comfortable';status.className='statusText good';dot.style.background='var(--green)';reason.textContent='Your planned commitments leave healthy flexible spending room.'}
- else if(safe>=v.income*.15){status.textContent='Getting tight';status.className='statusText warn';dot.style.background='var(--amber)';reason.textContent='You have some flexibility, but a large purchase could materially change your month.'}
- else{status.textContent='Risky';status.className='statusText bad';dot.style.background='var(--red)';reason.textContent='Most of this paycheck is already committed. Consider protecting your cash cushion.'}
- const rec=document.getElementById('rec');
- rec.innerHTML=safe>=v.income*.30?'<b>🟢 You’re in a comfortable position.</b><br>There is room for flexible spending while still funding your stated commitments.':safe>=v.income*.15?'<b>🟡 You’re getting tight.</b><br>Consider checking planned purchases before committing to anything new.':'<b>🔴 Your month is getting tight.</b><br>ClearSpend would prioritize protecting your cash cushion before adding a major expense.';
-}
-function runScenario(){
- updateAll();
- const v=vals(), monthly=(+document.getElementById('payment').value||0)+(+document.getElementById('extra').value||0), current=Math.max(0,v.income-v.bills-v.savings-v.life), after=Math.max(0,current-monthly), name=document.getElementById('purchaseName').value||'Purchase';
- const impact=current?Math.round(monthly/current*100):100;
- let tag=impact<=35?'<span class="tag">Comfortable</span>':impact<=60?'<span class="tag amber">Big impact</span>':'<span class="tag red">Risky</span>';
- document.getElementById('scenario').innerHTML=tag+`<div style="margin-top:9px"><b>${name}</b> adds <b>${money(monthly)}/month</b> to your modeled costs.</div><div class="scenarioGrid" style="margin-top:11px"><div class="scenarioBox"><div class="small">Before</div><b class="good">${money(current)}</b><div class="small">flexible room</div></div><div class="scenarioBox"><div class="small">After</div><b class="${after<current*.5?'bad':'good'}">${money(after)}</b><div class="small">flexible room</div></div></div><p class="note" style="margin-bottom:0">This does not approve or reject a purchase; it shows the modeled cash-flow impact so you can decide.</p>`;
-}
-function resetAll(){incomeEl().value=2100;billsEl().value=740;savingsEl().value=200;lifeEl().value=250;document.getElementById('purchaseName').value='New car';document.getElementById('payment').value=720;document.getElementById('extra').value=180;document.getElementById('upfront').value=8000;updateAll();runScenario()}
-updateAll();runScenario();
-</script>
-</body></html>
