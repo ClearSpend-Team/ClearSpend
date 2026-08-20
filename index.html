@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ClearSpend V2 — Know what you can actually spend.</title>
+<title>ClearSpend — Know what you can actually spend.</title>
 <style>
 :root{--bg:#f5f7fa;--card:#fff;--text:#17202a;--muted:#667085;--line:#e6e9ee;--blue:#2563eb;--blue2:#eaf1ff;--green:#15803d;--greenbg:#eaf8ef;--amber:#a16207;--amberbg:#fff7df;--red:#b42318;--redbg:#fff0ef;--shadow:0 8px 28px rgba(18,31,53,.07);--r:18px}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
@@ -27,7 +27,7 @@ button{border:0;border-radius:11px;padding:11px 14px;font-weight:800;cursor:poin
 </head>
 <body>
 <div class="container">
-<nav><div class="logo">Clear<span>Spend</span></div><div class="navright"><div class="pill">V2 prototype · No bank login</div><button class="secondary" onclick="resetAll()">Reset demo</button></div></nav>
+<nav><div class="logo">Clear<span>Spend</span></div><div class="navright"><div class="pill"> · No bank login</div><button class="secondary" onclick="resetAll()">Reset demo</button></div></nav>
 
 <section class="hero">
 <div class="eyebrow">Your money, made clearer</div>
@@ -58,7 +58,7 @@ button{border:0;border-radius:11px;padding:11px 14px;font-weight:800;cursor:poin
 <div class="field"><div class="label">Food & gas</div><input id="life" type="number" value="250"></div>
 </div>
 <button class="primary" onclick="updateAll()">Update ClearSpend</button>
-<p class="note">Prototype uses manual inputs only. No bank credentials or financial account data are collected.</p>
+<p class="note">uses manual inputs only. No bank credentials or financial account data are collected.</p>
 </section>
 
 <section class="card">
@@ -137,7 +137,7 @@ button{border:0;border-radius:11px;padding:11px 14px;font-weight:800;cursor:poin
 </section>
 </div>
 
-<div class="footer">ClearSpend V2 prototype · Educational planning tool, not financial advice.</div>
+<div class="footer">ClearSpend · Educational planning tool, not financial advice.</div>
 </div>
 
 <script>
@@ -164,7 +164,7 @@ function runScenario(){
  const v=vals(), monthly=(+document.getElementById('payment').value||0)+(+document.getElementById('extra').value||0), current=Math.max(0,v.income-v.bills-v.savings-v.life), after=Math.max(0,current-monthly), name=document.getElementById('purchaseName').value||'Purchase';
  const impact=current?Math.round(monthly/current*100):100;
  let tag=impact<=35?'<span class="tag">Comfortable</span>':impact<=60?'<span class="tag amber">Big impact</span>':'<span class="tag red">Risky</span>';
- document.getElementById('scenario').innerHTML=tag+`<div style="margin-top:9px"><b>${name}</b> adds <b>${money(monthly)}/month</b> to your modeled costs.</div><div class="scenarioGrid" style="margin-top:11px"><div class="scenarioBox"><div class="small">Before</div><b class="good">${money(current)}</b><div class="small">flexible room</div></div><div class="scenarioBox"><div class="small">After</div><b class="${after<current*.5?'bad':'good'}">${money(after)}</b><div class="small">flexible room</div></div></div><p class="note" style="margin-bottom:0">This prototype does not approve or reject a purchase; it shows the modeled cash-flow impact so you can decide.</p>`;
+ document.getElementById('scenario').innerHTML=tag+`<div style="margin-top:9px"><b>${name}</b> adds <b>${money(monthly)}/month</b> to your modeled costs.</div><div class="scenarioGrid" style="margin-top:11px"><div class="scenarioBox"><div class="small">Before</div><b class="good">${money(current)}</b><div class="small">flexible room</div></div><div class="scenarioBox"><div class="small">After</div><b class="${after<current*.5?'bad':'good'}">${money(after)}</b><div class="small">flexible room</div></div></div><p class="note" style="margin-bottom:0">This does not approve or reject a purchase; it shows the modeled cash-flow impact so you can decide.</p>`;
 }
 function resetAll(){incomeEl().value=2100;billsEl().value=740;savingsEl().value=200;lifeEl().value=250;document.getElementById('purchaseName').value='New car';document.getElementById('payment').value=720;document.getElementById('extra').value=180;document.getElementById('upfront').value=8000;updateAll();runScenario()}
 updateAll();runScenario();
