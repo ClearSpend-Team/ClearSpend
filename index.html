@@ -3,7 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>ClearSpend — Know what you can actually spend</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JF9LHLEGR5"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+  dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+gtag('config', 'G-JF9LHLEGR5');
+</script>
+<!-- End Google Analytics -->
 
 <style>
 :root{
@@ -65,12 +80,25 @@ nav{
 }
 
 .pill{
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:999px;
-  padding:8px 12px;
-  color:var(--muted);
-  font-size:12px;
+  display:none;
+}
+
+button{
+  border:0;
+  border-radius:11px;
+  padding:11px 14px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.primary{
+  background:var(--blue);
+  color:#fff;
+}
+
+.secondary{
+  background:#eef1f5;
+  color:var(--text);
 }
 
 .hero{
@@ -210,24 +238,6 @@ select{
   gap:10px;
 }
 
-button{
-  border:0;
-  border-radius:11px;
-  padding:11px 14px;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.primary{
-  background:var(--blue);
-  color:#fff;
-}
-
-.secondary{
-  background:#eef1f5;
-  color:var(--text);
-}
-
 .actions{
   display:flex;
   gap:8px;
@@ -311,6 +321,28 @@ button{
   background:#77c893;
 }
 
+.goal{
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  margin-top:10px;
+}
+
+.progress{
+  height:8px;
+  background:#edf0f4;
+  border-radius:99px;
+  overflow:hidden;
+  margin:9px 0;
+}
+
+.progress i{
+  display:block;
+  height:100%;
+  background:var(--blue);
+  border-radius:99px;
+}
+
 .rec{
   background:var(--blue2);
   border:1px solid #d5e3ff;
@@ -337,19 +369,10 @@ button{
 }
 
 .locked{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  padding:16px;
+  padding:14px;
   border:1px dashed #c8d5eb;
   border-radius:14px;
   background:#fff;
-}
-
-.lock{
-  font-size:20px;
-  margin-bottom:5px;
 }
 
 .footer{
@@ -378,14 +401,6 @@ button{
     grid-template-columns:1fr;
   }
 
-  .navright .pill{
-    display:none;
-  }
-
-  .locked{
-    align-items:flex-start;
-    flex-direction:column;
-  }
 }
 </style>
 </head>
@@ -497,6 +512,35 @@ button{
     <div class="field">
 
       <div class="label">
+        How often do you get paid?
+      </div>
+
+      <select id="payFrequency" onchange="payFrequencyChanged()">
+
+        <option value="weekly">
+          Weekly
+        </option>
+
+        <option value="biweekly" selected>
+          Every 2 weeks
+        </option>
+
+        <option value="semimonthly">
+          Twice a month
+        </option>
+
+        <option value="monthly">
+          Monthly
+        </option>
+
+      </select>
+
+    </div>
+
+
+    <div class="field">
+
+      <div class="label">
         Next paycheck
       </div>
 
@@ -555,12 +599,15 @@ button{
 
   </div>
 
-  <button class="primary" onclick="updateAll()">
+  <button
+    class="primary"
+    onclick="updateAll();trackEvent('safe_to_spend_used')"
+  >
     Update ClearSpend
   </button>
 
   <p class="note">
-    ClearSpend uses manual inputs only. No financial account credentials are required or collected.
+    ClearSpend uses manual inputs only. No financial account credentials are required or collected in this version.
   </p>
 
 </section>
@@ -640,7 +687,10 @@ button{
 
   </div>
 
-  <button class="primary" onclick="runScenario()">
+  <button
+    class="primary"
+    onclick="runScenario();trackEvent('what_if_used')"
+  >
     Run What-If
   </button>
 
@@ -661,7 +711,7 @@ button{
   </div>
 
   <p class="note">
-    Free users get limited What-If scenarios. ClearSpend Plus will include unlimited scenarios and deeper projections.
+    Free users get limited What-If scenarios. ClearSpend Plus can include unlimited scenarios and deeper projections.
   </p>
 
 </section>
@@ -691,7 +741,7 @@ button{
 
     <button
       class="secondary"
-      onclick="runScenario()"
+      onclick="runScenario();trackEvent('purchase_impact_clicked')"
     >
       See purchase impact
     </button>
@@ -765,44 +815,33 @@ button{
   </div>
 
   <p class="note">
-    Plus will add deeper history, category trends, future projections and more detailed insights.
+    Plus can add deeper history, category trends, future projections and more detailed insights.
   </p>
 
 </section>
 
 
-<!-- GOALS PLUS ONLY -->
+<!-- GOALS -->
 
 <section class="card">
 
   <h2>
-    Plan what's next
+    Goals
   </h2>
 
   <div class="locked">
 
-    <div>
-
-      <div class="lock">
-        🔒
-      </div>
-
-      <b>
-        Goals are part of ClearSpend Plus
-      </b>
-
-      <p
-        class="note"
-        style="margin-bottom:0"
-      >
-        Create savings goals for emergencies, vacations, cars and other major purchases, then see when you can reach them.
-      </p>
-
-    </div>
-
     <span class="tag">
       PLUS
     </span>
+
+    <p>
+      <b>Goals are part of ClearSpend Plus.</b>
+    </p>
+
+    <p class="note">
+      Create savings goals for emergencies, vacations, cars and other major purchases, then see when you can reach them.
+    </p>
 
   </div>
 
@@ -814,13 +853,10 @@ button{
 <section class="card">
 
   <h2>
-    Recurring expenses — Example
+    Recurring expenses
   </h2>
 
-  <div
-    class="rows"
-    style="margin-top:0"
-  >
+  <div class="rows" style="margin-top:0">
 
     <div class="row">
       <span>Insurance</span>
@@ -843,14 +879,14 @@ button{
     </div>
 
     <div class="row">
-      <b>Example total</b>
+      <b>Total recurring</b>
       <b>$403/mo</b>
     </div>
 
   </div>
 
   <p class="note">
-    Example only. Plus can provide saved recurring expenses, history and deeper analysis.
+    Example recurring expenses. Future versions can let you enter bills and calculate how much to set aside from each paycheck.
   </p>
 
 </section>
@@ -920,7 +956,11 @@ button{
         </li>
 
         <li>
-          Recurring-expense analysis
+          Recurring-expense planning
+        </li>
+
+        <li>
+          Paycheck allocation
         </li>
 
         <li>
@@ -935,13 +975,20 @@ button{
 
   <p>
     <b>
-      $9.99/month target price
+      ClearSpend Plus — Coming Soon
     </b>
   </p>
 
   <p class="note">
-    Pricing and features will be validated with early users before payments are enabled.
+    Monthly and limited one-time options can be tested with early users before payments are enabled.
   </p>
+
+  <button
+    class="primary"
+    onclick="trackEvent('plus_interest')"
+  >
+    I'm interested in Plus
+  </button>
 
 </section>
 
@@ -958,7 +1005,38 @@ button{
 
 <script>
 
+function trackEvent(eventName, params = {}){
+
+  if(typeof gtag === 'function'){
+
+    gtag(
+      'event',
+      eventName,
+      params
+    );
+
+  }
+
+}
+
+
+function payFrequencyChanged(){
+
+  const frequency =
+    document.getElementById('payFrequency').value;
+
+  trackEvent(
+    'pay_frequency_selected',
+    {
+      frequency:frequency
+    }
+  );
+
+}
+
+
 const money = n =>
+
   new Intl.NumberFormat(
     'en-US',
     {
@@ -992,7 +1070,8 @@ function vals(){
 
 function updateAll(){
 
-  const v = vals();
+  const v =
+    vals();
 
   const safe =
     Math.max(
@@ -1178,10 +1257,12 @@ function runScenario(){
     tag +
 
     `<div style="margin-top:9px">
+
       <b>${escapeHTML(name)}</b>
       adds
       <b>${money(monthly)}/month</b>
       to your modeled costs.
+
     </div>
 
     <div
@@ -1224,15 +1305,11 @@ function runScenario(){
 
     </div>
 
-    ${
-      price > 0
-      ? `<p class="note">
-          Example purchase price:
-          <b>${money(price)}</b>.
-          The current model centers on monthly cash-flow impact.
-        </p>`
-      : ''
-    }
+    <p class="note">
+      Example purchase price:
+      <b>${money(price)}</b>.
+      The current model centers on monthly cash-flow impact.
+    </p>
 
     <p
       class="note"
@@ -1257,6 +1334,9 @@ function escapeHTML(value){
 
 
 function resetAll(){
+
+  document.getElementById('payFrequency').value =
+    'biweekly';
 
   document.getElementById('income').value =
     2100;
