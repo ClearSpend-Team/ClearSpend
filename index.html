@@ -59,12 +59,12 @@ nav{
   margin-bottom:28px;
 }
 
-/* ===== Logo - Strong Fix ===== */
+/* ===== Logo Ultra Fix ===== */
 .cs-logo {
   display: flex !important;
   align-items: center !important;
-  text-decoration: none !important;
-  background: transparent !important;
+  background: none !important;
+  background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
   padding: 0 !important;
@@ -72,15 +72,16 @@ nav{
 }
 
 .cs-logo img {
-  height: 58px !important;       /* Much bigger */
+  height: 60px !important;
   width: auto !important;
-  display: block !important;
-  background: transparent !important;
+  background: none !important;
+  background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
   border-radius: 0 !important;
   padding: 0 !important;
   margin: 0 !important;
+  mix-blend-mode: multiply; /* helps remove white background sometimes */
 }
 /* ===== End Logo ===== */
 
