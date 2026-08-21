@@ -63,15 +63,57 @@ nav{
   margin-bottom:28px;
 }
 
-.logo{
-  font-size:22px;
-  font-weight:850;
-  letter-spacing:-.7px;
+/* ===== New ClearSpend Logo ===== */
+.cs-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
 }
 
-.logo span{
-  color:var(--blue);
+.cs-icon {
+  width: 36px;
+  height: 36px;
+  position: relative;
+  flex-shrink: 0;
 }
+
+.cs-circle {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.cs-circle-1 {
+  background: #2B8CFF;
+  top: 0;
+  left: 6px;
+  clip-path: circle(50% at 70% 40%);
+}
+
+.cs-circle-2 {
+  background: #0A2A6B;
+  bottom: 0;
+  left: 0;
+  clip-path: circle(50% at 30% 70%);
+}
+
+.cs-wordmark {
+  font-size: 22px;
+  font-weight: 850;
+  letter-spacing: -0.7px;
+  line-height: 1;
+}
+
+.cs-wordmark .clear {
+  color: #111111;
+}
+
+.cs-wordmark .spend {
+  color: #2563eb;
+}
+/* ===== End Logo ===== */
 
 .navright{
   display:flex;
@@ -411,9 +453,16 @@ select{
 
 <nav>
 
-  <div class="logo">
-    Clear<span>Spend</span>
-  </div>
+  <!-- New Logo -->
+  <a href="/" class="cs-logo">
+    <div class="cs-icon">
+      <div class="cs-circle cs-circle-1"></div>
+      <div class="cs-circle cs-circle-2"></div>
+    </div>
+    <div class="cs-wordmark">
+      <span class="clear">Clear</span><span class="spend">Spend</span>
+    </div>
+  </a>
 
   <div class="navright">
 
