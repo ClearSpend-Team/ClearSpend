@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ClearSpend — Master Your Cash Flow</title>
+<title>ClearSpend — The Financial Command Center</title>
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF9LHLEGR5"></script>
@@ -20,7 +20,7 @@
 <style>
 :root {
   --brand: #2563eb;
-  --brand-gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  --brand-grad: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
   --bg: #f8fafc;
   --card: #ffffff;
   --text: #0f172a;
@@ -34,134 +34,139 @@
 }
 
 * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
-body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.5; overflow-x: hidden; }
+body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.5; }
 
-/* Catchy Header */
-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; max-width: 1400px; margin: auto; }
-.logo { font-size: 28px; font-weight: 900; letter-spacing: -1.5px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
-.logo span { background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.nav-btns { display: flex; gap: 12px; }
+/* Navigation */
+nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 40px; max-width: 1400px; margin: auto; }
+.logo { font-size: 28px; font-weight: 950; letter-spacing: -1.5px; cursor: pointer; }
+.logo span { background: var(--brand-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-/* Hero Section */
+/* Hero */
 .container { max-width: 1200px; margin: auto; padding: 0 20px 100px; }
 .hero { text-align: center; padding: 60px 0 40px; }
-.hero h1 { font-size: 64px; font-weight: 900; letter-spacing: -3px; line-height: 0.9; margin-bottom: 20px; }
-.hero p { font-size: 20px; color: var(--muted); max-width: 600px; margin: auto; }
+.hero h1 { font-size: 72px; font-weight: 900; letter-spacing: -4px; line-height: 0.9; margin-bottom: 20px; }
+.hero h1 span { background: var(--brand-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-/* Grid System */
+/* Grid & Cards */
 .dashboard-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
 .full { grid-column: 1 / -1; }
 
-/* Safe to Spend Attraction */
-.label { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 8px; display: block; }
-.big-money { font-size: 84px; font-weight: 900; letter-spacing: -5px; margin: 10px 0; line-height: 1; }
+/* Safe to Spend Display */
+.label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
+.big-money { font-size: 96px; font-weight: 900; letter-spacing: -6px; margin: 10px 0; line-height: 1; }
 .status-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border-radius: 30px; font-weight: 800; font-size: 13px; margin-top: 10px; }
+
+/* Data Rows from V2 */
+.data-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); font-weight: 700; }
 
 /* 3D Visuals & Attractions */
 .attraction-overlay {
     position: absolute; inset: 0; background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center;
-    flex-direction: column; z-index: 5; border-radius: var(--r);
+    backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; z-index: 5;
 }
-.chart-3d { height: 180px; display: flex; align-items: flex-end; gap: 12px; margin-top: 20px; }
+.chart-3d { height: 160px; display: flex; align-items: flex-end; gap: 10px; margin-top: 20px; }
 .bar-3d { 
-    flex: 1; background: var(--brand-gradient); border-radius: 8px 8px 2px 2px;
-    position: relative; box-shadow: 4px 4px 10px rgba(0,0,0,0.1); 
+    flex: 1; background: var(--brand-grad); border-radius: 8px 8px 2px 2px;
+    position: relative; box-shadow: 4px 4px 10px rgba(0,0,0,0.1); transition: 0.3s;
 }
 
-/* Rows from V2 */
-.data-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); font-weight: 600; }
+/* Auth Modal */
+#auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(12px); }
+.modal-box { background: #fff; padding: 48px; border-radius: var(--r); width: 100%; max-width: 440px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+input { width: 100%; padding: 16px; border-radius: 14px; border: 1px solid var(--line); margin-top: 10px; margin-bottom: 20px; font-size: 16px; background: #f9fafb; font-weight: 500; }
 
 /* Buttons */
 button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; cursor: pointer; transition: 0.2s; font-size: 15px; }
-.btn-primary { background: var(--brand-gradient); color: #fff; box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4); }
+.btn-primary { background: var(--brand-grad); color: #fff; box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4); }
 .btn-secondary { background: #f1f5f9; color: var(--text); }
 .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
-/* Auth Modal */
-#auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.9); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-.modal-box { background: #fff; padding: 48px; border-radius: var(--r); width: 100%; max-width: 440px; text-align: center; }
-input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--line); margin-bottom: 16px; font-size: 16px; background: #f9fafb; }
-
-/* Pricing */
-.pricing-section { padding: 80px 0; text-align: center; }
-.pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; margin: 40px auto; }
-.price-card { background: #fff; border: 1px solid var(--line); padding: 40px; border-radius: var(--r); position: relative; transition: 0.3s; }
+/* Pricing Table */
+.pricing-section { padding: 100px 0; text-align: center; border-top: 1px solid var(--line); margin-top: 80px; }
+.pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 960px; margin: 40px auto; }
+.price-card { background: #fff; border: 1px solid var(--line); padding: 48px; border-radius: var(--r); position: relative; text-align: left; }
 .price-card.featured { border: 3px solid var(--brand); transform: scale(1.05); }
+.feature-list { list-style: none; padding: 0; margin: 24px 0; }
+.feature-list li { margin-bottom: 12px; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+.check { color: var(--green); font-weight: 900; }
 
-@media (max-width: 900px) { .dashboard-grid, .pricing-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 48px; } }
+@media (max-width: 900px) { .dashboard-grid, .pricing-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 52px; } .price-card.featured { transform: none; } }
 </style>
 </head>
 <body>
 
 <div id="auth-modal">
   <div class="modal-box">
-    <h2 id="modal-title" style="font-size: 32px; font-weight: 900; margin-bottom: 10px;">Join ClearSpend</h2>
-    <p id="modal-sub" style="color: var(--muted); margin-bottom: 30px;">Start your journey to financial clarity.</p>
-    <input type="email" id="auth-email" placeholder="Email Address">
-    <input type="password" id="auth-password" placeholder="Create Password">
-    <button class="btn-primary" style="width: 100%" onclick="handleAuth()">Continue</button>
-    <div id="auth-toggle-link" style="margin-top: 20px; font-weight: 800; color: var(--brand); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div>
+    <h2 id="modal-title" style="font-size: 36px; font-weight: 900; letter-spacing: -1px; margin-bottom: 8px;">Join ClearSpend</h2>
+    <p id="modal-sub" style="color: var(--muted); margin-bottom: 24px;">Start your journey to financial clarity.</p>
+    
+    <div style="text-align: left;"><label class="label">Email Address</label></div>
+    <input type="email" id="auth-email" placeholder="name@company.com">
+    
+    <div style="text-align: left;"><label class="label" id="pass-label">Create Password</label></div>
+    <input type="password" id="auth-password" placeholder="••••••••">
+    
+    <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="handleAuth()">Continue</button>
+    <div id="auth-toggle-link" style="margin-top: 24px; font-weight: 800; color: var(--brand); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div>
     <button class="btn-secondary" style="width: 100%; margin-top: 12px;" onclick="closeAuth()">Cancel</button>
   </div>
 </div>
 
 <nav>
   <div class="logo">Clear<span>Spend</span></div>
-  <div class="nav-btns" id="nav-auth">
+  <div id="nav-auth">
     <button class="btn-secondary" style="padding: 10px 20px" onclick="openAuth('signin')">Sign In</button>
-    <button class="btn-primary" style="padding: 10px 20px" onclick="openAuth('signup')">Get Started</button>
+    <button class="btn-primary" style="padding: 10px 20px; margin-left: 10px;" onclick="openAuth('signup')">Get Started</button>
   </div>
 </nav>
 
 <div class="container">
   <header class="hero">
-    <div class="label" style="color: var(--brand)">Professional Cash-Flow Planning</div>
-    <h1>Know what you can <br><span>actually spend.</span></h1>
-    <p>The smarter way to manage your paycheck, plan for bills, and visualize your financial future.</p>
+    <div class="label" style="color: var(--brand)">Master Your Cash Flow</div>
+    <h1>Stop guessing. <br><span>Start spending.</span></h1>
+    <p>The smarter way to manage your paycheck, visualize your fixed costs, and protect your flexible room.</p>
   </header>
 
   <div class="dashboard-grid">
-    <!-- PRIMARY TOOL -->
+    <!-- DASHBOARD -->
     <section class="card">
-      <span class="label">Disposable Cash Remaining</span>
-      <div class="big-money" id="display-safe">$0</div>
-      <div class="status-pill" id="status-pill" style="background: var(--line);">Calculating...</div>
+      <span class="label">Available Safe-to-Spend</span>
+      <div class="big-money" id="display-safe" style="color: var(--brand)">$0</div>
+      <div class="status-pill" id="status-pill" style="background: var(--line);">Awaiting Input...</div>
       
-      <div style="margin-top: 30px;">
-        <div class="data-row"><span>Next Paycheck</span><span id="row-inc">$0</span></div>
-        <div class="data-row"><span>Planned Bills</span><span id="row-bills">$0</span></div>
-        <div class="data-row" style="color: var(--brand); border: 0;"><span>Flexible Room</span><span id="row-safe">$0</span></div>
+      <div style="margin-top: 40px; border-top: 1px solid var(--line); padding-top: 20px;">
+        <div class="data-row"><span>Monthly Income</span><span id="row-inc">$0</span></div>
+        <div class="data-row"><span>Fixed Commitments</span><span id="row-bills" style="color: var(--red)">$0</span></div>
+        <div class="data-row" style="border: 0; font-size: 18px; padding-top: 20px;"><span>Flexible Room</span><span id="row-safe">$0</span></div>
       </div>
     </section>
 
-    <!-- QUICK INPUTS -->
+    <!-- SETUP -->
     <section class="card">
-      <h2 style="margin-top: 0;">Quick Setup</h2>
-      <label class="label">Next Income Amount</label>
+      <h2 style="margin-top: 0; letter-spacing: -1px;">Quick Setup</h2>
+      <label class="label">Expected Net Income</label>
       <input type="number" id="in-income" value="2500" oninput="runCalc()">
-      <label class="label">Bills & Savings Goals</label>
+      <label class="label">Bills, Rent & Savings</label>
       <input type="number" id="in-bills" value="1200" oninput="runCalc()">
-      <button class="btn-primary" onclick="saveToCloud()">Save Financial Profile</button>
-      <p style="font-size: 11px; color: var(--muted); margin-top: 12px; text-align: center;">Data is encrypted and saved to your private cloud profile.</p>
+      <button class="btn-primary" onclick="saveToCloud()">Securely Save Profile</button>
     </section>
 
-    <!-- WHAT IF SCENARIO (THE V2 FAVORITE) -->
+    <!-- WHAT IF? -->
     <section class="card">
-        <h2 style="margin-top: 0;">What If?</h2>
-        <p class="label">Model a purchase instantly</p>
-        <div style="display: flex; gap: 12px;">
-            <input type="text" id="p-name" placeholder="New Car..." style="flex: 2;">
-            <input type="number" id="p-cost" placeholder="$500" style="flex: 1;">
-        </div>
-        <button class="btn-secondary" onclick="runScenario()">Run Purchase Impact</button>
-        <div id="scenario-result" style="margin-top: 20px;"></div>
+      <h2 style="margin-top: 0; letter-spacing: -1px;">What If?</h2>
+      <p class="label">Instant Purchase Analysis</p>
+      <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+          <input type="text" id="p-name" placeholder="New iPhone..." style="flex: 2; margin-bottom: 0;">
+          <input type="number" id="p-cost" placeholder="$50" style="flex: 1; margin-bottom: 0;">
+      </div>
+      <button class="btn-secondary" onclick="runScenario()">Analyze Impact</button>
+      <div id="scenario-result" style="margin-top: 20px;"></div>
     </section>
 
-    <!-- 3D TREND SNEAK PEEK -->
+    <!-- 3D TRENDS -->
     <section class="card">
-      <span class="label">Money Momentum (3D View)</span>
+      <span class="label">3D Money Momentum</span>
       <div class="chart-3d">
         <div class="bar-3d" style="height: 40%;"></div>
         <div class="bar-3d" style="height: 75%;"></div>
@@ -170,27 +175,40 @@ input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(-
         <div class="bar-3d" style="height: 60%;"></div>
       </div>
       <div class="attraction-overlay">
-        <div style="background: #fff; padding: 12px 24px; border-radius: 40px; font-weight: 900; color: var(--brand); box-shadow: var(--shadow);">🔒 Unlock Pro Trends</div>
+        <button class="btn-primary" style="width: auto; border-radius: 40px; padding: 12px 30px;" onclick="document.getElementById('pricing').scrollIntoView()">Unlock Pro Trends</button>
       </div>
     </section>
 
-    <!-- PRICING SECTION -->
-    <section class="full pricing-section">
+    <!-- PRICING -->
+    <section class="full pricing-section" id="pricing">
         <div class="label" style="color: var(--brand)">Founding Member Specials</div>
-        <h2 style="font-size: 42px; font-weight: 900; letter-spacing: -2px;">One payment. Lifetime access.</h2>
+        <h2 style="font-size: 48px; font-weight: 900; letter-spacing: -2px;">One payment. Lifetime access.</h2>
         
         <div class="pricing-grid">
+            <!-- STARTER -->
             <div class="price-card">
                 <div class="label">Starter Lifetime</div>
                 <div style="font-size: 48px; font-weight: 900; margin: 10px 0;">$29</div>
-                <p style="color: var(--muted); font-size: 13px;">Save profile, cloud sync, and 3 scenarios.</p>
+                <ul class="feature-list">
+                    <li><span class="check">✓</span> Master Safe-to-Spend</li>
+                    <li><span class="check">✓</span> Secure Cloud Profile</li>
+                    <li><span class="check">✓</span> 3 What-If Scenarios</li>
+                    <li><span class="check">✓</span> Multi-Device Sync</li>
+                </ul>
                 <button class="btn-secondary" style="width: 100%" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
             </div>
+            <!-- PRO -->
             <div class="price-card featured">
                 <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--brand); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 900;">BEST VALUE</div>
                 <div class="label">Founding Pro Pass</div>
                 <div style="font-size: 48px; font-weight: 900; margin: 10px 0;">$49</div>
-                <p style="color: var(--muted); font-size: 13px;">Unlimited Goals, 3D Trends, & Lifetime Pro Status.</p>
+                <ul class="feature-list">
+                    <li><span class="check">✓</span> <b>Everything in Starter</b></li>
+                    <li><span class="check">✓</span> Unlimited What-If Scenarios</li>
+                    <li><span class="check">✓</span> 3D Trend Visualizations</li>
+                    <li><span class="check">✓</span> Advanced Savings Goals</li>
+                    <li><span class="check">✓</span> Priority Future Updates</li>
+                </ul>
                 <button class="btn-primary" style="width: 100%" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro Forever</button>
             </div>
         </div>
@@ -219,7 +237,7 @@ function runCalc() {
   
   const pill = document.getElementById('status-pill');
   if(safe > inc * 0.3) {
-    pill.innerText = "Comfortable Room"; pill.style.background = "#eaf8ef"; pill.style.color = "var(--green)";
+    pill.innerText = "Healthy Room"; pill.style.background = "#eaf8ef"; pill.style.color = "var(--green)";
   } else {
     pill.innerText = "Budget Tight"; pill.style.background = "#fff7df"; pill.style.color = "var(--amber)";
   }
@@ -233,24 +251,30 @@ function runScenario() {
   const result = inc - bill - pCost;
   
   document.getElementById('scenario-result').innerHTML = `
-    <div style="background: #f8fafc; border: 1px solid var(--line); padding: 15px; border-radius: 12px;">
-      <b>${pName}</b> Impact: Your safe-to-spend drops to <b style="color: var(--brand);">$${result.toLocaleString()}</b>.
+    <div style="background: var(--bg); border: 2px solid var(--brand); padding: 15px; border-radius: 12px;">
+      <b>${pName}</b> results: Your flexible room drops to <b style="color: var(--brand); font-size: 18px;">$${result.toLocaleString()}</b>.
     </div>
   `;
 }
 
-// --- AUTH UI LOGIC ---
+// --- AUTH LOGIC (THE FIX) ---
 function openAuth(mode) {
   currentMode = mode;
   const title = document.getElementById('modal-title');
   const link = document.getElementById('auth-toggle-link');
+  const passLabel = document.getElementById('pass-label');
+  const passInput = document.getElementById('auth-password');
   
   if(mode === 'signin') {
     title.innerText = "Welcome Back";
     link.innerText = "Need an account? Join Free";
+    passLabel.innerText = "Enter Password";
+    passInput.placeholder = "Enter your password";
   } else {
     title.innerText = "Join ClearSpend";
     link.innerText = "Already have an account? Sign In";
+    passLabel.innerText = "Create Password";
+    passInput.placeholder = "Min. 8 characters";
   }
   document.getElementById('auth-modal').style.display = 'flex';
 }
@@ -278,7 +302,7 @@ async function saveToCloud() {
   const { data: { user } } = await sb.auth.getUser();
   if(!user) { openAuth('signup'); return; }
   const { error } = await sb.from('profiles').upsert({ id: user.id, updated_at: new Date() });
-  if(!error) alert("Financial profile saved to cloud!");
+  if(!error) alert("Profile synced to cloud!");
 }
 
 async function checkUser() {
