@@ -1,3 +1,23 @@
+This error means the computer is confused because the word supabase is being
+defined twice in your code. It's like trying to give two different people the
+same name in the same room.
+
+This usually happens if you pasted the "Script" part of the code twice (once in
+the middle and once at the bottom).
+
+The Fix:
+
+I have cleaned everything up into one Master Version.
+
+Please follow these steps exactly:
+
+1.  Go to your GitHub index.html.
+2.  Delete every single line of code currently in that file. It should be
+    completely empty.
+3.  Copy the entire block below and paste it in.
+4.  I have already included your URL and your Key (the one you pasted earlier)
+    into this version so you don't have to edit it again.
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -154,11 +174,11 @@ button { width:100%; padding:16px; border-radius:14px; border:0; font-weight:800
 
 <script>
 // --- CONFIGURATION ---
-const SUPABASE_URL = 'https://chbfgkguxkdadnevqthk.supabase.co'; 
-// I added the required ' ' quotes around your key below:
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNoYmZna2d1eGtkYWRuZXZxdGhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczMTcxOTUsImV4cCI6MjEwMjg5MzE5NX0.hemyiyKpJXt7CvxReNOzX4AVajM7V_LHl0SOJNAutcw'; 
+const SB_URL = 'https://chbfgkguxkdadnevqthk.supabase.co'; 
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNoYmZna2d1eGtkYWRuZXZxdGhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczMTcxOTUsImV4cCI6MjEwMjg5MzE5NX0.hemyiyKpJXt7CvxReNOzX4AVajM7V_LHl0SOJNAutcw'; 
 
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// Use a unique name for the client to avoid conflicts
+const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
 
 let isLoginMode = false;
 
@@ -184,29 +204,42 @@ async function handleAuth() {
   const email = document.getElementById('auth-email').value;
   const password = document.getElementById('auth-password').value;
   if(isLoginMode) {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
     if(error) alert(error.message); else location.reload();
   } else {
-    const { error } = await supabase.auth.signUp({ email, password });
+    const { error } = await supabaseClient.auth.signUp({ email, password });
     if(error) alert(error.message); else alert("Check your email for the confirmation link!");
   }
 }
 
 async function saveToSupabase() {
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user } } = await supabaseClient.auth.getUser();
   if(!user) { openAuth(); return; }
   // This saves to the 'profiles' table we created
-  const { error } = await supabase.from('profiles').upsert({ id: user.id, updated_at: new Date() });
+  const { error } = await supabaseClient.from('profiles').upsert({ id: user.id, updated_at: new Date() });
   if(error) alert(error.message); else alert("Saved!");
 }
 
 async function checkUser() {
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user } } = await supabaseClient.auth.getUser();
   if(user) {
-    document.getElementById('nav-auth').innerHTML = `<span style="font-size:12px; margin-right:10px;">${user.email}</span><button class="btn-outline" style="padding:5px 10px; font-size:11px; width:auto;" onclick="supabase.auth.signOut().then(()=>location.reload())">Log Out</button>`;
+    document.getElementById('nav-auth').innerHTML = `<span style="font-size:12px; margin-right:10px;">${user.email}</span><button class="btn-outline" style="padding:5px 10px; font-size:11px; width:auto;" onclick="supabaseClient.auth.signOut().then(()=>location.reload())">Log Out</button>`;
   }
 }
 
 runCalc();
 checkUser();
 </script>
+</body>
+</html>
+
+Why this works:
+
+1.  No Duplicates: I removed all old script blocks so there is only one place
+    where the code lives.
+2.  Variable Protection: I renamed the connection to supabaseClient so it
+    doesn't clash with the Supabase library itself.
+3.  Correct Syntax: Your Key is now safely wrapped in 'quotes'.
+
+Commit this to GitHub now. Once you do, refresh your live site and try to Sign
+Up again. The red error in the console will be gone!
