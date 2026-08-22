@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ClearSpend — Financial Command Center</title>
+<title>ClearSpend — Know Before You Swipe</title>
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF9LHLEGR5"></script>
@@ -21,16 +21,9 @@
 :root {
   --brand: #2563eb;
   --brand-grad: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-  --bg: #f8fafc;
-  --card: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --line: #e2e8f0;
-  --green: #10b981;
-  --amber: #f59e0b;
-  --red: #ef4444;
-  --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
-  --r: 24px;
+  --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #64748b;
+  --line: #e2e8f0; --green: #10b981; --amber: #f59e0b; --red: #ef4444;
+  --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); --r: 24px;
 }
 
 * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
@@ -46,22 +39,22 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .hero { text-align: center; padding: 60px 0 40px; }
 .hero h1 { font-size: 72px; font-weight: 900; letter-spacing: -4px; line-height: 0.9; margin-bottom: 20px; }
 .hero h1 span { background: var(--brand-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: 20px; font-weight: 700; color: var(--muted); }
 
-/* Grid & Cards */
+/* Dashboard UI */
 .dashboard-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
 .full { grid-column: 1 / -1; }
 
-/* Dashboard UI */
 .label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
 .big-money { font-size: 96px; font-weight: 900; letter-spacing: -6px; margin: 10px 0; line-height: 1; }
-.status-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; border-radius: 30px; font-weight: 800; font-size: 13px; margin-top: 10px; }
+.burn-rate { font-size: 18px; font-weight: 800; color: var(--amber); margin-top: 5px; }
 
-/* The Crystal Clear Glass Overlay */
+/* The "Crystal" Glass Overlay */
 .glass-lock {
     position: absolute; inset: 0; 
-    background: rgba(255, 255, 255, 0.2); 
-    backdrop-filter: blur(2px); /* Subtle blur as requested */
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(1px); /* Reduced blur per your request */
     display: flex; align-items: center; justify-content: center; z-index: 10;
 }
 .upgrade-tag {
@@ -69,27 +62,22 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
     font-weight: 900; font-size: 11px; box-shadow: var(--shadow); border: 1px solid var(--line);
 }
 
-/* Goals/Rows */
+/* Data Rows */
 .data-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 14px; }
-.goal-track { height: 10px; background: #f1f5f9; border-radius: 20px; margin: 8px 0 18px; overflow: hidden; }
-.goal-bar { height: 100%; background: var(--brand-grad); border-radius: 20px; }
-
-/* Inputs */
-input, select { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--line); margin: 8px 0 16px; font-size: 15px; background: #f9fafb; }
-
-/* Auth Modal */
-#auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.9); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(12px); }
-.modal-box { background: #fff; padding: 48px; border-radius: var(--r); width: 100%; max-width: 440px; text-align: center; }
-
-/* Buttons */
-button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; cursor: pointer; transition: 0.2s; font-size: 15px; }
-.btn-primary { background: var(--brand-grad); color: #fff; box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4); }
-.btn-secondary { background: #f1f5f9; color: var(--text); }
 
 /* Pricing */
 .pricing-section { padding: 100px 0; text-align: center; }
 .price-card { background: #fff; border: 1px solid var(--line); padding: 40px; border-radius: var(--r); text-align: left; }
 .price-card.featured { border: 3px solid var(--brand); transform: scale(1.03); }
+
+/* Modal & Input */
+#auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.9); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(12px); }
+.modal-box { background: #fff; padding: 48px; border-radius: var(--r); width: 100%; max-width: 440px; text-align: center; }
+input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--line); margin: 8px 0 16px; font-size: 15px; background: #f9fafb; }
+
+button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; cursor: pointer; transition: 0.2s; font-size: 15px; }
+.btn-primary { background: var(--brand-grad); color: #fff; box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4); }
+.btn-secondary { background: #f1f5f9; color: var(--text); }
 
 @media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 52px; } }
 </style>
@@ -99,7 +87,7 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
 <div id="auth-modal">
   <div class="modal-box">
     <h2 id="modal-title" style="font-size: 36px; font-weight: 900; letter-spacing: -1px; margin-bottom: 8px;">Join ClearSpend</h2>
-    <p id="modal-sub" style="color: var(--muted); margin-bottom: 24px;">Start your journey to financial clarity.</p>
+    <p id="modal-sub" style="color: var(--muted); margin-bottom: 24px;">Protect your data with a cloud profile.</p>
     <div style="text-align: left;"><label class="label">Email Address</label></div>
     <input type="email" id="auth-email" placeholder="name@email.com">
     <div style="text-align: left;"><label class="label" id="pass-label">Create Password</label></div>
@@ -113,73 +101,66 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
 <nav>
   <div class="logo">Clear<span>Spend</span></div>
   <div id="nav-auth">
-    <button class="btn-secondary" style="padding: 10px 20px" onclick="openAuth('signin')">Sign In</button>
-    <button class="btn-primary" style="padding: 10px 20px; margin-left: 10px;" onclick="openAuth('signup')">Get Started</button>
+    <button class="btn-secondary" onclick="openAuth('signin')">Sign In</button>
+    <button class="btn-primary" style="margin-left: 10px;" onclick="openAuth('signup')">Get Started</button>
   </div>
 </nav>
 
 <div class="container">
   <header class="hero">
     <h1>Stop guessing. <br><span>Start spending.</span></h1>
-    <p>Professional cash-flow planning that protects your flexible room.</p>
+    <p>Know your "Safe-to-Spend" number before you swipe.</p>
   </header>
 
   <div class="dashboard-grid">
     
-    <!-- DASHBOARD -->
+    <!-- MAIN DASHBOARD -->
     <section class="card">
-      <span class="label">Safe-to-Spend Balance</span>
+      <span class="label">Safe-to-Spend Room</span>
       <div class="big-money" id="display-safe" style="color: var(--brand)">$0</div>
-      <div class="status-pill" id="status-pill" style="background: var(--line);">Awaiting Input...</div>
+      <div class="burn-rate" id="display-burn">Spend limit: $0.00 / day</div>
       
-      <div style="margin-top: 40px;">
-        <div class="data-row"><span>Monthly Income</span><span id="row-inc">$0</span></div>
-        <div class="data-row"><span>Fixed Bills</span><span id="row-bills" style="color: var(--red)">$0</span></div>
+      <div style="margin-top: 30px; border-top: 1px solid var(--line); padding-top: 15px;">
+        <div class="data-row"><span>Next Paycheck</span><span id="row-inc">$0</span></div>
+        <div class="data-row"><span>Bills & Commitments</span><span id="row-bills" style="color: var(--red)">$0</span></div>
       </div>
     </section>
 
     <!-- SETUP -->
     <section class="card">
-      <h2 style="margin-top: 0;">Quick Setup</h2>
+      <h2 style="margin-top: 0;">Daily Setup</h2>
       <label class="label">Paycheck Amount</label>
       <input type="number" id="in-income" value="2500" oninput="runCalc()">
       
-      <label class="label">Pay Frequency</label>
-      <div style="position: relative;">
-        <select disabled style="background: #eee; cursor: not-allowed;">
-            <option>Every 2 Weeks (Starter Only)</option>
-        </select>
-        <div class="glass-lock" style="backdrop-filter: blur(1px);"><div class="upgrade-tag">Starter Tier</div></div>
-      </div>
+      <label class="label">Days Until Next Payday</label>
+      <input type="number" id="in-days" value="14" oninput="runCalc()">
 
-      <label class="label">Total Monthly Bills</label>
+      <label class="label">Total Bills Due Before Payday</label>
       <input type="number" id="in-bills" value="1200" oninput="runCalc()">
       <button class="btn-primary" onclick="saveToCloud()">Secure Profile to Cloud</button>
     </section>
 
-    <!-- RECURRING EXPENSES (STARTER SNEAK PEEK) -->
+    <!-- PAYDAY SPLITTER (STARTER SNEAK PEEK) -->
     <section class="card">
-        <span class="label">Recurring Expenses</span>
+        <span class="label">Payday Splitter</span>
         <div style="margin-top: 15px;">
-            <div class="data-row"><span>Rent / Mortgage</span><span>$1,400</span></div>
-            <div class="data-row"><span>Car Insurance</span><span>$120</span></div>
-            <div class="data-row"><span>Phone & Internet</span><span>$95</span></div>
-            <div class="data-row"><span>Subscriptions</span><span>$45</span></div>
+            <div class="data-row"><span>To Bills Account</span><span>$1,200</span></div>
+            <div class="data-row"><span>To Savings</span><span>$250</span></div>
+            <div class="data-row" style="color: var(--brand)"><span>Left in Pocket</span><span>$1,050</span></div>
         </div>
-        <div class="glass-lock"><div class="upgrade-tag">Unlock Bill List (Starter)</div></div>
+        <div class="glass-lock" style="backdrop-filter: blur(1px);"><div class="upgrade-tag">Starter: Payday Splitter</div></div>
     </section>
 
-    <!-- EMOTIONAL GOALS (PRO SNEAK PEEK) -->
+    <!-- 12-MONTH CRYSTAL BALL (PRO SNEAK PEEK) -->
     <section class="card">
-      <span class="label">Pro Strategic Goals</span>
-      <div style="margin-top: 20px;">
-        <div style="display: flex; justify-content: space-between;"><span style="font-weight: 800; font-size: 13px;">🛡️ Debt Snowball</span><span>65%</span></div>
-        <div class="goal-track"><div class="goal-bar" style="width: 65%;"></div></div>
-        
-        <div style="display: flex; justify-content: space-between;"><span style="font-weight: 800; font-size: 13px;">🏠 Home Downpayment</span><span>15%</span></div>
-        <div class="goal-track"><div class="goal-bar" style="width: 15%; opacity: 0.6;"></div></div>
+      <span class="label">Pro: 12-Month Projection</span>
+      <div style="margin-top: 20px; height: 100px; display: flex; align-items: flex-end; gap: 8px;">
+        <div style="flex:1; height:40%; background: #e2e8f0; border-radius: 4px;"></div>
+        <div style="flex:1; height:60%; background: #e2e8f0; border-radius: 4px;"></div>
+        <div style="flex:1; height:85%; background: var(--brand-grad); border-radius: 4px;"></div>
+        <div style="flex:1; height:95%; background: var(--brand-grad); border-radius: 4px;"></div>
       </div>
-      <div class="glass-lock"><div class="upgrade-tag">Unlock Pro Goals</div></div>
+      <div class="glass-lock" style="backdrop-filter: blur(1px);"><div class="upgrade-tag">Pro: Crystal Ball Projection</div></div>
     </section>
 
     <!-- PRICING -->
@@ -188,26 +169,28 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
         <h2 style="font-size: 48px; font-weight: 900; letter-spacing: -2px; margin-bottom: 40px;">One payment. Lifetime access.</h2>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: auto;">
+            <!-- STARTER -->
             <div class="price-card">
                 <div class="label">Starter Lifetime</div>
                 <div style="font-size: 42px; font-weight: 900; margin: 10px 0;">$29</div>
                 <p style="color: var(--muted); font-size: 13px; line-height: 1.8;">
-                    ✓ Secure Cloud Profile<br>
-                    ✓ Save Income & Bills<br>
-                    ✓ 3 "What-If" Scenarios<br>
-                    ✓ Basic Recurring Bill List
+                    ✓ <b>3-Month</b> History Graph<br>
+                    ✓ Smart <b>Payday Splitter</b><br>
+                    ✓ 10% <b>Safety Buffer</b> Toggle<br>
+                    ✓ Saved Recurring Bill List
                 </p>
                 <button class="btn-secondary" style="width: 100%" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
             </div>
+            <!-- PRO -->
             <div class="price-card featured">
                 <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--brand); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 900;">BEST VALUE</div>
                 <div class="label">Founding Pro Pass</div>
                 <div style="font-size: 42px; font-weight: 900; margin: 10px 0;">$49</div>
                 <p style="color: var(--muted); font-size: 13px; line-height: 1.8;">
                     ✓ <b>Everything in Starter</b><br>
-                    ✓ Unlimited Scenarios<br>
-                    ✓ Advanced Debt Snowball Tool<br>
-                    ✓ Smart Payday Allocation
+                    ✓ 12-Month <b>Crystal Ball</b> Projection<br>
+                    ✓ Advanced <b>Debt Snowball</b> Tool<br>
+                    ✓ Priority Feature Requests
                 </p>
                 <button class="btn-primary" style="width: 100%" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro Forever</button>
             </div>
@@ -224,17 +207,19 @@ const sb = supabase.createClient(SB_URL, SB_KEY);
 
 let currentMode = 'signup';
 
-// --- CALCULATOR ---
+// --- CALCULATOR & DAILY BURN RATE ---
 function runCalc() {
   const inc = +document.getElementById('in-income').value || 0;
   const bill = +document.getElementById('in-bills').value || 0;
+  const days = +document.getElementById('in-days').value || 1;
+  
   const safe = inc - bill;
+  const burn = safe / days;
+
   document.getElementById('display-safe').innerText = '$' + safe.toLocaleString();
+  document.getElementById('display-burn').innerText = 'Spend limit: $' + burn.toFixed(2) + ' / day';
   document.getElementById('row-inc').innerText = '$' + inc.toLocaleString();
   document.getElementById('row-bills').innerText = '-$' + bill.toLocaleString();
-  const pill = document.getElementById('status-pill');
-  if(safe > inc * 0.3) { pill.innerText = "Comfortable"; pill.style.background = "#eaf8ef"; pill.style.color = "var(--green)"; }
-  else { pill.innerText = "Budget Tight"; pill.style.background = "#fff7df"; pill.style.color = "var(--amber)"; }
 }
 
 // --- AUTH UI LOGIC ---
@@ -280,7 +265,7 @@ async function checkUser() {
   if(user) {
     document.getElementById('nav-auth').innerHTML = `
       <span style="font-size: 13px; font-weight: 800; color: var(--muted);">${user.email}</span>
-      <button class="btn-secondary" style="padding: 8px 15px; margin-left: 10px; font-size: 12px;" onclick="sb.auth.signOut().then(()=>location.reload())">Sign Out</button>
+      <button class="btn-secondary" style="padding: 8px 15px; margin-left: 10px; font-size: 12px;" onclick="sb.auth.signOut().then(()=>location.reload())">Log Out</button>
     `;
   }
 }
