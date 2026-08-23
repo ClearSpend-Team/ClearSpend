@@ -19,8 +19,9 @@
 
 <style>
 :root {
-  --brand: #2563eb;
-  --brand-grad: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  --navy: #0f172a;
+  --blue: #2563eb;
+  --blue-grad: linear-gradient(135deg, #0f172a 0%, #2563eb 100%);
   --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #64748b;
   --line: #e2e8f0; --green: #10b981; --amber: #f59e0b; --red: #ef4444;
   --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); --r: 24px;
@@ -29,92 +30,87 @@
 * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
 body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.5; }
 
-/* Navigation & Logo */
+/* REFINED LOGO AREA (Based on your image) */
 nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 40px; max-width: 1400px; margin: auto; }
-.logo-area { display: flex; align-items: center; gap: 12px; cursor: pointer; text-decoration: none; }
-.clear-shield { width: 32px; height: 32px; fill: url(#brand-g); }
-.logo-text { font-size: 26px; font-weight: 950; letter-spacing: -1.5px; color: var(--text); }
-.logo-text span { background: var(--brand-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.logo-container { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-icon { width: 40px; height: 40px; }
+.logo-text { font-size: 28px; font-weight: 900; letter-spacing: -1.5px; color: var(--navy); }
+.logo-text span { color: var(--blue); }
 
-/* Hero */
+/* HERO SECTION (Refined Wording) */
 .container { max-width: 1200px; margin: auto; padding: 0 20px 100px; }
 .hero { text-align: center; padding: 60px 0 40px; }
-.hero h1 { font-size: 64px; font-weight: 900; letter-spacing: -4px; line-height: 0.9; margin-bottom: 15px; }
-.hero h1 span { background: var(--brand-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.hero p { font-size: 18px; font-weight: 700; color: var(--muted); }
+.hero h1 { font-size: 68px; font-weight: 950; letter-spacing: -4px; line-height: 0.9; margin-bottom: 20px; color: var(--navy); }
+.hero h1 span { color: var(--blue); }
+.hero p { font-size: 20px; font-weight: 600; color: var(--muted); max-width: 700px; margin: auto; }
 
-/* Dashboard UI */
+/* DASHBOARD CARDS */
 .dashboard-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
 .full { grid-column: 1 / -1; }
 
 .label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
-.big-money { font-size: 96px; font-weight: 900; letter-spacing: -6px; margin: 10px 0; line-height: 1; }
-.daily-limit { font-size: 20px; font-weight: 800; color: var(--amber); margin-top: 5px; }
+.big-money { font-size: 110px; font-weight: 900; letter-spacing: -7px; margin: 5px 0; line-height: 0.8; color: var(--navy); }
+.burn-rate { font-size: 22px; font-weight: 800; color: var(--blue); margin-top: 15px; }
 
-/* The Crystal Glass Overlay */
+/* THE "CRYSTAL" GLASS OVERLAY (1px Blur per your request) */
 .glass-lock {
     position: absolute; inset: 0; background: rgba(255, 255, 255, 0.1); 
-    backdrop-filter: blur(1.5px); display: flex; align-items: center; justify-content: center; z-index: 10;
+    backdrop-filter: blur(1px); display: flex; align-items: center; justify-content: center; z-index: 10;
 }
 .upgrade-tag {
-    background: white; color: var(--brand); padding: 8px 16px; border-radius: 40px; 
+    background: white; color: var(--blue); padding: 8px 16px; border-radius: 40px; 
     font-weight: 900; font-size: 11px; box-shadow: var(--shadow); border: 1px solid var(--line);
 }
 
-/* Rows */
-.data-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 14px; }
+/* DATA ROWS */
+.data-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); font-weight: 700; }
 
-/* Inputs */
-input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--line); margin: 8px 0 16px; font-size: 15px; background: #f9fafb; }
-.field-group { margin-bottom: 10px; }
+/* INPUTS (Renamed per Duo Decision) */
+input { width: 100%; padding: 15px; border-radius: 14px; border: 1px solid var(--line); margin: 8px 0 16px; font-size: 16px; background: #f9fafb; font-weight: 600; }
 
-/* Pricing */
-.pricing-section { padding: 80px 0; text-align: center; border-top: 1px solid var(--line); margin-top: 60px; }
-.price-card { background: #fff; border: 1px solid var(--line); padding: 40px; border-radius: var(--r); text-align: left; }
-.price-card.featured { border: 3px solid var(--brand); transform: scale(1.03); }
+/* BUTTONS */
+button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; cursor: pointer; transition: 0.2s; font-size: 15px; }
+.btn-primary { background: var(--blue); color: #fff; box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4); }
+.btn-secondary { background: #f1f5f9; color: var(--navy); }
 
-/* Modal */
+/* PRICING */
+.pricing-section { padding: 100px 0; text-align: center; border-top: 1px solid var(--line); margin-top: 80px; }
+.price-card { background: #fff; border: 1px solid var(--line); padding: 48px; border-radius: var(--r); text-align: left; transition: 0.3s; }
+.price-card.featured { border: 3px solid var(--blue); transform: scale(1.05); }
+
+/* AUTH MODAL */
 #auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(12px); }
 .modal-box { background: #fff; padding: 48px; border-radius: var(--r); width: 100%; max-width: 440px; text-align: center; }
 
-/* Buttons */
-button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; cursor: pointer; transition: 0.2s; font-size: 15px; }
-.btn-primary { background: var(--brand-grad); color: #fff; box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4); }
-.btn-secondary { background: #f1f5f9; color: var(--text); }
-
-@media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 52px; } }
+@media (max-width: 900px) { .hero h1 { font-size: 52px; } .dashboard-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
-<!-- SVG Definition for Logo -->
-<svg style="display: none;">
-  <defs>
-    <linearGradient id="brand-g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
-    </linearGradient>
-  </defs>
-</svg>
-
 <div id="auth-modal">
   <div class="modal-box">
-    <h2 id="modal-title" style="font-size: 36px; font-weight: 900; letter-spacing: -1px; margin-bottom: 8px;">Join ClearSpend</h2>
-    <p id="modal-sub" style="color: var(--muted); margin-bottom: 24px;">Sync your "Safe-to-Spend" across all devices.</p>
+    <h2 id="modal-title" style="font-size: 36px; font-weight: 900;">Join ClearSpend</h2>
+    <p id="modal-sub" style="color: var(--muted); margin-bottom: 24px;">Start your journey to financial clarity.</p>
     <div style="text-align: left;"><label class="label">Email Address</label></div>
     <input type="email" id="auth-email" placeholder="name@email.com">
     <div style="text-align: left;"><label class="label" id="pass-label">Create Password</label></div>
     <input type="password" id="auth-password" placeholder="••••••••">
     <button class="btn-primary" style="width: 100%;" onclick="handleAuth()">Continue</button>
-    <div id="auth-toggle-link" style="margin-top: 24px; font-weight: 800; color: var(--brand); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div>
+    <div id="auth-toggle-link" style="margin-top: 24px; font-weight: 800; color: var(--blue); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div>
     <button class="btn-secondary" style="width: 100%; margin-top: 12px;" onclick="closeAuth()">Cancel</button>
   </div>
 </div>
 
 <nav>
-  <div class="logo-area" onclick="location.reload()">
-    <svg class="clear-shield" viewBox="0 0 24 24"><path d="M12 2L3 7v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5zm-1 15l-4-4 1.41-1.41L11 14.17l5.59-5.59L18 10l-7 7z"/></svg>
+  <div class="logo-container" onclick="location.reload()">
+    <!-- REFINED LOGO BASED ON YOUR IMAGE -->
+    <svg class="logo-icon" viewBox="0 0 100 100">
+      <path d="M30 40 C 30 25, 70 25, 70 40 C 70 55, 30 55, 30 70 C 30 85, 70 85, 70 70" fill="none" stroke="#0f172a" stroke-width="12" stroke-linecap="round"/>
+      <path d="M50 20 V 85" stroke="#0f172a" stroke-width="10" stroke-linecap="round"/>
+      <path d="M45 70 L 65 40 L 85 45" fill="none" stroke="#2563eb" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M85 45 L 85 30 L 70 30" fill="none" stroke="#2563eb" stroke-width="10" stroke-linecap="round"/>
+    </svg>
     <div class="logo-text">Clear<span>Spend</span></div>
   </div>
   <div id="nav-auth">
@@ -126,18 +122,18 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
 <div class="container">
   <header class="hero">
     <h1>Know your <span>"Safe-to-Spend"</span><br>number before you swipe.</h1>
-    <p>The financial bridge between today's balance and your next payday.</p>
+    <p>ClearSpend connects today's cash flow with tomorrow's decisions so you can see what is safe to spend and what happens if you do it.</p>
   </header>
 
   <div class="dashboard-grid">
     
-    <!-- PRIMARY DASHBOARD -->
+    <!-- THE RESULT -->
     <section class="card">
-      <span class="label">Disposable Cash Balance</span>
-      <div class="big-money" id="display-safe" style="color: var(--brand)">$0</div>
-      <div class="daily-limit" id="display-burn">Daily Spend Limit: $0.00</div>
+      <span class="label">Total Safe-to-Spend</span>
+      <div class="big-money" id="display-safe">$0</div>
+      <div class="burn-rate" id="display-burn">The Daily Limit: $0.00</div>
       
-      <div style="margin-top: 40px; border-top: 1px solid var(--line); padding-top: 15px;">
+      <div style="margin-top: 50px; border-top: 1px solid var(--line); padding-top: 20px;">
         <div class="data-row"><span>Next Cash In</span><span id="row-inc">$0</span></div>
         <div class="data-row"><span>The Friction (Must-Pays)</span><span id="row-bills" style="color: var(--red)">$0</span></div>
       </div>
@@ -145,72 +141,66 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
 
     <!-- THE SNAPSHOT (INPUTS) -->
     <section class="card">
-      <h2 style="margin-top: 0;">The Snapshot</h2>
-      <div class="field-group">
-          <label class="label">Next Cash In (Net Pay)</label>
-          <input type="number" id="in-income" value="2500" oninput="runCalc()">
-      </div>
-      <div class="field-group">
-          <label class="label">The Friction (Total Bills Due)</label>
-          <input type="number" id="in-bills" value="1200" oninput="runCalc()">
-      </div>
-      <div class="field-group">
-          <label class="label">The Countdown (Days left)</label>
-          <input type="number" id="in-days" value="14" oninput="runCalc()">
-      </div>
-      <button class="btn-primary" onclick="saveToCloud()">Secure Profile to Cloud</button>
+      <h2 style="margin-top: 0; letter-spacing: -1px;">The Snapshot</h2>
+      <label class="label">Next Cash In (Net Pay)</label>
+      <input type="number" id="in-income" value="2500" oninput="runCalc()">
+      
+      <label class="label">The Friction (Total Bills Due)</label>
+      <input type="number" id="in-bills" value="1200" oninput="runCalc()">
+
+      <label class="label">The Countdown (Days left)</label>
+      <input type="number" id="in-days" value="14" oninput="runCalc()">
+      
+      <button class="btn-primary" onclick="saveToCloud()" style="width: 100%">Secure Profile to Cloud</button>
     </section>
 
-    <!-- THE SPLITTER (STARTER SNEAK PEEK) -->
+    <!-- THE SPLITTER (STARTER) -->
     <section class="card">
         <span class="label">The Payday Splitter</span>
         <div style="margin-top: 15px;">
             <div class="data-row"><span>Transfer to Bills</span><span>$1,200</span></div>
             <div class="data-row"><span>10% Safety Buffer</span><span>$130</span></div>
-            <div class="data-row" style="color: var(--brand)"><span>Safe Pocket Cash</span><span>$1,170</span></div>
+            <div class="data-row" style="color: var(--blue)"><span>Safe Pocket Cash</span><span>$1,170</span></div>
         </div>
         <div class="glass-lock"><div class="upgrade-tag">Starter: The Splitter + 10% Cushion</div></div>
     </section>
 
-    <!-- THE DEBT SNOWBALL (PRO SNEAK PEEK) -->
+    <!-- THE DEBT SNOWBALL (PRO) -->
     <section class="card">
       <span class="label">Pro: The Debt Snowball</span>
       <div style="margin-top: 15px;">
-          <div class="data-row"><span>Remaining Safe Cash</span><span>$1,170</span></div>
-          <div class="data-row" style="color: var(--green)"><span>Suggested Extra Payment</span><span>$150</span></div>
-          <div class="data-row" style="border: 0; font-size: 12px; color: var(--muted);">Impact: Pay off Debt 4 Months Earlier</div>
+          <div class="data-row"><span>Suggested Extra Payment</span><span style="color: var(--green)">$150</span></div>
+          <div class="data-row" style="border: 0; font-size: 12px; color: var(--muted);">Result: Pay off Debt 4 Months Earlier</div>
       </div>
       <div class="glass-lock"><div class="upgrade-tag">Pro: Debt Snowball + Crystal Ball</div></div>
     </section>
 
     <!-- PRICING -->
     <section class="full pricing-section" id="pricing">
-        <div class="label" style="color: var(--brand)">Founding Member Deals</div>
-        <h2 style="font-size: 48px; font-weight: 900; letter-spacing: -2px; margin-bottom: 40px;">One payment. Lifetime access.</h2>
+        <div class="label" style="color: var(--blue)">Founding Member Deals</div>
+        <h2 style="font-size: 48px; font-weight: 950; letter-spacing: -3px; margin-bottom: 40px;">One payment. Lifetime access.</h2>
         
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: auto;">
-            <!-- STARTER -->
             <div class="price-card">
                 <div class="label">Starter Lifetime</div>
                 <div style="font-size: 42px; font-weight: 900; margin: 10px 0;">$29</div>
-                <p style="color: var(--muted); font-size: 13px; line-height: 1.8;">
-                    ✓ Secure <b>Cloud Profile</b><br>
-                    ✓ Smart <b>Payday Splitter</b><br>
-                    ✓ 10% <b>Safety Buffer</b> Toggle<br>
-                    ✓ 3 Named "What-If" Scenarios
+                <p style="color: var(--muted); font-size: 13px; line-height: 1.8; text-align: left;">
+                    ✓ Secure Cloud Profile<br>
+                    ✓ Smart Payday Splitter<br>
+                    ✓ 10% Safety Buffer Toggle<br>
+                    ✓ 3 "What-If" Scenarios
                 </p>
                 <button class="btn-secondary" style="width: 100%" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
             </div>
-            <!-- PRO -->
             <div class="price-card featured">
-                <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--brand); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 900;">BEST VALUE</div>
+                <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--blue); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 900;">BEST VALUE</div>
                 <div class="label">Founding Pro Pass</div>
                 <div style="font-size: 42px; font-weight: 900; margin: 10px 0;">$49</div>
-                <p style="color: var(--muted); font-size: 13px; line-height: 1.8;">
-                    ✓ <b>Everything in Starter</b><br>
-                    ✓ The <b>Debt Snowball</b> Tool<br>
-                    ✓ 12-Month <b>Crystal Ball</b> Projection<br>
-                    ✓ Pro <b>Goal Stacking</b> (Emergency + Fun)
+                <p style="color: var(--muted); font-size: 13px; line-height: 1.8; text-align: left;">
+                    ✓ Everything in Starter<br>
+                    ✓ The Debt Snowball Tool<br>
+                    ✓ 12-Month Crystal Ball Projection<br>
+                    ✓ Pro Goal Stacking
                 </p>
                 <button class="btn-primary" style="width: 100%" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro Forever</button>
             </div>
@@ -236,7 +226,7 @@ function runCalc() {
   const burn = safe / (days || 1);
 
   document.getElementById('display-safe').innerText = '$' + safe.toLocaleString();
-  document.getElementById('display-burn').innerText = 'Daily Spend Limit: $' + burn.toFixed(2);
+  document.getElementById('display-burn').innerText = 'The Daily Limit: $' + burn.toFixed(2);
   document.getElementById('row-inc').innerText = '$' + inc.toLocaleString();
   document.getElementById('row-bills').innerText = '-$' + bill.toLocaleString();
 }
@@ -265,7 +255,7 @@ async function handleAuth() {
     if(error) alert(error.message); else location.reload();
   } else {
     const { error } = await sb.auth.signUp({ email, password });
-    if(error) alert(error.message); else alert("Success! Check your email for a confirmation link.");
+    if(error) alert(error.message); else alert("Check your email for confirmation!");
   }
 }
 
@@ -273,7 +263,7 @@ async function saveToCloud() {
   const { data: { user } } = await sb.auth.getUser();
   if(!user) { openAuth('signup'); return; }
   const { error } = await sb.from('profiles').upsert({ id: user.id, updated_at: new Date() });
-  if(!error) alert("Financial profile synced to cloud!");
+  if(!error) alert("Profile synced to cloud!");
 }
 
 async function checkUser() {
