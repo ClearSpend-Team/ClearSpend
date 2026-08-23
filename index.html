@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ClearSpend — The Financial Recovery Suite</title>
+<title>ClearSpend — The Financial Command Center</title>
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF9LHLEGR5"></script>
@@ -26,60 +26,58 @@
 }
 
 * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
-html, body { min-height: 100vh; margin: 0; }
+html, body { min-height: 100vh; margin: 0; padding: 0; width: 100%; }
 body { background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%); background-attachment: fixed; color: var(--text); line-height: 1.5; overflow-x: hidden; }
 
-/* NAVIGATION & ENLARGED LOGO */
+/* NAVIGATION */
 nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 50px; max-width: 1400px; margin: auto; }
 .logo-container { display: flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none; }
 .logo-vault { width: 65px; height: 65px; }
 .logo-text { font-size: 36px; font-weight: 950; letter-spacing: -2px; color: var(--navy); margin-left: -4px; }
 .logo-text span { color: var(--indigo); }
 
+/* HERO */
 .container { max-width: 1300px; margin: auto; padding: 0 20px 40px; }
-.hero { text-align: center; padding: 60px 0 60px; }
-.hero h1 { 
-    font-size: 76px; font-weight: 900; 
-    letter-spacing: -1.5px; /* PREVENTS OVERLAP */
-    line-height: 1.1; margin-bottom: 25px; color: var(--navy); 
-}
+.hero { text-align: center; padding: 60px 0 40px; }
+.hero h1 { font-size: 76px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 25px; color: var(--navy); }
 .hero h1 span { background: linear-gradient(to bottom right, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-/* BENTO DASHBOARD */
-.dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; margin-bottom: 80px; }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; min-height: 240px; transition: 0.3s; }
-.col-8 { grid-column: span 8; } .col-4 { grid-column: span 4; } .col-12 { grid-column: span 12; }
+/* DASHBOARD GRID */
+.dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; margin-bottom: 50px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; min-height: 220px; transition: 0.3s; }
 
-/* TRAFFIC LIGHT HALO */
-.burn-card { border-top: 12px solid var(--line); transition: 0.3s; justify-content: center; }
+.col-8 { grid-column: span 8; }
+.col-4 { grid-column: span 4; }
+.col-12 { grid-column: span 12; }
+
+/* DYNAMIC HALO */
+.burn-card { border-top: 12px solid var(--line); }
 .halo-green { border-top-color: var(--green); box-shadow: 0 0 50px rgba(16, 185, 129, 0.15); }
 .halo-yellow { border-top-color: var(--amber); box-shadow: 0 0 50px rgba(245, 158, 11, 0.15); }
 .halo-red { border-top-color: var(--red); box-shadow: 0 0 50px rgba(239, 68, 68, 0.15); }
 
-.big-money { font-size: 100px; font-weight: 950; letter-spacing: -6px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
+.label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); display: block; margin-bottom: 10px; }
+.big-money { font-size: 90px; font-weight: 950; letter-spacing: -6px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
 .status-text { font-size: 24px; font-weight: 900; margin-top: 10px; }
 
-/* GATING SYSTEM */
+/* COMPACT PRICING SHIELD */
+.pricing-section { width: 100%; padding: 100px 20px; border-top: 1px solid var(--line); background: rgba(255,255,255,0.4); display: flex; flex-direction: column; align-items: center; }
+.pricing-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%; max-width: 1050px; margin-top: 40px; }
+.price-card { background: #fff; border: 1px solid var(--line); padding: 32px; border-radius: 24px; text-align: left; width: 100%; max-width: 320px; box-shadow: var(--shadow); transition: 0.3s; }
+.price-card.featured { border: 3px solid var(--indigo); transform: scale(1.05); }
+.price-card h3 { margin: 0 0 10px 0; font-size: 18px; font-weight: 800; }
+.price-amt { font-size: 32px; font-weight: 900; margin-bottom: 15px; }
+.price-list { list-style: none; padding: 0; margin: 0; font-size: 13px; line-height: 1.8; color: var(--muted); }
+.price-list li::before { content: "✓ "; color: var(--green); font-weight: 900; }
+
+/* GATING */
 .glass-lock { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(0.5px); display: flex; align-items: center; justify-content: center; z-index: 10; }
 .unlocked .glass-lock { display: none !important; }
-.upgrade-tag { background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 40px; font-weight: 900; font-size: 10px; box-shadow: var(--shadow); cursor: pointer; }
-
-/* DATA UI */
-.data-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 14px; }
-.debt-item { display: flex; justify-content: space-between; align-items: center; padding: 14px; background: #f8fafc; border-radius: 14px; margin-bottom: 10px; border: 1px solid var(--line); font-weight: 700; }
-.remove-btn { color: var(--red); font-size: 20px; font-weight: 900; margin-left: 15px; cursor: pointer; opacity: 0.5; }
-
-/* PRICING GLOBAL SHIELD */
-.pricing-outer-shield { width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 20px; border-top: 1px solid var(--line); background: rgba(255,255,255,0.4); }
-.pricing-header { text-align: center; max-width: 800px; margin-bottom: 60px; }
-.pricing-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; width: 100%; max-width: 1100px; }
-.price-card { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); text-align: left; width: 100%; max-width: 480px; flex: 1; min-width: 320px; box-shadow: var(--shadow); position: relative; }
-.price-card.featured { border: 4px solid var(--indigo); border-radius: var(--r); transform: scale(1.03); }
+.upgrade-tag { background: var(--navy); color: #fff; padding: 6px 14px; border-radius: 40px; font-weight: 900; font-size: 10px; box-shadow: var(--shadow); cursor: pointer; }
 
 /* UI */
-input { width: 100%; padding: 16px; border-radius: 16px; border: 1px solid var(--line); margin: 6px 0 14px; font-size: 16px; background: #f8fafc; color: var(--navy); font-weight: 600; outline: none; display: block; }
-.label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); display: block; margin-top: 10px; }
-button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 16px; }
+input, select { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--line); margin: 6px 0 14px; font-size: 15px; background: #f8fafc; color: var(--navy); font-weight: 600; outline: none; }
+button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 14px; }
 .btn-primary { background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; }
 .btn-secondary { background: #f1f5f9; color: var(--navy); }
 
@@ -92,102 +90,71 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
 </head>
 <body>
 
-<div id="auth-modal">
-  <div class="modal-box">
-    <h2 id="modal-title" style="font-size: 42px; font-weight: 950; letter-spacing: -2px;">Join ClearSpend</h2>
-    <p id="modal-subtext" style="color: var(--muted); margin-bottom: 30px;">Sync your financial profile to the cloud.</p>
-    <div id="auth-form-inputs">
-        <div style="text-align: left;"><label class="label">Email Address</label></div>
-        <input type="email" id="auth-email" placeholder="name@email.com">
-        <div style="text-align: left;"><label class="label" id="pass-label">Create Password</label></div>
-        <input type="password" id="auth-password" placeholder="Min. 6 characters">
-        <button class="btn-primary" style="width: 100%;" onclick="handleAuth()">Continue to Vault</button>
-        <div id="auth-toggle-link" style="margin-top: 25px; font-weight: 800; color: var(--indigo); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div>
-    </div>
-    <button class="btn-secondary" style="margin-top: 15px; width: 100%; font-size: 13px;" onclick="closeAuth()">Cancel</button>
-  </div>
-</div>
+<div id="auth-modal"><div class="modal-box"><h2 id="modal-title" style="font-size: 42px; font-weight: 950; letter-spacing: -2px;">Join ClearSpend</h2><p id="modal-subtext" style="color: var(--muted); margin-bottom: 30px;">Sync your financial profile to the cloud.</p><div id="auth-form-inputs"><input type="email" id="auth-email" placeholder="name@email.com"><input type="password" id="auth-password" placeholder="Min. 6 characters"><button class="btn-primary" style="width: 100%;" onclick="handleAuth()">Continue to Vault</button><div id="auth-toggle-link" style="margin-top: 25px; font-weight: 800; color: var(--indigo); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div></div><button class="btn-secondary" style="margin-top: 15px; width: 100%;" onclick="closeAuth()">Cancel</button></div></div>
 
-<nav>
-  <div class="logo-container" onclick="location.reload()">
-    <svg class="logo-vault" viewBox="0 0 100 100"><defs><linearGradient id="vG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:var(--indigo)"/><stop offset="100%" style="stop-color:var(--cyan)"/></linearGradient></defs><path d="M50 10 L90 30 L90 70 L50 90 L10 70 L10 30 Z" fill="none" stroke="url(#vG)" stroke-width="5"/><path d="M50 10 L50 90 M90 30 L10 70 M10 30 L90 70" stroke="var(--line)" stroke-width="2"/><path d="M50 35 L70 45 L50 55 L30 45 Z" fill="url(#vG)" /><path d="M50 55 V 80" stroke="url(#vG)" stroke-width="10" stroke-linecap="round"/></svg>
-    <div class="logo-text">Clear<span>Spend</span></div>
-  </div>
-  <div id="nav-auth">
-    <button class="btn-secondary" style="background:none;" onclick="openAuth('signin')">Sign In</button>
-    <button class="btn-primary" style="margin-left: 15px; padding: 12px 25px;" onclick="openAuth('signup')">Get Started</button>
-  </div>
-</nav>
+<nav><div class="logo-container" onclick="location.reload()"><svg class="logo-vault" viewBox="0 0 100 100"><defs><linearGradient id="vG" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:var(--indigo)"/><stop offset="100%" style="stop-color:var(--cyan)"/></linearGradient></defs><path d="M50 10 L90 30 L90 70 L50 90 L10 70 L10 30 Z" fill="none" stroke="url(#vG)" stroke-width="5"/><path d="M50 10 L50 90 M90 30 L10 70 M10 30 L90 70" stroke="var(--line)" stroke-width="2"/><path d="M50 35 L70 45 L50 55 L30 45 Z" fill="url(#vG)" /><path d="M50 55 V 80" stroke="url(#vG)" stroke-width="10" stroke-linecap="round"/></svg><div class="logo-text">Clear<span>Spend</span></div></div><div id="nav-auth"><button class="btn-secondary" style="background:none;" onclick="openAuth('signin')">Sign In</button><button class="btn-primary" style="margin-left: 15px; padding: 12px 25px;" onclick="openAuth('signup')">Get Started</button></div></nav>
 
 <div class="container">
   <div class="hero"><h1>Know your <span>Safe-to-Spend</span><br>before you swipe.</h1><p>Professional financial command center. Stop guessing and start outrunning your debt.</p></div>
   <div class="dashboard-grid">
     <!-- ROW 1 -->
-    <section class="card col-8 burn-card" id="main-card">
-      <span class="label">Live Disposable Balance</span>
-      <div class="big-money" id="display-safe">$0</div>
-      <div class="status-text" id="status-text">Daily Limit: $0.00</div>
-      <div style="font-size: 14px; font-weight: 800; color: var(--muted); margin-top: 5px;" id="debt-to-life">Time Burden: Enter Snapshot...</div>
-    </section>
-
+    <section class="card col-8 burn-card" id="main-card"><span class="label">Live Disposable Balance</span><div class="big-money" id="display-safe">$0</div><div class="status-text" id="status-text">Daily Limit: $0.00</div></section>
+    
     <section class="card col-4">
       <h2 style="margin:0; font-size:24px; color:var(--navy);">The Snapshot</h2>
-      <label class="label">Net Paycheck In</label>
-      <input type="number" id="in-income" value="2500" oninput="runCalc()">
-      
-      <div class="pro-feat" style="position:relative;">
-        <label class="label">Yearly Salary (Gross)</label>
-        <input type="number" id="in-annual" value="55000" oninput="runCalc()">
-        <div class="glass-lock"><div class="upgrade-tag">Pro Input</div></div>
+      <label class="label" style="margin-top:10px; margin-bottom:0;">Next Cash In</label><input type="number" id="in-income" value="2500" oninput="runCalc()">
+      <div id="freq-area" style="position:relative;">
+        <label class="label" style="margin-bottom:0;">Pay Frequency</label>
+        <select disabled style="background:#eee;"><option>Weekly (Starter Feature)</option></select>
+        <div class="glass-lock" style="background:none;"><div class="upgrade-tag">Starter</div></div>
       </div>
-
-      <label class="label">Monthly Fixed Bills</label>
-      <input type="number" id="in-bills" value="1200" oninput="runCalc()">
-      <label class="label">Payday Countdown (Days)</label>
-      <input type="number" id="in-days" value="14" oninput="runCalc()">
+      <label class="label" style="margin-bottom:0;">Fixed Bills</label><input type="number" id="in-bills" value="1200" oninput="runCalc()">
+      <label class="label" style="margin-bottom:0;">Countdown (Days)</label><input type="number" id="in-days" value="14" oninput="runCalc()">
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%; padding: 12px; font-size: 14px;">Secure Sync</button>
     </section>
 
-    <!-- PRO GAUGE -->
-    <section class="card col-4 pro-feat">
-        <span class="label">Pro: Annual Debt Stress</span>
+    <!-- ROW 2 -->
+    <section class="card col-4" id="annual-velocity">
+        <span class="label">The Annual Velocity</span>
         <div style="margin-top: 15px;">
-            <div id="stress-label" style="font-weight: 900; font-size: 16px;">Calculated</div>
-            <div style="height:12px;background:#f1f5f9;border-radius:10px;margin:10px 0;overflow:hidden;border:1px solid var(--line);"><div id="stress-bar" style="height:100%;transition:1s;width:0%;"></div></div>
-            <p id="stress-msg" style="font-size: 11px; color: var(--muted);">Based on Yearly Gross vs. Total Debt.</p>
+            <div class="pro-feat" style="position:relative;">
+                <label class="label" style="margin-bottom:0;">Yearly Gross Salary</label>
+                <input type="number" id="in-annual" value="55000" oninput="runCalc()">
+                <div class="glass-lock"><div class="upgrade-tag">Pro: Stress Analytics</div></div>
+            </div>
+            <div style="height:10px; background:var(--line); border-radius:10px; margin-top:20px;"></div>
         </div>
-        <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Stress Gauge</div></div>
     </section>
 
-    <!-- PRO STACK -->
     <section class="card col-8 pro-feat">
         <span class="label">Pro: The Debt Stack</span>
         <div style="display: flex; gap: 10px; margin: 15px 0;">
-            <input type="text" id="debt-name" placeholder="Debt Name" style="margin:0;">
-            <input type="number" id="debt-amt" placeholder="Amount" style="margin:0;">
-            <button class="btn-primary" onclick="addDebt()" style="padding: 10px 20px;">Add</button>
+            <input type="text" id="debt-name" placeholder="Debt Name" style="margin:0;"><input type="number" id="debt-amt" placeholder="Amount" style="margin:0;"><button class="btn-primary" style="padding:10px 20px;">Add</button>
         </div>
-        <div id="debt-list"></div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Debt Stack</div></div>
     </section>
   </div>
 </div>
 
-<section class="pricing-outer-shield" id="pricing">
-    <div class="pricing-header">
-        <div class="label" style="color: var(--indigo)">Founding Member Deals</div>
-        <h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2>
-    </div>
+<section class="pricing-section" id="pricing">
+    <div style="text-align: center;"><div class="label" style="color: var(--indigo)">Founding Member Deals</div><h2 style="font-size: 48px; font-weight: 950; letter-spacing: -3px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2></div>
     <div class="pricing-grid">
+        <!-- Tier 1 -->
         <div class="price-card">
-            <div class="label">Starter Lifetime</div><div style="font-size: 52px; font-weight: 900; margin: 10px 0;">$29</div>
-            <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ Ghost Cushion toggle<br>✓ 3-Month visuals<br>✓ Cloud Profile Sync</p>
-            <button class="btn-secondary" style="width: 100%; margin-top: 30px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
+            <h3>Essential Pass</h3><div class="price-amt" style="color:var(--muted)">Free</div>
+            <ul class="price-list"><li>Safe-to-Spend Calc</li><li>Daily Spend Limit</li><li>Manual Payday Countdown</li><li>Single Session Access</li></ul>
         </div>
+        <!-- Tier 2 -->
+        <div class="price-card">
+            <h3>Founding Starter</h3><div class="price-amt">$29</div>
+            <ul class="price-list"><li><b>Pay Frequency</b> selection</li><li>Ghost Cushion toggle</li><li>3-Month visual history</li><li>Full Cloud Profile Sync</li></ul>
+            <button class="btn-secondary" style="width: 100%; margin-top: 20px; padding: 12px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
+        </div>
+        <!-- Tier 3 -->
         <div class="price-card featured">
-            <div class="label" style="color: var(--indigo)">Founding Pro Pass</div><div style="font-size: 52px; font-weight: 900; margin: 10px 0;">$49</div>
-            <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ <b>Annual Stress Gauge</b><br>✓ <b>Yearly Salary</b> Engine<br>✓ Itemized Debt Stack<br>✓ Priority Support</p>
-            <button class="btn-primary" style="width: 100%; margin-top: 30px;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro Forever</button>
+            <h3>Founding Pro</h3><div class="price-amt">$49</div>
+            <ul class="price-list"><li><b>Annual Velocity</b> Engine</li><li>Stress Gauge Analytics</li><li>Unlimited Debt Stack</li><li>Priority Pro Support</li></ul>
+            <button class="btn-primary" style="width: 100%; margin-top: 20px; padding: 12px;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro</button>
         </div>
     </div>
 </section>
@@ -196,23 +163,9 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
 const SB_URL = 'https://chbfgkguxkdadnevqthk.supabase.co'; 
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNoYmZna2d1eGtkYWRuZXZxdGhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczMTcxOTUsImV4cCI6MjEwMjg5MzE5NX0.hemyiyKpJXt7CvxReNOzX4AVajM7V_LHl0SOJNAutcw'; 
 const sb = supabase.createClient(SB_URL, SB_KEY);
-let debts = [];
-
-function addDebt() {
-    const name = document.getElementById('debt-name').value; const amt = +document.getElementById('debt-amt').value;
-    if(!name || !amt) return; debts.push({name, amt});
-    document.getElementById('debt-name').value = ''; document.getElementById('debt-amt').value = '';
-    renderDebts(); runCalc();
-}
-function removeDebt(i) { debts.splice(i, 1); renderDebts(); runCalc(); }
-function renderDebts() {
-    const list = document.getElementById('debt-list'); list.innerHTML = '';
-    debts.forEach((d, i) => { list.innerHTML += `<div class="debt-item"><span>${d.name}: $${d.amt.toLocaleString()}</span><span class="remove-btn" onclick="removeDebt(${i})">×</span></div>`; });
-}
 
 function runCalc() {
   const inc = +document.getElementById('in-income').value || 0;
-  const yearly = +document.getElementById('in-annual').value || 0;
   const bill = +document.getElementById('in-bills').value || 0;
   const days = +document.getElementById('in-days').value || 1;
   const safe = inc - bill; const burn = safe / days;
@@ -223,18 +176,6 @@ function runCalc() {
   if (burn > 100) { statusT.style.color = "var(--green)"; card.classList.add('halo-green'); }
   else if (burn > 40) { statusT.style.color = "var(--amber)"; card.classList.add('halo-yellow'); }
   else { statusT.style.color = "var(--red)"; card.classList.add('halo-red'); }
-
-  const totalDebt = debts.reduce((acc, curr) => acc + curr.amt, 0);
-  const ratio = (totalDebt / (yearly || 1)) * 100;
-  const bar = document.getElementById('stress-bar');
-  const label = document.getElementById('stress-label');
-  bar.style.width = Math.min(100, ratio * 2) + "%";
-  if(ratio < 15) { bar.style.background = "var(--green)"; label.innerText="Healthy"; }
-  else if(ratio < 40) { bar.style.background = "var(--amber)"; label.innerText="Caution"; }
-  else { bar.style.background = "var(--red)"; label.innerText="Danger"; }
-  
-  const debtCheck = (totalDebt / (inc || 1)).toFixed(1);
-  document.getElementById('debt-to-life').innerText = `Time Burden: This debt costs you ${debtCheck} paychecks.`;
 }
 
 function openAuth(mode) { window.currentMode = mode; document.getElementById('auth-modal').style.display = 'flex'; }
@@ -255,10 +196,16 @@ async function saveToCloud() {
 async function checkUser() {
   const { data: { user } } = await sb.auth.getUser();
   if(user) {
-    document.getElementById('nav-auth').innerHTML = `<span style="font-size: 14px;font-weight:800;">${user.email}</span><button style="background:none;font-size:12px;" onclick="sb.auth.signOut().then(()=>location.reload())">Sign Out</button>`;
+    document.getElementById('nav-auth').innerHTML = `<span style="font-size:14px;font-weight:800;color:var(--muted)">${user.email}</span><button style="background:none;font-size:12px;margin-left:10px;" onclick="sb.auth.signOut().then(()=>location.reload())">Sign Out</button>`;
     const { data: profile } = await sb.from('profiles').select('plan').eq('id', user.id).single();
-    if(profile && profile.plan === 'PRO') {
-        document.querySelectorAll('.pro-feat').forEach(el => el.classList.add('unlocked'));
+    if(profile) {
+      if(profile.plan === 'STARTER' || profile.plan === 'PRO') {
+          document.getElementById('freq-area').classList.add('unlocked');
+      }
+      if(profile.plan === 'PRO') {
+          document.querySelectorAll('.pro-feat').forEach(el => el.classList.add('unlocked'));
+          document.getElementById('annual-velocity').classList.add('unlocked');
+      }
     }
   }
 }
