@@ -26,7 +26,7 @@
 }
 
 * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
-html, body { min-height: 100vh; margin: 0; padding: 0; }
+html, body { min-height: 100vh; margin: 0; padding: 0; width: 100%; }
 body { background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%); background-attachment: fixed; color: var(--text); line-height: 1.5; overflow-x: hidden; }
 
 /* NAVIGATION */
@@ -36,16 +36,18 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .logo-text { font-size: 36px; font-weight: 950; letter-spacing: -2px; color: var(--navy); margin-left: -4px; }
 .logo-text span { color: var(--indigo); }
 
-/* MAIN APP CONTAINER */
-.app-container { max-width: 1300px; margin: auto; padding: 0 20px 60px; }
+.container { max-width: 1300px; margin: auto; padding: 0 20px 40px; }
 .hero { text-align: center; padding: 40px 0 60px; }
 .hero h1 { font-size: 76px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 25px; color: var(--navy); }
 .hero h1 span { background: linear-gradient(to bottom right, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
 /* DASHBOARD GRID */
-.dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; min-height: 240px; }
-.col-8 { grid-column: span 8; } .col-4 { grid-column: span 4; } .col-12 { grid-column: span 12; }
+.dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; margin-bottom: 50px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; min-height: 240px; transition: 0.3s; }
+
+.col-8 { grid-column: span 8; }
+.col-4 { grid-column: span 4; }
+.col-12 { grid-column: span 12; }
 
 /* STATUS EFFECTS */
 .burn-card { border-top: 12px solid var(--line); transition: 0.3s; justify-content: center; }
@@ -54,20 +56,21 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .halo-red { border-top-color: var(--red); box-shadow: 0 0 50px rgba(239, 68, 68, 0.15); }
 .big-money { font-size: 90px; font-weight: 950; letter-spacing: -6px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
 
-/* PROGRESS ROADMAPS */
-.bill-track { height: 8px; background: var(--line); border-radius: 10px; margin: 8px 0; overflow: hidden; }
-.bill-fill { height: 100%; transition: 1s; }
+/* ROADMAP TRACKER */
+.roadmap-row { display: flex; align-items: center; justify-content: space-between; padding: 15px; background: #f8fafc; border-radius: 16px; margin-bottom: 12px; border: 1px solid var(--line); }
+.progress-container { flex: 1; margin: 0 20px; height: 12px; background: var(--line); border-radius: 20px; overflow: hidden; }
+.progress-bar { height: 100%; transition: 1s; width: 0%; }
 
 /* GATING */
 .glass-lock { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(0.5px); display: flex; align-items: center; justify-content: center; z-index: 10; }
 .unlocked .glass-lock { display: none !important; }
 .upgrade-tag { background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 40px; font-weight: 900; font-size: 10px; box-shadow: var(--shadow); cursor: pointer; }
 
-/* PRICING SECTION - THE PERMANENT SHIELD */
-.pricing-shield { width: 100vw; background: rgba(255,255,255,0.5); border-top: 1px solid var(--line); padding: 100px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; }
-.pricing-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; width: 100%; max-width: 1100px; padding: 0 20px; }
-.price-card { background: #fff; border: 1px solid var(--line); padding: 48px; border-radius: var(--r); text-align: left; width: 100%; max-width: 340px; box-shadow: var(--shadow); transition: 0.3s; }
-.price-card.featured { border: 3.5px solid var(--indigo); transform: scale(1.03); }
+/* PRICING SECTION - FORCED 3-COLUMN SYMMETRY */
+.pricing-section { width: 100%; padding: 120px 0; border-top: 1px solid var(--line); background: rgba(255,255,255,0.4); display: flex; flex-direction: column; align-items: center; }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 100%; max-width: 1200px; padding: 0 40px; }
+.price-card { background: #fff; border: 1px solid var(--line); padding: 40px; border-radius: var(--r); text-align: left; box-shadow: var(--shadow); position: relative; display: flex; flex-direction: column; }
+.price-card.featured { border: 4px solid var(--indigo); transform: scale(1.05); }
 
 /* UI */
 .input-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 5px; display: block; }
@@ -76,27 +79,23 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; c
 .btn-primary { background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; }
 .btn-secondary { background: #f1f5f9; color: var(--navy); }
 
-/* AUTH MODAL */
-#auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-.modal-box { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); width: 100%; max-width: 460px; text-align: center; }
-
-@media (max-width: 1000px) { .col-8, .col-4 { grid-column: span 12; } .hero h1 { font-size: 48px; } }
+@media (max-width: 1000px) { 
+    .dashboard-grid, .pricing-grid { grid-template-columns: 1fr; } 
+    .hero h1 { font-size: 48px; } 
+    .price-card.featured { transform: none; }
+}
 </style>
 </head>
 <body>
 
-<div id="auth-modal" class="modal-overlay">
-  <div class="modal-box">
-    <h2 id="modal-title" style="font-size: 32px; font-weight: 950; letter-spacing: -1px;">Join ClearSpend</h2>
-    <p id="modal-subtext" style="color: var(--muted); margin-bottom: 30px;">Sync your financial profile to the cloud.</p>
-    <div id="auth-form-inputs">
-        <input type="email" id="auth-email" placeholder="name@email.com">
-        <input type="password" id="auth-password" placeholder="Password (Min. 6 chars)">
-        <button class="btn-primary" style="width: 100%;" onclick="handleAuth()">Continue to Vault</button>
-        <div id="auth-toggle-link" style="margin-top: 25px; font-weight: 800; color: var(--indigo); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div>
+<div id="auth-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:10000; display:flex; align-items:center; justify-content:center;">
+    <div class="modal-box" style="background:#fff; padding:50px; border-radius:28px; width:400px; text-align:center;">
+        <h2 id="modal-title" style="font-size:32px; font-weight:900;">Join ClearSpend</h2>
+        <input type="email" id="auth-email" placeholder="Email Address">
+        <input type="password" id="auth-password" placeholder="Password (Min 6 chars)">
+        <button class="btn-primary" style="width:100%" onclick="handleAuth()">Continue</button>
+        <button class="btn-secondary" style="width:100%; margin-top:10px;" onclick="document.getElementById('auth-modal').style.display='none'">Cancel</button>
     </div>
-    <button class="btn-secondary" style="margin-top: 15px; width: 100%;" onclick="closeAuth()">Cancel</button>
-  </div>
 </div>
 
 <nav>
@@ -110,95 +109,103 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; c
   </div>
 </nav>
 
-<div class="app-container">
-  <div class="hero"><h1>Know your <span>Safe-to-Spend</span><br>before you swipe.</h1><p>The high-performance command center for your next payday.</p></div>
+<div class="container">
+  <div class="hero"><h1>Know your <span>Safe-to-Spend</span><br>before you swipe.</h1><p>The first-ever financial dashboard with built-in Bill Roadmaps.</p></div>
   
   <div class="dashboard-grid">
-    <!-- ROW 1 -->
+    <!-- DISPOSABLE -->
     <section class="card col-8 burn-card" id="main-card">
-      <span class="input-label">Live Disposable Balance</span>
+      <span class="label">Live Disposable Balance</span>
       <div class="big-money" id="display-safe">$0</div>
-      <div class="status-text" id="status-text">Daily Limit: $0.00</div>
+      <div id="status-text" class="status-text">Daily Limit: $0.00</div>
     </section>
 
+    <!-- SNAPSHOT -->
     <section class="card col-4">
       <h2 style="margin:0; font-size:24px; color:var(--navy);">The Snapshot</h2>
-      <label class="input-label" style="margin-top:10px;">Net Paycheck In</label>
+      <label class="label" style="margin-top:10px;">Net Paycheck In</label>
       <input type="text" id="in-income" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
-      <label class="input-label">The Friction (Monthly Bills)</label>
+      
+      <label class="label">Pay Frequency</label>
+      <div id="freq-area" style="position:relative;">
+        <select id="in-freq" onchange="updateFreq()">
+            <option value="14">Bi-Weekly (14 days)</option>
+            <option value="7">Weekly (7 days)</option>
+            <option value="15">Semi-Monthly (Twice Monthly)</option>
+            <option value="30">Monthly (30 days)</option>
+        </select>
+        <div class="glass-lock"><div class="upgrade-tag">Starter</div></div>
+      </div>
+
+      <label class="label">The Friction (Total Bills)</label>
       <input type="text" id="in-bills" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
-      <label class="input-label">The Countdown (Days)</label>
+      
+      <label class="label">Countdown (Days Left)</label>
       <input type="number" id="in-days" value="14" oninput="runCalc()">
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%; padding: 12px; font-size: 14px;">Secure Sync</button>
     </section>
 
-    <!-- ROW 2 -->
-    <section class="card col-4" id="annual-velocity-box">
-        <span class="input-label">The Annual Velocity</span>
-        <div style="margin-top: 15px;">
-            <label class="input-label">State Cost Index</label>
-            <select id="in-state" onchange="runCalc()">
-                <option value="1.0" selected>General USA (Standard)</option>
-                <option value="1.3">California (High Cost)</option>
-                <option value="1.3">New York (High Cost)</option>
-                <option value="1.15">Texas (Mid-High)</option>
-                <option value="1.15">Florida (Mid-High)</option>
-                <option value="0.9">Ohio (Low Cost)</option>
-            </select>
-            <label class="input-label">Yearly Gross Salary</label>
-            <input type="text" id="in-annual" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
-            <div id="ratio-label" style="font-weight: 900; font-size: 16px; margin-top:10px;">Ratio: ---</div>
-            <div class="bill-track"><div id="ratio-bar" class="bill-fill" style="width:0%;"></div></div>
-        </div>
-        <div class="glass-lock"><div class="upgrade-tag">Pro Pass Required</div></div>
-    </section>
-
-    <section class="card col-8" id="slicer-box">
-        <span class="input-label">The Payday Roadmap</span>
+    <!-- THE PAYDAY ROADMAP (NEW) -->
+    <section class="card col-12" id="roadmap-box">
+        <span class="label">The Payday Roadmap</span>
         <div style="display: flex; gap: 10px; margin: 15px 0;">
-            <input type="text" id="slice-name" placeholder="Phone, Rent, etc." style="margin:0;">
-            <input type="text" id="slice-amt" placeholder="$0.00" oninput="formatCurrency(this)" style="margin:0; width:150px;">
-            <button class="btn-primary" onclick="addSlice()" style="padding:10px 20px;">Add Bill</button>
+            <input type="text" id="bill-name" placeholder="Bill Name (e.g. Phone)" style="margin:0;">
+            <input type="text" id="bill-amt" placeholder="Total Due" oninput="formatCurrency(this)" style="margin:0;">
+            <input type="date" id="bill-date" style="margin:0; width: 200px;">
+            <button class="btn-primary" onclick="addBillToRoadmap()" style="padding:10px 20px;">Add Bill</button>
         </div>
-        <div id="slice-list"></div>
-        <div class="glass-lock"><div class="upgrade-tag">Starter Tier Required</div></div>
+        <div id="roadmap-list">
+            <!-- Dynamic rows with progress bars here -->
+        </div>
+        <div class="glass-lock"><div class="upgrade-tag">Starter: Bill Roadmap Engine</div></div>
     </section>
   </div>
 </div>
 
-<div class="pricing-shield" id="pricing">
+<section class="pricing-section" id="pricing">
     <div class="pricing-header">
-        <div class="input-label" style="color: var(--indigo)">Choose Your Founding Status</div>
+        <div class="label" style="color: var(--indigo)">Choose Your Founding Status</div>
         <h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2>
     </div>
     <div class="pricing-grid">
+        <!-- FREE -->
         <div class="price-card">
-            <div class="input-label">Essential Pass</div><div style="font-size:32px; font-weight:950; margin:10px 0; color:var(--muted)">$0</div>
+            <h3>Essential Pass</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px; color:var(--muted)">$0</div>
             <ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2;">
                 <li>✓ Daily Spend Limit</li>
-                <li>✓ Basic Snapshot Tool</li>
-                <li>✓ Mobile-Friendly UI</li>
+                <li>✓ Basic Snapshot</li>
+                <li>✓ Mobile UI</li>
             </ul>
-            <button class="btn-secondary" style="width: 100%; margin-top: 20px;" onclick="openAuth('signup')">Claim Pass</button>
+            <button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="openAuth('signup')">Claim Pass</button>
         </div>
+        <!-- STARTER -->
         <div class="price-card">
-            <div class="input-label">Founding Starter</div><div style="font-size:32px; font-weight:950; margin:10px 0;">$29</div>
-            <p style="color: var(--muted); font-size: 13px; line-height: 1.8;">✓ <b>Bill Roadmap</b> Progress<br>✓ Ghost Cushion toggle<br>✓ Cloud Snapshot Sync</p>
-            <button class="btn-secondary" style="width: 100%; margin-top: 20px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
+            <h3>Founding Starter</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$29</div>
+            <ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2;">
+                <li>✓ <b>Bill Roadmap</b> Progress</li>
+                <li>✓ Ghost Cushion toggle</li>
+                <li>✓ Cloud Profile Sync</li>
+            </ul>
+            <button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
         </div>
+        <!-- PRO -->
         <div class="price-card featured">
-            <div class="input-label" style="color:var(--indigo)">Founding Pro Pass</div><div style="font-size:32px; font-weight:950; margin:10px 0;">$49</div>
-            <p style="color: var(--muted); font-size: 13px; line-height: 1.8;">✓ <b>Annual Velocity</b> Index<br>✓ State Stress Ratios<br>✓ Unlimited Debt Manager</p>
-            <button class="btn-primary" style="width: 100%; margin-top: 20px;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro Forever</button>
+            <h3>Founding Pro</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$49</div>
+            <ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2;">
+                <li>✓ <b>Annual Velocity</b> Index</li>
+                <li>✓ Debt Negotiation Suite</li>
+                <li>✓ Priority Support</li>
+            </ul>
+            <button class="btn-primary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro</button>
         </div>
     </div>
-</div>
+</section>
 
 <script>
 const SB_URL = 'https://chbfgkguxkdadnevqthk.supabase.co'; 
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNoYmZna2d1eGtkYWRuZXZxdGhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczMTcxOTUsImV4cCI6MjEwMjg5MzE5NX0.hemyiyKpJXt7CvxReNOzX4AVajM7V_LHl0SOJNAutcw'; 
 const sb = supabase.createClient(SB_URL, SB_KEY);
-let slices = [];
+let roadmapBills = [];
 
 function formatCurrency(i) {
     let v = i.value.replace(/\D/g, "");
@@ -207,53 +214,69 @@ function formatCurrency(i) {
 }
 function parseVal(s) { return parseFloat(s.replace(/[$,]/g, "")) || 0; }
 
-function addSlice() {
-    const n = document.getElementById('slice-name').value;
-    const a = parseVal(document.getElementById('slice-amt').value);
-    if(!n || !a) return;
-    slices.push({name:n, amt:a, current: 0});
-    document.getElementById('slice-name').value=''; document.getElementById('slice-amt').value='';
-    renderSlices(); runCalc();
+function updateFreq() {
+    document.getElementById('in-days').value = document.getElementById('in-freq').value;
+    runCalc();
 }
 
-function renderSlices() {
-    const list = document.getElementById('slice-list'); list.innerHTML = '';
-    const days = +document.getElementById('in-days').value;
-    slices.forEach((s, i) => {
-        // ROADMAP LOGIC: Color depends on how close we are to payday vs saved amount
-        const targetPerDay = s.amt / 30;
-        const progress = Math.min(100, (s.current / s.amt) * 100);
-        const color = progress < 25 ? 'var(--red)' : progress < 75 ? 'var(--amber)' : 'var(--green)';
-        list.innerHTML += `<div style="margin-bottom:15px;"><div class="data-row"><span>${s.name}</span><span>Target: $${s.amt.toLocaleString()} <span class="remove-btn" onclick="removeSlice(${i})">×</span></span></div><div class="bill-track"><div class="bill-fill" style="width:${progress}%; background:${color}"></div></div></div>`;
+function addBillToRoadmap() {
+    const n = document.getElementById('bill-name').value;
+    const a = parseVal(document.getElementById('bill-amt').value);
+    const d = document.getElementById('bill-date').value;
+    if(!n || !a || !d) return;
+    roadmapBills.push({name: n, amt: a, dueDate: new Date(d)});
+    renderRoadmap();
+}
+
+function renderRoadmap() {
+    const list = document.getElementById('roadmap-list');
+    list.innerHTML = '';
+    const today = new Date();
+    
+    roadmapBills.forEach((b, i) => {
+        const timeDiff = b.dueDate - today;
+        const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+        
+        // ROADMAP MATH: Simple Red to Green logic based on "how far in the future"
+        let progress = 100 - (daysLeft * 3); // Mock logic for visual
+        progress = Math.max(10, Math.min(100, progress));
+        
+        let color = "var(--red)";
+        if (progress > 40) color = "var(--amber)";
+        if (progress > 80) color = "var(--green)";
+
+        list.innerHTML += `
+            <div class="roadmap-row">
+                <div style="flex: 1;">
+                    <b style="font-size:14px;">${b.name}</b><br>
+                    <small style="color:var(--muted)">Due in ${daysLeft} days</small>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: ${progress}%; background: ${color}"></div>
+                </div>
+                <div style="text-align: right; min-width: 100px;">
+                    <b style="color: ${color}">$${b.amt.toLocaleString()}</b>
+                </div>
+            </div>
+        `;
     });
 }
-function removeSlice(i) { slices.splice(i, 1); renderSlices(); runCalc(); }
 
 function runCalc() {
   const inc = parseVal(document.getElementById('in-income').value);
   const bill = parseVal(document.getElementById('in-bills').value);
-  const yearly = parseVal(document.getElementById('in-annual').value);
   const days = +document.getElementById('in-days').value || 1;
-  const stateBuffer = +document.getElementById('in-state').value;
   const safe = inc - bill; const burn = safe / days;
-  document.getElementById('display-safe').innerText = '$' + safe.toLocaleString(undefined, {minimumFractionDigits: 2});
+  document.getElementById('display-safe').innerText = '$' + safe.toLocaleString();
   const statusT = document.getElementById('status-text'); const card = document.getElementById('main-card');
   statusT.innerText = 'Daily Limit: $' + burn.toFixed(2);
   card.classList.remove('halo-green', 'halo-yellow', 'halo-red');
-  if (burn > (100 * stateBuffer)) { statusT.style.color = "var(--green)"; card.classList.add('halo-green'); }
-  else if (burn > (40 * stateBuffer)) { statusT.style.color = "var(--amber)"; card.classList.add('halo-yellow'); }
+  if (burn > 100) { statusT.style.color = "var(--green)"; card.classList.add('halo-green'); }
+  else if (burn > 40) { statusT.style.color = "var(--amber)"; card.classList.add('halo-yellow'); }
   else { statusT.style.color = "var(--red)"; card.classList.add('halo-red'); }
-  const totalBill = slices.reduce((acc, curr) => acc + curr.amt, 0);
-  const ratio = (totalBill / (yearly / 12 || 1)) * 100;
-  const bar = document.getElementById('ratio-bar'); const label = document.getElementById('ratio-label');
-  bar.style.width = Math.min(100, ratio) + "%";
-  if(ratio < 15) { bar.style.background = "var(--green)"; label.innerText="Ratio: Healthy"; }
-  else if(ratio < 36) { bar.style.background = "var(--amber)"; label.innerText="Ratio: Caution"; }
-  else { bar.style.background = "var(--red)"; label.innerText="Ratio: Heavy"; }
 }
 
 function openAuth(mode) { window.currentMode = mode; document.getElementById('auth-modal').style.display = 'flex'; }
-function closeAuth() { document.getElementById('auth-modal').style.display = 'none'; }
 function toggleAuthMode() { openAuth(window.currentMode === 'signup' ? 'signin' : 'signup'); }
 
 async function handleAuth() {
@@ -265,11 +288,13 @@ async function handleAuth() {
 async function checkUser() {
   const { data: { user } } = await sb.auth.getUser();
   if(user) {
-    document.getElementById('nav-auth').innerHTML = `<span style="font-size:14px;font-weight:800;color:var(--muted)">${user.email}</span><button style="background:none;font-size:12px;margin-left:10px;" onclick="sb.auth.signOut().then(()=>location.reload())">Sign Out</button>`;
+    document.getElementById('nav-auth').innerHTML = `<span style="font-size:14px;font-weight:800;">${user.email}</span><button style="background:none;font-size:12px;" onclick="sb.auth.signOut().then(()=>location.reload())">Sign Out</button>`;
     const { data: profile } = await sb.from('profiles').select('plan').eq('id', user.id).single();
     if(profile) {
-      if(profile.plan === 'STARTER' || profile.plan === 'PRO') document.getElementById('slicer-box').classList.add('unlocked');
-      if(profile.plan === 'PRO') document.getElementById('annual-velocity-box').classList.add('unlocked');
+      if(profile.plan === 'STARTER' || profile.plan === 'PRO') {
+          document.getElementById('freq-area').classList.add('unlocked');
+          document.getElementById('roadmap-box').classList.add('unlocked');
+      }
     }
   }
 }
