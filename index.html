@@ -36,14 +36,14 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .logo-text { font-size: 36px; font-weight: 950; letter-spacing: -2px; color: var(--navy); margin-left: -4px; }
 .logo-text span { color: var(--indigo); }
 
-/* HERO (FIXED COLLISION & CENTERING) */
+/* HERO */
 .container { max-width: 1300px; margin: auto; padding: 0 20px 100px; }
 .hero { text-align: center; padding: 60px 0 80px; }
 .hero h1 { font-size: 76px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 25px; color: var(--navy); }
 .hero h1 span { background: linear-gradient(to bottom right, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hero p { font-size: 22px; color: var(--muted); max-width: 800px; margin: auto; font-weight: 500; }
 
-/* BENTO DASHBOARD GRID */
+/* DASHBOARD */
 .dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; }
 .col-8 { grid-column: span 8; }
@@ -60,8 +60,8 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .big-money { font-size: 90px; font-weight: 950; letter-spacing: -6px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
 .status-text { font-size: 24px; font-weight: 900; margin-top: 10px; }
 
-/* TEASERS (CRYSTAL FROST 0.5px) */
-.glass-lock { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(0.5px); display: flex; align-items: center; justify-content: center; z-index: 10; }
+/* TEASERS */
+.glass-lock { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(0.5px); display: flex; align-items: center; justify-content: center; z-index: 10; }
 .unlocked .glass-lock { display: none !important; }
 .upgrade-tag { background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 40px; font-weight: 900; font-size: 10px; box-shadow: var(--shadow); cursor: pointer; }
 
@@ -69,10 +69,10 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .pricing-section { width: 100%; margin-top: 100px; padding: 100px 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; }
 .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 40px auto 0; text-align: left; }
 
-/* MODAL FIXES */
+/* AUTH MODAL */
 #auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
 .modal-box { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); width: 100%; max-width: 460px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
-input, select { width: 100%; padding: 16px; border-radius: 16px; border: 1px solid var(--line); margin: 6px 0 14px; font-size: 16px; background: #f8fafc; color: var(--navy); font-weight: 600; outline: none; }
+input { width: 100%; padding: 18px; border-radius: 16px; border: 1px solid var(--line); margin: 6px 0 14px; font-size: 16px; background: #f8fafc; color: var(--navy); font-weight: 600; outline: none; }
 button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 16px; }
 .btn-primary { background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; }
 .btn-secondary { background: #f1f5f9; color: var(--navy); }
@@ -115,10 +115,11 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
 <div class="container">
   <header class="hero">
     <h1>Know your <span>Safe-to-Spend</span><br>before you swipe.</h1>
-    <p>The financial bridge between today's balance and your next payday. Stop guessing and start outrunning your debt.</p>
+    <p>Professional financial command center. Stop guessing and start outrunning your debt.</p>
   </header>
 
   <div class="dashboard-grid">
+    <!-- ROW 1 -->
     <section class="card col-8 burn-card" id="main-card">
       <span class="label">Live Disposable Balance</span>
       <div class="big-money" id="display-safe">$0</div>
@@ -132,11 +133,12 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
       <input type="number" id="in-income" value="2500" oninput="runCalc()">
       <label class="label" style="margin-bottom:0;">Friction (Bills + Debt)</label>
       <input type="number" id="in-bills" value="1600" oninput="runCalc()">
-      <label class="label" style="margin-bottom:0;">The Countdown (Days)</label>
+      <label class="label" style="margin-bottom:0;">Countdown (Days)</label>
       <input type="number" id="in-days" value="14" oninput="runCalc()">
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%; padding: 12px; font-size: 14px;">Secure Sync</button>
     </section>
 
+    <!-- TEASERS -->
     <section class="card col-4" id="starter-cushion">
         <span class="label">The Ghost Cushion</span>
         <div style="margin-top: 15px;">
@@ -144,7 +146,7 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
                 <span style="font-weight: 800; font-size: 13px;">10% Safety Buffer</span>
                 <div style="width: 40px; height: 22px; background: var(--line); border-radius: 20px;"></div>
             </div>
-            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--muted);"><span>Hidden Reserves:</span><span>$130.00</span></div>
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--muted);"><span>Hidden:</span><span id="val-cushion">$0.00</span></div>
         </div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Starter Cushion</div></div>
     </section>
@@ -161,7 +163,7 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
     <section class="card col-4 pro-feat">
         <span class="label">Pro: Debt Escape Plan</span>
         <div style="margin-top: 15px; text-align: center;">
-            <div style="font-size: 24px; font-weight: 950; color: var(--navy);">MARCH 2027</div>
+            <div style="font-size: 24px; font-weight: 950; color: var(--navy);" id="escape-date">---</div>
             <div style="height: 8px; background: var(--line); border-radius: 20px; margin-top: 10px; overflow: hidden;"><div style="width: 45%; height: 100%; background: var(--green);"></div></div>
         </div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Escape Date</div></div>
@@ -209,20 +211,24 @@ function runCalc() {
   if (burn > 100) { statusT.style.color = "var(--green)"; card.classList.add('halo-green'); }
   else if (burn > 40) { statusT.style.color = "var(--amber)"; card.classList.add('halo-yellow'); }
   else { statusT.style.color = "var(--red)"; card.classList.add('halo-red'); }
+  
+  document.getElementById('val-cushion').innerText = '$' + (safe * 0.1).toFixed(2);
+  const d = new Date(); d.setMonth(d.getUTCMonth() + 18);
+  document.getElementById('escape-date').innerText = d.toLocaleString('default', { month: 'short', year: 'numeric' }).toUpperCase();
 }
 
 function openAuth(mode) {
   window.currentMode = mode;
-  document.getElementById('auth-form-inputs').style.display = 'block';
   const title = document.getElementById('modal-title');
   const sub = document.getElementById('modal-subtext');
   const link = document.getElementById('auth-toggle-link');
   const passL = document.getElementById('pass-label');
   const passI = document.getElementById('auth-password');
+  
   if(mode === 'signin') {
-    title.innerText = "Welcome Back"; sub.innerText = "Access your private vault."; link.innerText = "Need an account? Join Free"; passL.innerText = "Enter Password"; passI.placeholder = "Enter your password";
+    title.innerText = "Welcome Back"; sub.innerText = "Access your private financial vault."; link.innerText = "Need an account? Join Free"; passL.innerText = "Enter Password"; passI.placeholder = "Enter your password";
   } else {
-    title.innerText = "Join ClearSpend"; sub.innerText = "Sync your profile to the cloud."; link.innerText = "Already have an account? Sign In"; passL.innerText = "Create Password"; passI.placeholder = "Min. 6 characters";
+    title.innerText = "Join ClearSpend"; sub.innerText = "Sync your financial profile to the cloud."; link.innerText = "Already have an account? Sign In"; passL.innerText = "Create Password"; passI.placeholder = "Min. 6 characters";
   }
   document.getElementById('auth-modal').style.display = 'flex';
 }
@@ -233,24 +239,14 @@ function toggleAuthMode() { openAuth(window.currentMode === 'signup' ? 'signin' 
 async function handleAuth() {
   const email = document.getElementById('auth-email').value;
   const password = document.getElementById('auth-password').value;
-  
-  // THE REDIRECT FIX: Forcing Supabase to return to the right page
   const { error } = window.currentMode === 'signin' 
     ? await sb.auth.signInWithPassword({ email, password }) 
-    : await sb.auth.signUp({ 
-        email, 
-        password,
-        options: { emailRedirectTo: 'https://clearspend-team.github.io/ClearSpend/' }
-      });
+    : await sb.auth.signUp({ email, password });
   
   if(error) {
       alert(error.message);
-  } else if (window.currentMode === 'signup') {
-      document.getElementById('modal-title').innerText = "Verify Email";
-      document.getElementById('modal-subtext').innerText = "Success! We sent a confirmation link to your email. Please click it to activate your vault.";
-      document.getElementById('auth-form-inputs').style.display = 'none';
   } else {
-      location.reload();
+      location.reload(); // LOGS IN INSTANTLY WITHOUT VERIFY UI
   }
 }
 
