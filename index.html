@@ -27,20 +27,21 @@
 * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
 body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.5; }
 
-/* LOGO REBUILT TO MATCH IMAGE EXACTLY */
-nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 40px; max-width: 1400px; margin: auto; }
+/* LOGO: REBUILT TO MATCH IMAGE PERFECTLY */
+nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 40px; max-width: 1400px; margin: auto; }
 .logo-container { display: flex; align-items: center; gap: 0; text-decoration: none; cursor: pointer; }
-.logo-icon { width: 80px; height: 80px; margin-right: -5px; } /* Large & Tight Spacing */
-.logo-text { font-size: 42px; font-weight: 950; letter-spacing: -2.5px; color: var(--navy); }
+.logo-icon { width: 90px; height: 90px; margin-right: -8px; } /* Enlarged and tightened */
+.logo-text { font-size: 44px; font-weight: 900; letter-spacing: -2.5px; color: var(--navy); }
 .logo-text span { color: var(--blue); }
 
 /* HERO */
 .container { max-width: 1200px; margin: auto; padding: 0 20px 100px; }
 .hero { text-align: center; padding: 40px 0; }
 .hero h1 { font-size: 68px; font-weight: 950; letter-spacing: -4px; line-height: 0.95; margin-bottom: 20px; }
+.hero h1 span { color: var(--blue); }
 .hero p { font-size: 20px; color: var(--muted); max-width: 800px; margin: auto; font-weight: 600; }
 
-/* DASHBOARD GRID */
+/* DASHBOARD */
 .dashboard-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
 .full { grid-column: 1 / -1; }
@@ -54,7 +55,7 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 
 /* CRYSTAL GLASS OVERLAYS */
 .glass-lock {
-    position: absolute; inset: 0; background: rgba(255, 255, 255, 0.02); 
+    position: absolute; inset: 0; background: rgba(255, 255, 255, 0.05); 
     backdrop-filter: blur(1px); display: flex; align-items: center; justify-content: center; z-index: 10;
 }
 .upgrade-tag {
@@ -62,14 +63,12 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
     font-weight: 900; font-size: 12px; box-shadow: var(--shadow); border: 1px solid var(--line);
 }
 
-.data-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); font-weight: 700; }
 input { width: 100%; padding: 16px; border-radius: 14px; border: 1px solid var(--line); margin: 8px 0 16px; font-size: 16px; background: #f9fafb; font-weight: 600; }
-
 button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; cursor: pointer; transition: 0.2s; }
 .btn-primary { background: var(--blue); color: #fff; }
 .btn-secondary { background: #f1f5f9; color: var(--navy); }
 
-/* AUTH MODAL FIXES */
+/* AUTH MODAL */
 #auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(12px); }
 .modal-box { background: #fff; padding: 48px; border-radius: var(--r); width: 100%; max-width: 440px; text-align: center; }
 
@@ -94,19 +93,22 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
 
 <nav>
   <div class="logo-container" onclick="location.reload()">
-    <!-- SVG LOGO MATCHING YOUR ATTACHED IMAGE -->
+    <!-- REBUILT LOGO: THE "S" GROWTH CURVE -->
     <svg class="logo-icon" viewBox="0 0 120 120">
       <defs>
-        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" style="stop-color:#0f172a" />
           <stop offset="100%" style="stop-color:#2563eb" />
         </linearGradient>
       </defs>
-      <!-- The 'S' Swoop and Arrow -->
-      <path d="M40 45 C 40 30, 80 30, 80 45 C 80 60, 40 60, 40 75 C 40 90, 80 90, 80 75" fill="none" stroke="url(#logoGradient)" stroke-width="12" stroke-linecap="round"/>
-      <path d="M60 20 V 90" stroke="url(#logoGradient)" stroke-width="10" stroke-linecap="round"/>
-      <path d="M50 85 Q 85 85 95 45" fill="none" stroke="#2563eb" stroke-width="12" stroke-linecap="round"/>
-      <path d="M85 55 L 95 35 L 105 55" fill="none" stroke="#2563eb" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- The main "S" into Arrow path (Widened and correctly oriented) -->
+      <path d="M85 35 C 85 20, 35 20, 35 45 C 35 65, 85 65, 85 85 C 85 105, 35 110, 25 85" fill="none" stroke="url(#blueGrad)" stroke-width="16" stroke-linecap="round"/>
+      <!-- The Growth Arrow Tail -->
+      <path d="M50 100 Q 95 100 110 50" fill="none" stroke="#2563eb" stroke-width="16" stroke-linecap="round"/>
+      <!-- The Arrow Head -->
+      <path d="M100 65 L 110 45 L 120 65" fill="none" stroke="#2563eb" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- The Top Dollar Stroke (Not mirrored) -->
+      <path d="M60 15 V 35" stroke="url(#blueGrad)" stroke-width="14" stroke-linecap="round"/>
     </svg>
     <div class="logo-text">Clear<span>Spend</span></div>
   </div>
@@ -119,14 +121,14 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
 <div class="container">
   <header class="hero">
     <h1>Know your <span>"Safe-to-Spend"</span><br>number before you swipe.</h1>
-    <p>ClearSpend connects today's cash flow with tomorrow's decisions so you can see what is safe to spend and what happens if you do it.</p>
+    <p>The financial bridge between today's balance and your next payday. Stop guessing and start outrunning your debt.</p>
   </header>
 
   <div class="dashboard-grid">
     
-    <!-- MAIN RESULTS (TRAFFIC LIGHT) -->
+    <!-- MAIN RESULTS -->
     <section class="card burn-card" id="main-card">
-      <span class="label">Total Safe-to-Spend Room</span>
+      <span class="label">Total Safe-to-Spend Balance</span>
       <div class="big-money" id="display-safe">$0</div>
       <div class="status-text" id="status-text">The Daily Limit: $0.00</div>
       <div id="status-desc" style="font-weight: 600; color: var(--muted); margin-top: 5px;">Input your snapshot to begin...</div>
@@ -137,16 +139,12 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
       <h2 style="margin-top: 0; letter-spacing: -1px;">The Snapshot</h2>
       <label class="label">Next Cash In (Net Pay)</label>
       <input type="number" id="in-income" value="2500" oninput="runCalc()">
-      
-      <label class="label">The Friction (Living Bills)</label>
+      <label class="label">The Friction (Monthly Bills)</label>
       <input type="number" id="in-bills" value="1200" oninput="runCalc()">
-
       <label class="label">The Weight (Debt Min-Pays)</label>
       <input type="number" id="in-debt" value="400" oninput="runCalc()">
-
       <label class="label">The Countdown (Days left)</label>
       <input type="number" id="in-days" value="14" oninput="runCalc()">
-      
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%">Secure Snapshot to Cloud</button>
     </section>
 
@@ -180,7 +178,7 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
             <div class="card" style="text-align: left;">
                 <div class="label">Starter Lifetime</div>
                 <div style="font-size: 42px; font-weight: 900; margin: 10px 0;">$29</div>
-                <p style="color: var(--muted); font-size: 14px; line-height: 1.8;">✓ <b>The Interest Saver</b> Graph<br>✓ <b>Ghost Cushion</b> (10% Safety)<br>✓ Smart Payday Splitter<br>✓ Multi-device Sync</p>
+                <p style="color: var(--muted); font-size: 14px; line-height: 1.8;">✓ <b>3-Month</b> History Graph<br>✓ <b>Ghost Cushion</b> (10% Safety)<br>✓ Smart Payday Splitter<br>✓ Multi-device Sync</p>
                 <button class="btn-secondary" style="width: 100%; margin-top: 20px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
             </div>
             <div class="card" style="text-align: left; border: 3px solid var(--blue);">
@@ -208,7 +206,7 @@ function runCalc() {
   const debt = +document.getElementById('in-debt').value || 0;
   const days = +document.getElementById('in-days').value || 1;
   const safe = inc - bill - debt;
-  const burn = safe / (days || 1);
+  const burn = safe / days;
 
   document.getElementById('display-safe').innerText = '$' + safe.toLocaleString();
   const statusT = document.getElementById('status-text');
@@ -235,17 +233,20 @@ function openAuth(mode) {
   const sub = document.getElementById('modal-subtext');
   const toggle = document.getElementById('auth-toggle-link');
   const passLabel = document.getElementById('pass-label');
+  const passInput = document.getElementById('auth-password');
 
   if(mode === 'signin') {
     title.innerText = "Welcome Back";
     sub.innerText = "Sign in to access your financial profile.";
     toggle.innerText = "Need an account? Join Free";
     passLabel.innerText = "Enter Password";
+    passInput.placeholder = "Enter your password";
   } else {
     title.innerText = "Join ClearSpend";
     sub.innerText = "Protect your data with a cloud profile.";
     toggle.innerText = "Already have an account? Sign In";
     passLabel.innerText = "Create Password";
+    passInput.placeholder = "Min. 8 characters";
   }
   document.getElementById('auth-modal').style.display = 'flex';
 }
