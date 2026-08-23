@@ -29,28 +29,27 @@
 html, body { min-height: 100vh; margin: 0; }
 body { background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%); background-attachment: fixed; color: var(--text); line-height: 1.5; }
 
-/* NAVIGATION */
+/* LOGO & NAVIGATION */
 nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 50px; max-width: 1400px; margin: auto; }
 .logo-container { display: flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none; }
 .logo-vault { width: 65px; height: 65px; }
 .logo-text { font-size: 36px; font-weight: 950; letter-spacing: -2px; color: var(--navy); margin-left: -4px; }
 .logo-text span { color: var(--indigo); }
 
-/* HERO (FIXED COLLISION) */
+/* HERO */
 .container { max-width: 1300px; margin: auto; padding: 0 20px 100px; }
 .hero { text-align: center; padding: 60px 0 60px; }
 .hero h1 { font-size: 76px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 25px; color: var(--navy); }
 .hero h1 span { background: linear-gradient(to bottom right, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-/* DASHBOARD GRID */
+/* BENTO DASHBOARD */
 .dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; }
-
 .col-8 { grid-column: span 8; }
 .col-4 { grid-column: span 4; }
 .col-12 { grid-column: span 12; }
 
-/* TRAFFIC LIGHT HALO */
+/* STATUS EFFECTS */
 .burn-card { border-top: 12px solid var(--line); transition: 0.3s; }
 .halo-green { border-top-color: var(--green); box-shadow: 0 0 50px rgba(16, 185, 129, 0.15); }
 .halo-yellow { border-top-color: var(--amber); box-shadow: 0 0 50px rgba(245, 158, 11, 0.15); }
@@ -60,22 +59,18 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .big-money { font-size: 90px; font-weight: 950; letter-spacing: -6px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
 .status-text { font-size: 24px; font-weight: 900; margin-top: 10px; }
 
-/* LOCKING SYSTEM */
-.glass-lock { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(0.5px); display: flex; align-items: center; justify-content: center; z-index: 10; }
+/* TEASERS */
+.glass-lock { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(0.5px); display: flex; align-items: center; justify-content: center; z-index: 10; }
 .unlocked .glass-lock { display: none !important; }
 .upgrade-tag { background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 40px; font-weight: 900; font-size: 10px; box-shadow: var(--shadow); cursor: pointer; }
 
-/* PRICING - CENTERED FIX */
-.pricing-section { width: 100%; margin-top: 100px; padding: 100px 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; }
-.pricing-header { text-align: center; width: 100%; max-width: 800px; }
-.pricing-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; width: 100%; max-width: 1100px; margin-top: 50px; }
-.price-card { background: #fff; border: 1px solid var(--line); padding: 48px; border-radius: var(--r); text-align: left; width: 100%; max-width: 450px; flex: 1; min-width: 320px; box-shadow: var(--shadow); transition: 0.3s; }
-.price-card.featured { border: 3px solid var(--indigo); transform: scale(1.03); }
+/* PRICING */
+.pricing-section { width: 100%; margin-top: 100px; padding: 120px 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 40px auto 0; text-align: left; }
 
-/* AUTH MODAL */
+/* MODAL FIXES */
 #auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-.modal-box { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); width: 100%; max-width: 460px; text-align: center; }
-
+.modal-box { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); width: 100%; max-width: 460px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
 input { width: 100%; padding: 16px; border-radius: 16px; border: 1px solid var(--line); margin: 6px 0 14px; font-size: 16px; background: #f8fafc; color: var(--navy); font-weight: 600; outline: none; }
 button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 16px; }
 .btn-primary { background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; }
@@ -87,15 +82,17 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
 <body>
 
 <div id="auth-modal">
-  <div class="modal-box">
+  <div class="modal-box" id="modal-content-area">
     <h2 id="modal-title" style="font-size: 42px; font-weight: 950; letter-spacing: -2px;">Join ClearSpend</h2>
     <p id="modal-subtext" style="color: var(--muted); margin-bottom: 30px;">Sync your financial profile to the cloud.</p>
-    <div style="text-align: left;"><label class="label">Email Address</label></div>
-    <input type="email" id="auth-email" placeholder="name@email.com">
-    <div style="text-align: left;"><label class="label" id="pass-label">Create Password</label></div>
-    <input type="password" id="auth-password" placeholder="Min. 6 characters">
-    <button class="btn-primary" style="width: 100%;" onclick="handleAuth()">Continue to Vault</button>
-    <div id="auth-toggle-link" style="margin-top: 25px; font-weight: 800; color: var(--indigo); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div>
+    <div id="auth-form-inputs">
+        <div style="text-align: left;"><label class="label">Email Address</label></div>
+        <input type="email" id="auth-email" placeholder="name@email.com">
+        <div style="text-align: left;"><label class="label" id="pass-label">Create Password</label></div>
+        <input type="password" id="auth-password" placeholder="Min. 6 characters">
+        <button class="btn-primary" style="width: 100%;" onclick="handleAuth()">Continue to Dashboard</button>
+        <div id="auth-toggle-link" style="margin-top: 25px; font-weight: 800; color: var(--indigo); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div>
+    </div>
     <button class="btn-secondary" style="margin-top: 15px; width: 100%; font-size: 13px;" onclick="closeAuth()">Cancel</button>
   </div>
 </div>
@@ -142,7 +139,7 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%; padding: 12px; font-size: 14px;">Secure Sync</button>
     </section>
 
-    <!-- TEASERS -->
+    <!-- PRO TEASERS -->
     <section class="card col-4" id="starter-cushion">
         <span class="label">The Ghost Cushion</span>
         <div style="margin-top: 15px;">
@@ -165,7 +162,7 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
     </section>
 
     <section class="card col-4 pro-feat">
-        <span class="label">Pro: Debt Escape Path</span>
+        <span class="label">Pro: Debt Escape Plan</span>
         <div style="margin-top: 15px; text-align: center;">
             <div style="font-size: 24px; font-weight: 950; color: var(--navy);" id="escape-date">---</div>
             <div style="height: 8px; background: var(--line); border-radius: 20px; margin-top: 10px; overflow: hidden;"><div style="width: 45%; height: 100%; background: var(--green);"></div></div>
@@ -173,20 +170,19 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Escape Date</div></div>
     </section>
 
-    <!-- PRICING SECTION (CLEANLY CENTERED) -->
     <section class="col-12 pricing-section" id="pricing">
         <div class="pricing-header">
             <div class="label" style="color: var(--indigo)">Founding Member Deals</div>
-            <h2 style="font-size: 56px; font-weight: 950; letter-spacing: -3px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2>
+            <h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; color: var(--navy);">One payment. Lifetime access.</h2>
         </div>
         <div class="pricing-grid">
-            <div class="price-card">
+            <div class="price-card" style="background: #fff; border: 1px solid var(--line); padding: 48px; border-radius: var(--r);">
                 <div class="label">Starter Lifetime</div>
                 <div style="font-size: 52px; font-weight: 900; margin: 10px 0;">$29</div>
                 <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ <b>Ghost Cushion</b> safety toggle<br>✓ <b>3-Month</b> history visuals<br>✓ Smart Payday Splitter<br>✓ Cloud Snapshot Storage</p>
                 <button class="btn-secondary" style="width: 100%; margin-top: 30px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
             </div>
-            <div class="price-card featured">
+            <div class="price-card" style="background: #fff; border: 3px solid var(--indigo); padding: 48px; border-radius: var(--r);">
                 <div class="label" style="color: var(--indigo)">Founding Pro Pass</div>
                 <div style="font-size: 52px; font-weight: 900; margin: 10px 0;">$49</div>
                 <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ <b>Debt Escape Date</b> visuals<br>✓ <b>Payday Map</b> automation<br>✓ 12-Month Wealth Projection<br>✓ Priority Pro Support</p>
@@ -226,6 +222,7 @@ function runCalc() {
 
 function openAuth(mode) {
   window.currentMode = mode;
+  document.getElementById('auth-form-inputs').style.display = 'block';
   const title = document.getElementById('modal-title');
   const sub = document.getElementById('modal-subtext');
   const link = document.getElementById('auth-toggle-link');
@@ -237,6 +234,7 @@ function openAuth(mode) {
   }
   document.getElementById('auth-modal').style.display = 'flex';
 }
+
 function closeAuth() { document.getElementById('auth-modal').style.display = 'none'; }
 function toggleAuthMode() { openAuth(window.currentMode === 'signup' ? 'signin' : 'signup'); }
 
@@ -244,7 +242,16 @@ async function handleAuth() {
   const email = document.getElementById('auth-email').value;
   const password = document.getElementById('auth-password').value;
   const { error } = window.currentMode === 'signin' ? await sb.auth.signInWithPassword({ email, password }) : await sb.auth.signUp({ email, password });
-  if(error) alert(error.message); else location.reload();
+  
+  if(error) {
+      alert(error.message);
+  } else if (window.currentMode === 'signup') {
+      document.getElementById('modal-title').innerText = "Verify Email";
+      document.getElementById('modal-subtext').innerText = "Success! We sent a confirmation link to " + email + ". Please check your inbox (and spam) to activate your vault.";
+      document.getElementById('auth-form-inputs').style.display = 'none';
+  } else {
+      location.reload();
+  }
 }
 
 async function saveToCloud() {
