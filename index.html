@@ -19,15 +19,24 @@
 <style>
 :root {
   --indigo: #4f46e5; --violet: #7c3aed; --cyan: #0891b2;
-  --navy: #0f172a; --bg-top: #ffffff; --bg-bottom: #dbeafe; 
-  --card: #ffffff; --text: #0f172a; --muted: #64748b; --line: #e2e8f0; 
+  --navy: #0f172a; 
+  --bg-top: #ffffff; --bg-bottom: #dbeafe; 
+  --card: #ffffff; 
+  --text: #0f172a; --muted: #64748b; --line: #e2e8f0; 
   --green: #10b981; --amber: #f59e0b; --red: #ef4444;
   --shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.08); --r: 28px;
 }
 
 * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+
 html, body { min-height: 100vh; margin: 0; }
-body { background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%); background-attachment: fixed; color: var(--text); line-height: 1.5; }
+
+body { 
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+  background-attachment: fixed;
+  color: var(--text); 
+  line-height: 1.5; 
+}
 
 /* NAVIGATION & LOGO */
 nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 50px; max-width: 1400px; margin: auto; }
@@ -39,18 +48,24 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 /* HERO */
 .container { max-width: 1300px; margin: auto; padding: 0 20px 100px; }
 .hero { text-align: center; padding: 60px 0 80px; }
-.hero h1 { font-size: 76px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 25px; color: var(--navy); }
+.hero h1 { 
+    font-size: 76px; font-weight: 900; letter-spacing: -1.5px; 
+    line-height: 1.1; margin-bottom: 25px; color: var(--navy); 
+}
 .hero h1 span { background: linear-gradient(to bottom right, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hero p { font-size: 22px; color: var(--muted); max-width: 800px; margin: auto; font-weight: 500; }
 
-/* DASHBOARD */
+/* BENTO DASHBOARD */
 .dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; }
+.card { 
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--r); 
+    padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden;
+    display: flex; flex-direction: column;
+}
 .col-8 { grid-column: span 8; }
 .col-4 { grid-column: span 4; }
-.col-12 { grid-column: span 12; }
 
-/* STATUS EFFECTS */
+/* TRAFFIC LIGHT HALO */
 .burn-card { border-top: 12px solid var(--line); transition: 0.3s; }
 .halo-green { border-top-color: var(--green); box-shadow: 0 0 50px rgba(16, 185, 129, 0.15); }
 .halo-yellow { border-top-color: var(--amber); box-shadow: 0 0 50px rgba(245, 158, 11, 0.15); }
@@ -60,24 +75,42 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .big-money { font-size: 90px; font-weight: 950; letter-spacing: -6px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
 .status-text { font-size: 24px; font-weight: 900; margin-top: 10px; }
 
-/* TEASERS */
+/* GLASSMISM */
 .glass-lock { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(0.5px); display: flex; align-items: center; justify-content: center; z-index: 10; }
 .unlocked .glass-lock { display: none !important; }
 .upgrade-tag { background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 40px; font-weight: 900; font-size: 10px; box-shadow: var(--shadow); cursor: pointer; }
 
-/* PRICING (CENTERED) */
-.pricing-section { width: 100%; margin-top: 100px; padding: 100px 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; }
-.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: 40px auto 0; text-align: left; }
+/* PRICING - RE-CENTERED VERSION */
+.pricing-section { 
+    width: 100%; margin-top: 100px; padding: 100px 20px; border-top: 1px solid var(--line); 
+    display: flex; flex-direction: column; align-items: center; /* THE FIX FOR CENTERING */
+}
+.pricing-header { text-align: center; margin-bottom: 50px; }
+.pricing-grid { 
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; 
+    width: 100%; max-width: 1000px; margin: 0 auto; 
+}
+.price-card { 
+    background: #fff; border: 1px solid var(--line); padding: 48px; 
+    border-radius: var(--r); text-align: left; width: 100%; max-width: 450px;
+    box-shadow: var(--shadow);
+}
+.price-card.featured { 
+    border: 3px solid var(--indigo); 
+    border-radius: var(--r); /* ENSURES ROUNDED CORNERS ON PRO BOX */
+    transform: scale(1.03); 
+}
 
 /* AUTH MODAL */
 #auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-.modal-box { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); width: 100%; max-width: 460px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
-input { width: 100%; padding: 18px; border-radius: 16px; border: 1px solid var(--line); margin: 6px 0 14px; font-size: 16px; background: #f8fafc; color: var(--navy); font-weight: 600; outline: none; }
+.modal-box { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); width: 100%; max-width: 460px; text-align: center; }
+
+input, select { width: 100%; padding: 16px; border-radius: 16px; border: 1px solid var(--line); margin: 6px 0 14px; font-size: 16px; background: #f8fafc; color: var(--navy); font-weight: 600; outline: none; }
 button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 16px; }
 .btn-primary { background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; }
 .btn-secondary { background: #f1f5f9; color: var(--navy); }
 
-@media (max-width: 1000px) { .col-8, .col-4 { grid-column: span 12; } .hero h1 { font-size: 48px; } }
+@media (max-width: 1000px) { .col-8, .col-4 { grid-column: span 12; } .hero h1 { font-size: 48px; } .price-card.featured { transform: none; } }
 </style>
 </head>
 <body>
@@ -119,7 +152,6 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
   </header>
 
   <div class="dashboard-grid">
-    <!-- ROW 1 -->
     <section class="card col-8 burn-card" id="main-card">
       <span class="label">Live Disposable Balance</span>
       <div class="big-money" id="display-safe">$0</div>
@@ -128,17 +160,16 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
     </section>
 
     <section class="card col-4">
-      <h2 style="margin-top: 0; font-size: 24px; letter-spacing: -1px; color: var(--navy);">The Snapshot</h2>
+      <h2 style="margin-top: 0; font-size: 28px; letter-spacing: -1px; color: var(--navy);">The Snapshot</h2>
       <label class="label" style="margin-bottom:0;">Next Cash In (Net)</label>
       <input type="number" id="in-income" value="2500" oninput="runCalc()">
       <label class="label" style="margin-bottom:0;">Friction (Bills + Debt)</label>
       <input type="number" id="in-bills" value="1600" oninput="runCalc()">
-      <label class="label" style="margin-bottom:0;">Countdown (Days)</label>
+      <label class="label" style="margin-bottom:0;">The Countdown (Days)</label>
       <input type="number" id="in-days" value="14" oninput="runCalc()">
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%; padding: 12px; font-size: 14px;">Secure Sync</button>
     </section>
 
-    <!-- TEASERS -->
     <section class="card col-4" id="starter-cushion">
         <span class="label">The Ghost Cushion</span>
         <div style="margin-top: 15px;">
@@ -146,7 +177,7 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
                 <span style="font-weight: 800; font-size: 13px;">10% Safety Buffer</span>
                 <div style="width: 40px; height: 22px; background: var(--line); border-radius: 20px;"></div>
             </div>
-            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--muted);"><span>Hidden:</span><span id="val-cushion">$0.00</span></div>
+            <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--muted);"><span>Hidden Reserves:</span><span id="val-cushion">$0.00</span></div>
         </div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Starter Cushion</div></div>
     </section>
@@ -169,7 +200,8 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Escape Date</div></div>
     </section>
 
-    <section class="col-12 pricing-section" id="pricing">
+    <!-- PRICING SECTION - RE-CENTERED -->
+    <section class="pricing-section" id="pricing">
         <div class="pricing-header">
             <div class="label" style="color: var(--indigo)">Founding Member Deals</div>
             <h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2>
@@ -181,7 +213,7 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
                 <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ <b>Ghost Cushion</b> safety toggle<br>✓ <b>3-Month</b> history visuals<br>✓ Smart Payday Splitter<br>✓ Cloud Snapshot Storage</p>
                 <button class="btn-secondary" style="width: 100%; margin-top: 30px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
             </div>
-            <div class="price-card featured" style="border: 3px solid var(--indigo);">
+            <div class="price-card featured">
                 <div class="label" style="color: var(--indigo)">Founding Pro Pass</div>
                 <div style="font-size: 52px; font-weight: 900; margin: 10px 0;">$49</div>
                 <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ <b>Debt Escape Date</b> visuals<br>✓ <b>Payday Map</b> automation<br>✓ 12-Month Wealth Projection<br>✓ Priority Pro Support</p>
@@ -211,7 +243,6 @@ function runCalc() {
   if (burn > 100) { statusT.style.color = "var(--green)"; card.classList.add('halo-green'); }
   else if (burn > 40) { statusT.style.color = "var(--amber)"; card.classList.add('halo-yellow'); }
   else { statusT.style.color = "var(--red)"; card.classList.add('halo-red'); }
-  
   document.getElementById('val-cushion').innerText = '$' + (safe * 0.1).toFixed(2);
   const d = new Date(); d.setMonth(d.getUTCMonth() + 18);
   document.getElementById('escape-date').innerText = d.toLocaleString('default', { month: 'short', year: 'numeric' }).toUpperCase();
@@ -224,30 +255,21 @@ function openAuth(mode) {
   const link = document.getElementById('auth-toggle-link');
   const passL = document.getElementById('pass-label');
   const passI = document.getElementById('auth-password');
-  
   if(mode === 'signin') {
     title.innerText = "Welcome Back"; sub.innerText = "Access your private financial vault."; link.innerText = "Need an account? Join Free"; passL.innerText = "Enter Password"; passI.placeholder = "Enter your password";
   } else {
-    title.innerText = "Join ClearSpend"; sub.innerText = "Sync your financial profile to the cloud."; link.innerText = "Already have an account? Sign In"; passL.innerText = "Create Password"; passI.placeholder = "Min. 6 characters";
+    title.innerText = "Join ClearSpend"; sub.innerText = "Sync your profile to the cloud."; link.innerText = "Already have an account? Sign In"; passL.innerText = "Create Password"; passI.placeholder = "Min. 6 characters";
   }
   document.getElementById('auth-modal').style.display = 'flex';
 }
-
 function closeAuth() { document.getElementById('auth-modal').style.display = 'none'; }
 function toggleAuthMode() { openAuth(window.currentMode === 'signup' ? 'signin' : 'signup'); }
 
 async function handleAuth() {
   const email = document.getElementById('auth-email').value;
   const password = document.getElementById('auth-password').value;
-  const { error } = window.currentMode === 'signin' 
-    ? await sb.auth.signInWithPassword({ email, password }) 
-    : await sb.auth.signUp({ email, password });
-  
-  if(error) {
-      alert(error.message);
-  } else {
-      location.reload(); // LOGS IN INSTANTLY WITHOUT VERIFY UI
-  }
+  const { error } = window.currentMode === 'signin' ? await sb.auth.signInWithPassword({ email, password }) : await sb.auth.signUp({ email, password });
+  if(error) alert(error.message); else location.reload();
 }
 
 async function saveToCloud() {
