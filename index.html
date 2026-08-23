@@ -18,30 +18,30 @@
 
 <style>
 :root {
-  --indigo: #4f46e5;
-  --cyan: #06b6d4;
+  --indigo: #6366f1;
+  --violet: #a855f7;
   --navy: #0f172a;
   --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #64748b;
   --line: #e2e8f0; --green: #10b981; --amber: #f59e0b; --red: #ef4444;
-  --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); --r: 20px;
+  --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); --r: 24px;
 }
 
 * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
 body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.5; }
 
-/* THE NEW "CLARITY LENS" BRANDING */
+/* THE "VELOCITY C" BRANDING */
 nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 40px; max-width: 1400px; margin: auto; }
-.logo-container { display: flex; align-items: center; gap: 12px; cursor: pointer; text-decoration: none; }
-.logo-lens { width: 44px; height: 44px; position: relative; }
-.logo-text { font-size: 30px; font-weight: 800; letter-spacing: -1.5px; color: var(--navy); }
+.logo-container { display: flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none; }
+.logo-velocity { width: 60px; height: 60px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
+.logo-text { font-size: 34px; font-weight: 900; letter-spacing: -2px; color: var(--navy); margin-left: -2px; }
 .logo-text span { color: var(--indigo); }
 
 /* HERO */
 .container { max-width: 1200px; margin: auto; padding: 0 20px 100px; }
 .hero { text-align: center; padding: 60px 0 40px; }
-.hero h1 { font-size: 64px; font-weight: 900; letter-spacing: -3px; line-height: 1; margin-bottom: 20px; color: var(--navy); }
-.hero h1 span { background: linear-gradient(to right, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.hero p { font-size: 19px; color: var(--muted); max-width: 700px; margin: auto; font-weight: 500; }
+.hero h1 { font-size: 72px; font-weight: 900; letter-spacing: -4px; line-height: 0.9; margin-bottom: 20px; color: var(--navy); }
+.hero h1 span { background: linear-gradient(to right, var(--indigo), var(--violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: 20px; color: var(--muted); max-width: 700px; margin: auto; font-weight: 600; }
 
 /* DASHBOARD */
 .dashboard-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
@@ -49,67 +49,73 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .full { grid-column: 1 / -1; }
 
 .label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
-.big-money { font-size: 100px; font-weight: 900; letter-spacing: -6px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
+.big-money { font-size: 110px; font-weight: 950; letter-spacing: -7px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
 
 /* TRAFFIC LIGHT SYSTEM */
-.burn-card { transition: 0.4s ease; border-top: 8px solid var(--line); }
-.status-text { font-size: 24px; font-weight: 800; margin-top: 15px; }
+.burn-card { transition: 0.4s ease; border-left: 12px solid var(--line); }
+.status-text { font-size: 26px; font-weight: 900; margin-top: 15px; }
 
-/* GLASSMISM OVERLAYS */
+/* GLASSMISM */
 .glass-lock {
-    position: absolute; inset: 0; background: rgba(255, 255, 255, 0.4); 
-    backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; z-index: 10;
+    position: absolute; inset: 0; background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(1.5px); display: flex; align-items: center; justify-content: center; z-index: 10;
 }
 .upgrade-tag {
-    background: var(--navy); color: white; padding: 8px 16px; border-radius: 40px; 
-    font-weight: 800; font-size: 11px; box-shadow: var(--shadow);
+    background: var(--navy); color: white; padding: 10px 20px; border-radius: 40px; 
+    font-weight: 900; font-size: 11px; box-shadow: var(--shadow); border: 1px solid var(--line);
 }
 
 .data-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); font-weight: 700; }
-input { width: 100%; padding: 16px; border-radius: 12px; border: 1px solid var(--line); margin: 8px 0 16px; font-size: 16px; background: #f9fafb; font-weight: 600; }
+input { width: 100%; padding: 16px; border-radius: 14px; border: 1px solid var(--line); margin: 8px 0 16px; font-size: 16px; background: #f9fafb; font-weight: 600; }
 
 /* BUTTONS */
-button { border: 0; border-radius: 12px; padding: 16px 24px; font-weight: 800; cursor: pointer; transition: 0.2s; font-size: 15px; }
-.btn-primary { background: var(--indigo); color: #fff; }
-.btn-primary:hover { background: var(--navy); transform: translateY(-1px); }
+button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; cursor: pointer; transition: 0.2s; font-size: 15px; }
+.btn-primary { background: var(--indigo); color: #fff; box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3); }
 .btn-secondary { background: #f1f5f9; color: var(--navy); }
 
 /* PRICING */
 .pricing-section { padding: 100px 0; text-align: center; border-top: 1px solid var(--line); margin-top: 80px; }
 .price-card { background: #fff; border: 1px solid var(--line); padding: 48px; border-radius: var(--r); text-align: left; }
-.price-card.featured { border: 2px solid var(--indigo); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1); }
+.price-card.featured { border: 3px solid var(--indigo); transform: scale(1.05); }
 
 /* AUTH MODAL */
-#auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.9); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
-.modal-box { background: #fff; padding: 48px; border-radius: var(--r); width: 100%; max-width: 420px; text-align: center; }
+#auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(12px); }
+.modal-box { background: #fff; padding: 48px; border-radius: var(--r); width: 100%; max-width: 440px; text-align: center; }
 
-@media (max-width: 900px) { .hero h1 { font-size: 48px; } .dashboard-grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .hero h1 { font-size: 52px; } .dashboard-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
 <div id="auth-modal">
   <div class="modal-box">
-    <h2 id="modal-title" style="font-size: 32px; font-weight: 900; letter-spacing: -1px;">Join ClearSpend</h2>
-    <p id="modal-subtext" style="color: var(--muted); margin-bottom: 24px;">Sync your finances to the cloud.</p>
+    <h2 id="modal-title" style="font-size: 36px; font-weight: 900;">Join ClearSpend</h2>
+    <p id="modal-subtext" style="color: var(--muted); margin-bottom: 24px;">Start your journey to financial clarity.</p>
     <div style="text-align: left;"><label class="label">Email Address</label></div>
     <input type="email" id="auth-email" placeholder="name@email.com">
     <div style="text-align: left;"><label class="label" id="pass-label">Create Password</label></div>
     <input type="password" id="auth-password" placeholder="••••••••">
     <button class="btn-primary" style="width: 100%;" onclick="handleAuth()">Continue</button>
-    <div id="auth-toggle-link" style="margin-top: 24px; font-weight: 700; color: var(--indigo); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div>
+    <div id="auth-toggle-link" style="margin-top: 24px; font-weight: 800; color: var(--indigo); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div>
     <button class="btn-secondary" style="width: 100%; margin-top: 12px; font-size: 13px;" onclick="closeAuth()">Cancel</button>
   </div>
 </div>
 
 <nav>
   <div class="logo-container" onclick="location.reload()">
-    <!-- NEW "CLARITY LENS" SVG LOGO -->
-    <svg class="logo-lens" viewBox="0 0 100 100">
-        <circle cx="50" cy="50" r="40" fill="none" stroke="var(--line)" stroke-width="8"/>
-        <path d="M50 10 A 40 40 0 0 1 90 50" fill="none" stroke="var(--indigo)" stroke-width="12" stroke-linecap="round"/>
-        <path d="M10 50 A 40 40 0 0 0 50 90" fill="none" stroke="var(--cyan)" stroke-width="12" stroke-linecap="round"/>
-        <circle cx="50" cy="50" r="10" fill="var(--navy)"/>
+    <!-- NEW "VELOCITY C" SVG LOGO -->
+    <svg class="logo-velocity" viewBox="0 0 100 100">
+      <defs>
+        <linearGradient id="velGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:var(--navy)" />
+          <stop offset="100%" style="stop-color:var(--indigo)" />
+        </linearGradient>
+      </defs>
+      <!-- Main "C" Body -->
+      <path d="M75 75 A 35 35 0 1 1 75 25" fill="none" stroke="url(#velGrad)" stroke-width="14" stroke-linecap="round"/>
+      <!-- Growth Arrow ending of the C -->
+      <path d="M75 25 L 90 25 M 75 25 L 75 10" fill="none" stroke="var(--indigo)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M50 25 L 85 25" stroke="var(--indigo)" stroke-width="14" stroke-linecap="round"/>
     </svg>
     <div class="logo-text">Clear<span>Spend</span></div>
   </div>
@@ -122,17 +128,17 @@ button { border: 0; border-radius: 12px; padding: 16px 24px; font-weight: 800; c
 <div class="container">
   <header class="hero">
     <h1>Know your <span>Safe-to-Spend</span><br>before you swipe.</h1>
-    <p>The financial bridge between today's balance and your next payday. Stop guessing and start growing your cushion.</p>
+    <p>The financial bridge between today's balance and your next payday. Stop guessing and start outrunning your debt.</p>
   </header>
 
   <div class="dashboard-grid">
     
     <!-- MAIN RESULTS (TRAFFIC LIGHT) -->
     <section class="card burn-card" id="main-card">
-      <span class="label">Disposable Cash Balance</span>
+      <span class="label">Total Safe-to-Spend Balance</span>
       <div class="big-money" id="display-safe">$0</div>
       <div class="status-text" id="status-text">The Daily Limit: $0.00</div>
-      <div id="status-desc" style="font-weight: 600; color: var(--muted); margin-top: 10px;">Input your snapshot to begin...</div>
+      <div id="status-desc" style="font-weight: 600; color: var(--muted); margin-top: 5px;">Input your snapshot to begin...</div>
     </section>
 
     <!-- THE SNAPSHOT (INPUTS) -->
@@ -178,15 +184,15 @@ button { border: 0; border-radius: 12px; padding: 16px 24px; font-weight: 800; c
     <!-- PRICING -->
     <section class="full pricing-section" id="pricing">
         <div class="label" style="color: var(--indigo)">Founding Member Deals</div>
-        <h2 style="font-size: 48px; font-weight: 900; letter-spacing: -2px; margin-bottom: 40px;">One payment. Lifetime access.</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: auto;">
-            <div class="price-card">
+        <h2 style="font-size: 48px; font-weight: 950; letter-spacing: -3px; margin-bottom: 40px;">One payment. Lifetime access.</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1100px; margin: auto;">
+            <div class="card" style="text-align: left;">
                 <div class="label">Starter Lifetime</div>
                 <div style="font-size: 42px; font-weight: 900; margin: 10px 0;">$29</div>
                 <p style="color: var(--muted); font-size: 14px; line-height: 1.8;">✓ <b>3-Month</b> History Graph<br>✓ <b>Ghost Cushion</b> (10% Safety)<br>✓ Smart Payday Splitter<br>✓ Multi-device Sync</p>
                 <button class="btn-secondary" style="width: 100%; margin-top: 20px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
             </div>
-            <div class="price-card featured">
+            <div class="card" style="text-align: left; border: 3px solid var(--indigo);">
                 <div style="background: var(--indigo); color: #fff; padding: 4px 15px; border-radius: 20px; font-size: 11px; font-weight: 900; display: inline-block; margin-bottom: 10px;">BEST VALUE</div>
                 <div class="label">Founding Pro Pass</div>
                 <div style="font-size: 42px; font-weight: 900; margin: 10px 0;">$49</div>
@@ -211,7 +217,7 @@ function runCalc() {
   const debt = +document.getElementById('in-debt').value || 0;
   const days = +document.getElementById('in-days').value || 1;
   const safe = inc - bill - debt;
-  const burn = safe / (days || 1);
+  const burn = safe / days;
 
   document.getElementById('display-safe').innerText = '$' + safe.toLocaleString();
   const statusT = document.getElementById('status-text');
@@ -221,13 +227,13 @@ function runCalc() {
   statusT.innerText = 'The Daily Limit: $' + burn.toFixed(2);
 
   if (burn > 100) {
-    statusT.style.color = "var(--green)"; card.style.borderTopColor = "var(--green)";
+    statusT.style.color = "var(--green)"; card.style.borderLeftColor = "var(--green)";
     statusD.innerText = "Comfortable. Your cushion is growing.";
   } else if (burn > 40) {
-    statusT.style.color = "var(--amber)"; card.style.borderTopColor = "var(--amber)";
+    statusT.style.color = "var(--amber)"; card.style.borderLeftColor = "var(--amber)";
     statusD.innerText = "Tight. Monitor your daily swipes.";
   } else {
-    statusT.style.color = "var(--red)"; card.style.borderTopColor = "var(--red)";
+    statusT.style.color = "var(--red)"; card.style.borderLeftColor = "var(--red)";
     statusD.innerText = "Critical. Minimize non-essential spending.";
   }
 }
@@ -238,20 +244,17 @@ function openAuth(mode) {
   const sub = document.getElementById('modal-subtext');
   const toggle = document.getElementById('auth-toggle-link');
   const passLabel = document.getElementById('pass-label');
-  const passInput = document.getElementById('auth-password');
 
   if(mode === 'signin') {
     title.innerText = "Welcome Back";
     sub.innerText = "Sign in to access your financial profile.";
     toggle.innerText = "Need an account? Join Free";
     passLabel.innerText = "Enter Password";
-    passInput.placeholder = "Enter your password";
   } else {
     title.innerText = "Join ClearSpend";
     sub.innerText = "Protect your data with a cloud profile.";
     toggle.innerText = "Already have an account? Sign In";
     passLabel.innerText = "Create Password";
-    passInput.placeholder = "Min. 8 characters";
   }
   document.getElementById('auth-modal').style.display = 'flex';
 }
