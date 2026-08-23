@@ -29,21 +29,21 @@
 * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
 body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.5; }
 
-/* THE "VELOCITY C" BRANDING */
+/* THE "PRISM SPARK" BRANDING - SHARP & PROFESSIONAL */
 nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 40px; max-width: 1400px; margin: auto; }
-.logo-container { display: flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none; }
-.logo-velocity { width: 60px; height: 60px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
-.logo-text { font-size: 34px; font-weight: 900; letter-spacing: -2px; color: var(--navy); margin-left: -2px; }
+.logo-container { display: flex; align-items: center; gap: 4px; cursor: pointer; text-decoration: none; }
+.logo-spark { width: 55px; height: 55px; }
+.logo-text { font-size: 38px; font-weight: 900; letter-spacing: -2.5px; color: var(--navy); }
 .logo-text span { color: var(--indigo); }
 
-/* HERO */
+/* HERO SECTION */
 .container { max-width: 1200px; margin: auto; padding: 0 20px 100px; }
 .hero { text-align: center; padding: 60px 0 40px; }
 .hero h1 { font-size: 72px; font-weight: 900; letter-spacing: -4px; line-height: 0.9; margin-bottom: 20px; color: var(--navy); }
 .hero h1 span { background: linear-gradient(to right, var(--indigo), var(--violet)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hero p { font-size: 20px; color: var(--muted); max-width: 700px; margin: auto; font-weight: 600; }
 
-/* DASHBOARD */
+/* DASHBOARD GRID */
 .dashboard-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
 .full { grid-column: 1 / -1; }
@@ -55,7 +55,7 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .burn-card { transition: 0.4s ease; border-left: 12px solid var(--line); }
 .status-text { font-size: 26px; font-weight: 900; margin-top: 15px; }
 
-/* GLASSMISM */
+/* GLASSMISM OVERLAYS */
 .glass-lock {
     position: absolute; inset: 0; background: rgba(255, 255, 255, 0.2); 
     backdrop-filter: blur(1.5px); display: flex; align-items: center; justify-content: center; z-index: 10;
@@ -73,7 +73,7 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
 .btn-primary { background: var(--indigo); color: #fff; box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3); }
 .btn-secondary { background: #f1f5f9; color: var(--navy); }
 
-/* PRICING */
+/* PRICING SECTION */
 .pricing-section { padding: 100px 0; text-align: center; border-top: 1px solid var(--line); margin-top: 80px; }
 .price-card { background: #fff; border: 1px solid var(--line); padding: 48px; border-radius: var(--r); text-align: left; }
 .price-card.featured { border: 3px solid var(--indigo); transform: scale(1.05); }
@@ -82,15 +82,15 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
 #auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(12px); }
 .modal-box { background: #fff; padding: 48px; border-radius: var(--r); width: 100%; max-width: 440px; text-align: center; }
 
-@media (max-width: 900px) { .hero h1 { font-size: 52px; } .dashboard-grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .hero h1 { font-size: 48px; } .dashboard-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
 <div id="auth-modal">
   <div class="modal-box">
-    <h2 id="modal-title" style="font-size: 36px; font-weight: 900;">Join ClearSpend</h2>
-    <p id="modal-subtext" style="color: var(--muted); margin-bottom: 24px;">Start your journey to financial clarity.</p>
+    <h2 id="modal-title" style="font-size: 36px; font-weight: 900; letter-spacing: -1px;">Join ClearSpend</h2>
+    <p id="modal-subtext" style="color: var(--muted); margin-bottom: 24px;">Protect your financial journey.</p>
     <div style="text-align: left;"><label class="label">Email Address</label></div>
     <input type="email" id="auth-email" placeholder="name@email.com">
     <div style="text-align: left;"><label class="label" id="pass-label">Create Password</label></div>
@@ -103,19 +103,16 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
 
 <nav>
   <div class="logo-container" onclick="location.reload()">
-    <!-- NEW "VELOCITY C" SVG LOGO -->
-    <svg class="logo-velocity" viewBox="0 0 100 100">
+    <!-- NEW "PRISM SPARK" SVG LOGO -->
+    <svg class="logo-spark" viewBox="0 0 100 100">
       <defs>
-        <linearGradient id="velGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="sparkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" style="stop-color:var(--navy)" />
-          <stop offset="100%" style="stop-color:var(--indigo)" />
+          <stop offset="50%" style="stop-color:var(--indigo)" />
+          <stop offset="100%" style="stop-color:var(--violet)" />
         </linearGradient>
       </defs>
-      <!-- Main "C" Body -->
-      <path d="M75 75 A 35 35 0 1 1 75 25" fill="none" stroke="url(#velGrad)" stroke-width="14" stroke-linecap="round"/>
-      <!-- Growth Arrow ending of the C -->
-      <path d="M75 25 L 90 25 M 75 25 L 75 10" fill="none" stroke="var(--indigo)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M50 25 L 85 25" stroke="var(--indigo)" stroke-width="14" stroke-linecap="round"/>
+      <path d="M50 5 L62 40 L95 50 L62 60 L50 95 L38 60 L5 50 L38 40 Z" fill="url(#sparkGrad)" />
     </svg>
     <div class="logo-text">Clear<span>Spend</span></div>
   </div>
@@ -173,7 +170,7 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
     <section class="card">
       <span class="label">Debt Escape Path</span>
       <div style="margin-top: 20px; text-align: center;">
-          <div style="font-size: 32px; font-weight: 900; color: var(--navy);">MARCH 2027</div>
+          <div style="font-size: 32px; font-weight: 950; color: var(--navy);">MARCH 2027</div>
           <div style="height: 8px; background: var(--line); border-radius: 20px; margin-top: 15px;">
               <div style="width: 50%; height: 100%; background: var(--green); border-radius: 20px;"></div>
           </div>
@@ -244,17 +241,20 @@ function openAuth(mode) {
   const sub = document.getElementById('modal-subtext');
   const toggle = document.getElementById('auth-toggle-link');
   const passLabel = document.getElementById('pass-label');
+  const passInput = document.getElementById('auth-password');
 
   if(mode === 'signin') {
     title.innerText = "Welcome Back";
     sub.innerText = "Sign in to access your financial profile.";
     toggle.innerText = "Need an account? Join Free";
     passLabel.innerText = "Enter Password";
+    passInput.placeholder = "Enter your password";
   } else {
     title.innerText = "Join ClearSpend";
     sub.innerText = "Protect your data with a cloud profile.";
     toggle.innerText = "Already have an account? Sign In";
     passLabel.innerText = "Create Password";
+    passInput.placeholder = "Min. 8 characters";
   }
   document.getElementById('auth-modal').style.display = 'flex';
 }
