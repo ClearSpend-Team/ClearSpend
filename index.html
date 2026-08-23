@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ClearSpend — Know Before You Swipe</title>
+<title>ClearSpend — Escape the Debt Cycle</title>
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF9LHLEGR5"></script>
@@ -14,76 +14,67 @@
   gtag('config', 'G-JF9LHLEGR5');
 </script>
 
-<!-- Supabase Library -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root {
-  --navy: #0f172a;
-  --blue: #2563eb;
-  --blue-grad: linear-gradient(135deg, #0f172a 0%, #2563eb 100%);
-  --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #64748b;
-  --line: #e2e8f0; --green: #10b981; --amber: #f59e0b; --red: #ef4444;
+  --navy: #0f172a; --blue: #2563eb; --bg: #f8fafc; --card: #ffffff; 
+  --text: #0f172a; --muted: #64748b; --line: #e2e8f0; 
+  --green: #10b981; --amber: #f59e0b; --red: #ef4444;
   --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); --r: 24px;
 }
 
 * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
 body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.5; }
 
-/* REFINED LOGO AREA (Based on your image) */
-nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 40px; max-width: 1400px; margin: auto; }
-.logo-container { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-.logo-icon { width: 40px; height: 40px; }
-.logo-text { font-size: 28px; font-weight: 900; letter-spacing: -1.5px; color: var(--navy); }
+/* ENLARGED REFINED LOGO */
+nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 40px; max-width: 1400px; margin: auto; }
+.logo-container { display: flex; align-items: center; gap: 15px; text-decoration: none; cursor: pointer; }
+.logo-icon { width: 65px; height: 65px; } /* Enlarged */
+.logo-text { font-size: 34px; font-weight: 950; letter-spacing: -1.5px; color: var(--navy); }
 .logo-text span { color: var(--blue); }
 
-/* HERO SECTION (Refined Wording) */
+/* HERO */
 .container { max-width: 1200px; margin: auto; padding: 0 20px 100px; }
-.hero { text-align: center; padding: 60px 0 40px; }
-.hero h1 { font-size: 68px; font-weight: 950; letter-spacing: -4px; line-height: 0.9; margin-bottom: 20px; color: var(--navy); }
+.hero { text-align: center; padding: 40px 0; }
+.hero h1 { font-size: 68px; font-weight: 950; letter-spacing: -4px; line-height: 0.95; margin-bottom: 20px; }
 .hero h1 span { color: var(--blue); }
-.hero p { font-size: 20px; font-weight: 600; color: var(--muted); max-width: 700px; margin: auto; }
+.hero p { font-size: 20px; color: var(--muted); max-width: 800px; margin: auto; font-weight: 500; }
 
-/* DASHBOARD CARDS */
+/* DASHBOARD */
 .dashboard-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
 .full { grid-column: 1 / -1; }
 
 .label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
-.big-money { font-size: 110px; font-weight: 900; letter-spacing: -7px; margin: 5px 0; line-height: 0.8; color: var(--navy); }
-.burn-rate { font-size: 22px; font-weight: 800; color: var(--blue); margin-top: 15px; }
+.big-money { font-size: 110px; font-weight: 950; letter-spacing: -7px; margin: 5px 0; line-height: 0.8; color: var(--navy); }
 
-/* THE "CRYSTAL" GLASS OVERLAY (1px Blur per your request) */
+/* TRAFFIC LIGHT DAILY LIMIT */
+.burn-card { transition: 0.4s ease; border-left: 10px solid var(--line); }
+.status-text { font-size: 24px; font-weight: 900; margin-top: 15px; }
+
+/* GLASS OVERLAYS (1px BLUR) */
 .glass-lock {
-    position: absolute; inset: 0; background: rgba(255, 255, 255, 0.1); 
+    position: absolute; inset: 0; background: rgba(255, 255, 255, 0.05); 
     backdrop-filter: blur(1px); display: flex; align-items: center; justify-content: center; z-index: 10;
 }
 .upgrade-tag {
-    background: white; color: var(--blue); padding: 8px 16px; border-radius: 40px; 
-    font-weight: 900; font-size: 11px; box-shadow: var(--shadow); border: 1px solid var(--line);
+    background: white; color: var(--blue); padding: 10px 20px; border-radius: 40px; 
+    font-weight: 900; font-size: 12px; box-shadow: var(--shadow); border: 1px solid var(--line);
 }
 
-/* DATA ROWS */
 .data-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); font-weight: 700; }
+input { width: 100%; padding: 16px; border-radius: 14px; border: 1px solid var(--line); margin: 8px 0 16px; font-size: 16px; background: #f9fafb; font-weight: 600; }
 
-/* INPUTS (Renamed per Duo Decision) */
-input { width: 100%; padding: 15px; border-radius: 14px; border: 1px solid var(--line); margin: 8px 0 16px; font-size: 16px; background: #f9fafb; font-weight: 600; }
-
-/* BUTTONS */
-button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; cursor: pointer; transition: 0.2s; font-size: 15px; }
-.btn-primary { background: var(--blue); color: #fff; box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4); }
+button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; cursor: pointer; transition: 0.2s; }
+.btn-primary { background: var(--blue); color: #fff; }
 .btn-secondary { background: #f1f5f9; color: var(--navy); }
-
-/* PRICING */
-.pricing-section { padding: 100px 0; text-align: center; border-top: 1px solid var(--line); margin-top: 80px; }
-.price-card { background: #fff; border: 1px solid var(--line); padding: 48px; border-radius: var(--r); text-align: left; transition: 0.3s; }
-.price-card.featured { border: 3px solid var(--blue); transform: scale(1.05); }
 
 /* AUTH MODAL */
 #auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(12px); }
 .modal-box { background: #fff; padding: 48px; border-radius: var(--r); width: 100%; max-width: 440px; text-align: center; }
 
-@media (max-width: 900px) { .hero h1 { font-size: 52px; } .dashboard-grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .hero h1 { font-size: 48px; } .dashboard-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -91,52 +82,51 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
 <div id="auth-modal">
   <div class="modal-box">
     <h2 id="modal-title" style="font-size: 36px; font-weight: 900;">Join ClearSpend</h2>
-    <p id="modal-sub" style="color: var(--muted); margin-bottom: 24px;">Start your journey to financial clarity.</p>
-    <div style="text-align: left;"><label class="label">Email Address</label></div>
+    <div style="text-align: left; margin-top: 20px;"><label class="label">Email Address</label></div>
     <input type="email" id="auth-email" placeholder="name@email.com">
     <div style="text-align: left;"><label class="label" id="pass-label">Create Password</label></div>
     <input type="password" id="auth-password" placeholder="••••••••">
     <button class="btn-primary" style="width: 100%;" onclick="handleAuth()">Continue</button>
-    <div id="auth-toggle-link" style="margin-top: 24px; font-weight: 800; color: var(--blue); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div>
+    <div id="auth-toggle-link" style="margin-top: 20px; font-weight: 800; color: var(--blue); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div>
     <button class="btn-secondary" style="width: 100%; margin-top: 12px;" onclick="closeAuth()">Cancel</button>
   </div>
 </div>
 
 <nav>
   <div class="logo-container" onclick="location.reload()">
-    <!-- REFINED LOGO BASED ON YOUR IMAGE -->
     <svg class="logo-icon" viewBox="0 0 100 100">
-      <path d="M30 40 C 30 25, 70 25, 70 40 C 70 55, 30 55, 30 70 C 30 85, 70 85, 70 70" fill="none" stroke="#0f172a" stroke-width="12" stroke-linecap="round"/>
-      <path d="M50 20 V 85" stroke="#0f172a" stroke-width="10" stroke-linecap="round"/>
-      <path d="M45 70 L 65 40 L 85 45" fill="none" stroke="#2563eb" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-      <path d="M85 45 L 85 30 L 70 30" fill="none" stroke="#2563eb" stroke-width="10" stroke-linecap="round"/>
+      <defs>
+        <linearGradient id="logoG" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#0f172a" />
+          <stop offset="100%" style="stop-color:#2563eb" />
+        </linearGradient>
+      </defs>
+      <path d="M35 45 C 35 30, 65 30, 65 45 C 65 60, 35 60, 35 75 C 35 90, 65 90, 65 75" fill="none" stroke="url(#logoG)" stroke-width="12" stroke-linecap="round"/>
+      <path d="M50 20 V 85" stroke="url(#logoG)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M45 75 L 75 40 M 75 40 L 75 55 M 75 40 L 60 40" fill="none" stroke="#2563eb" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     <div class="logo-text">Clear<span>Spend</span></div>
   </div>
   <div id="nav-auth">
-    <button class="btn-secondary" style="padding: 10px 20px" onclick="openAuth('signin')">Sign In</button>
-    <button class="btn-primary" style="padding: 10px 20px; margin-left: 10px;" onclick="openAuth('signup')">Get Started</button>
+    <button class="btn-secondary" onclick="openAuth('signin')">Sign In</button>
+    <button class="btn-primary" style="margin-left: 10px;" onclick="openAuth('signup')">Get Started</button>
   </div>
 </nav>
 
 <div class="container">
   <header class="hero">
     <h1>Know your <span>"Safe-to-Spend"</span><br>number before you swipe.</h1>
-    <p>ClearSpend connects today's cash flow with tomorrow's decisions so you can see what is safe to spend and what happens if you do it.</p>
+    <p>The financial bridge between today's balance and your next payday. Stop surviving your debt—start outrunning it.</p>
   </header>
 
   <div class="dashboard-grid">
     
-    <!-- THE RESULT -->
-    <section class="card">
-      <span class="label">Total Safe-to-Spend</span>
+    <!-- MAIN RESULTS (TRAFFIC LIGHT) -->
+    <section class="card burn-card" id="main-card">
+      <span class="label">Disposable Cash Balance</span>
       <div class="big-money" id="display-safe">$0</div>
-      <div class="burn-rate" id="display-burn">The Daily Limit: $0.00</div>
-      
-      <div style="margin-top: 50px; border-top: 1px solid var(--line); padding-top: 20px;">
-        <div class="data-row"><span>Next Cash In</span><span id="row-inc">$0</span></div>
-        <div class="data-row"><span>The Friction (Must-Pays)</span><span id="row-bills" style="color: var(--red)">$0</span></div>
-      </div>
+      <div class="status-text" id="status-text">The Daily Limit: $0.00</div>
+      <div id="status-desc" style="font-weight: 600; color: var(--muted);">Enter your snapshot to begin...</div>
     </section>
 
     <!-- THE SNAPSHOT (INPUTS) -->
@@ -145,8 +135,11 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
       <label class="label">Next Cash In (Net Pay)</label>
       <input type="number" id="in-income" value="2500" oninput="runCalc()">
       
-      <label class="label">The Friction (Total Bills Due)</label>
+      <label class="label">The Friction (Monthly Bills)</label>
       <input type="number" id="in-bills" value="1200" oninput="runCalc()">
+
+      <label class="label">The Weight (Debt Min-Pays)</label>
+      <input type="number" id="in-debt" value="400" oninput="runCalc()">
 
       <label class="label">The Countdown (Days left)</label>
       <input type="number" id="in-days" value="14" oninput="runCalc()">
@@ -154,55 +147,58 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%">Secure Profile to Cloud</button>
     </section>
 
-    <!-- THE SPLITTER (STARTER) -->
+    <!-- DEBT ESCAPE PLAN (PRO SNEAK PEEK) -->
     <section class="card">
-        <span class="label">The Payday Splitter</span>
-        <div style="margin-top: 15px;">
-            <div class="data-row"><span>Transfer to Bills</span><span>$1,200</span></div>
-            <div class="data-row"><span>10% Safety Buffer</span><span>$130</span></div>
-            <div class="data-row" style="color: var(--blue)"><span>Safe Pocket Cash</span><span>$1,170</span></div>
-        </div>
-        <div class="glass-lock"><div class="upgrade-tag">Starter: The Splitter + 10% Cushion</div></div>
+      <span class="label">The Debt Escape Plan</span>
+      <div style="margin-top: 20px; text-align: center;">
+          <div style="font-size: 14px; font-weight: 700; color: var(--muted);">ESTIMATED DEBT-FREE DATE</div>
+          <div style="font-size: 38px; font-weight: 900; color: var(--navy); margin: 5px 0;">MARCH 2027</div>
+          <div style="height: 10px; background: var(--line); border-radius: 20px; margin-top: 15px;">
+              <div style="width: 45%; height: 100%; background: var(--green); border-radius: 20px;"></div>
+          </div>
+      </div>
+      <div class="glass-lock"><div class="upgrade-tag">Pro: Unlock Your Escape Date</div></div>
     </section>
 
-    <!-- THE DEBT SNOWBALL (PRO) -->
+    <!-- PAYDAY MAP (PRO SNEAK PEEK) -->
     <section class="card">
-      <span class="label">Pro: The Debt Snowball</span>
+      <span class="label">The Payday Map</span>
       <div style="margin-top: 15px;">
-          <div class="data-row"><span>Suggested Extra Payment</span><span style="color: var(--green)">$150</span></div>
-          <div class="data-row" style="border: 0; font-size: 12px; color: var(--muted);">Result: Pay off Debt 4 Months Earlier</div>
+          <div class="data-row"><span>To Bills Account</span><span>$1,200</span></div>
+          <div class="data-row"><span>To Debt Attack</span><span style="color: var(--green)">$250</span></div>
+          <div class="data-row" style="border: 0;"><span>Left in Pocket</span><span style="color: var(--blue)">$650</span></div>
       </div>
-      <div class="glass-lock"><div class="upgrade-tag">Pro: Debt Snowball + Crystal Ball</div></div>
+      <div class="glass-lock"><div class="upgrade-tag">Pro: Unlock The Payday Map</div></div>
     </section>
 
     <!-- PRICING -->
-    <section class="full pricing-section" id="pricing">
+    <section class="full" id="pricing" style="padding: 80px 0; text-align: center;">
         <div class="label" style="color: var(--blue)">Founding Member Deals</div>
         <h2 style="font-size: 48px; font-weight: 950; letter-spacing: -3px; margin-bottom: 40px;">One payment. Lifetime access.</h2>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1000px; margin: auto;">
-            <div class="price-card">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1100px; margin: auto;">
+            <div class="card" style="text-align: left;">
                 <div class="label">Starter Lifetime</div>
                 <div style="font-size: 42px; font-weight: 900; margin: 10px 0;">$29</div>
-                <p style="color: var(--muted); font-size: 13px; line-height: 1.8; text-align: left;">
-                    ✓ Secure Cloud Profile<br>
+                <p style="color: var(--muted); font-size: 14px; line-height: 1.8;">
+                    ✓ <b>The Interest Saver</b> Calculator<br>
+                    ✓ <b>The Ghost Cushion</b> (10% Safety)<br>
                     ✓ Smart Payday Splitter<br>
-                    ✓ 10% Safety Buffer Toggle<br>
-                    ✓ 3 "What-If" Scenarios
+                    ✓ Saved Recurring Bill List
                 </p>
-                <button class="btn-secondary" style="width: 100%" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
+                <button class="btn-secondary" style="width: 100%; margin-top: 20px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
             </div>
-            <div class="price-card featured">
-                <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--blue); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 900;">BEST VALUE</div>
+            <div class="card" style="text-align: left; border: 3px solid var(--blue);">
+                <div style="background: var(--blue); color: #fff; padding: 4px 15px; border-radius: 20px; font-size: 11px; font-weight: 900; display: inline-block; margin-bottom: 10px;">BEST VALUE</div>
                 <div class="label">Founding Pro Pass</div>
                 <div style="font-size: 42px; font-weight: 900; margin: 10px 0;">$49</div>
-                <p style="color: var(--muted); font-size: 13px; line-height: 1.8; text-align: left;">
-                    ✓ Everything in Starter<br>
-                    ✓ The Debt Snowball Tool<br>
+                <p style="color: var(--muted); font-size: 14px; line-height: 1.8;">
+                    ✓ <b>The Debt Escape Date</b> Visual<br>
+                    ✓ <b>The Payday Map</b> (Automated)<br>
                     ✓ 12-Month Crystal Ball Projection<br>
-                    ✓ Pro Goal Stacking
+                    ✓ Advanced Debt Snowball Engine
                 </p>
-                <button class="btn-primary" style="width: 100%" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro Forever</button>
+                <button class="btn-primary" style="width: 100%; margin-top: 20px;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro Forever</button>
             </div>
         </div>
     </section>
@@ -210,71 +206,68 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
 </div>
 
 <script>
-// --- SUPABASE ENGINE ---
 const SB_URL = 'https://chbfgkguxkdadnevqthk.supabase.co'; 
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNoYmZna2d1eGtkYWRuZXZxdGhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczMTcxOTUsImV4cCI6MjEwMjg5MzE5NX0.hemyiyKpJXt7CvxReNOzX4AVajM7V_LHl0SOJNAutcw'; 
 const sb = supabase.createClient(SB_URL, SB_KEY);
 
 let currentMode = 'signup';
 
-// --- CALCULATOR ---
 function runCalc() {
   const inc = +document.getElementById('in-income').value || 0;
   const bill = +document.getElementById('in-bills').value || 0;
+  const debt = +document.getElementById('in-debt').value || 0;
   const days = +document.getElementById('in-days').value || 1;
-  const safe = inc - bill;
-  const burn = safe / (days || 1);
+  
+  const safe = inc - bill - debt;
+  const burn = safe / days;
 
   document.getElementById('display-safe').innerText = '$' + safe.toLocaleString();
-  document.getElementById('display-burn').innerText = 'The Daily Limit: $' + burn.toFixed(2);
-  document.getElementById('row-inc').innerText = '$' + inc.toLocaleString();
-  document.getElementById('row-bills').innerText = '-$' + bill.toLocaleString();
+  const statusT = document.getElementById('status-text');
+  const statusD = document.getElementById('status-desc');
+  const card = document.getElementById('main-card');
+
+  statusT.innerText = 'The Daily Limit: $' + burn.toFixed(2);
+
+  if (burn > 100) {
+    statusT.style.color = "var(--green)"; card.style.borderLeftColor = "var(--green)";
+    statusD.innerText = "Comfortable. Your cushion is growing.";
+  } else if (burn > 40) {
+    statusT.style.color = "var(--amber)"; card.style.borderLeftColor = "var(--amber)";
+    statusD.innerText = "Tight. Monitor your daily swipes.";
+  } else {
+    statusT.style.color = "var(--red)"; card.style.borderLeftColor = "var(--red)";
+    statusD.innerText = "Risky. Stop non-essential spending now.";
+  }
 }
 
-// --- AUTH UI LOGIC ---
 function openAuth(mode) {
   currentMode = mode;
-  const title = document.getElementById('modal-title');
-  const link = document.getElementById('auth-toggle-link');
-  const passLabel = document.getElementById('pass-label');
-  if(mode === 'signin') {
-    title.innerText = "Welcome Back"; link.innerText = "Need an account? Join Free"; passLabel.innerText = "Enter Password";
-  } else {
-    title.innerText = "Join ClearSpend"; link.innerText = "Already have an account? Sign In"; passLabel.innerText = "Create Password";
-  }
+  document.getElementById('modal-title').innerText = mode === 'signin' ? "Welcome Back" : "Join ClearSpend";
+  document.getElementById('pass-label').innerText = mode === 'signin' ? "Enter Password" : "Create Password";
   document.getElementById('auth-modal').style.display = 'flex';
 }
 function closeAuth() { document.getElementById('auth-modal').style.display = 'none'; }
-function toggleAuthMode() { if(currentMode === 'signup') openAuth('signin'); else openAuth('signup'); }
+function toggleAuthMode() { currentMode = currentMode === 'signup' ? 'signin' : 'signup'; openAuth(currentMode); }
 
 async function handleAuth() {
   const email = document.getElementById('auth-email').value;
   const password = document.getElementById('auth-password').value;
-  if(currentMode === 'signin') {
-    const { error } = await sb.auth.signInWithPassword({ email, password });
-    if(error) alert(error.message); else location.reload();
-  } else {
-    const { error } = await sb.auth.signUp({ email, password });
-    if(error) alert(error.message); else alert("Check your email for confirmation!");
-  }
+  const { error } = currentMode === 'signin' ? await sb.auth.signInWithPassword({ email, password }) : await sb.auth.signUp({ email, password });
+  if(error) alert(error.message); else location.reload();
 }
 
 async function saveToCloud() {
   const { data: { user } } = await sb.auth.getUser();
   if(!user) { openAuth('signup'); return; }
-  const { error } = await sb.from('profiles').upsert({ id: user.id, updated_at: new Date() });
-  if(!error) alert("Profile synced to cloud!");
+  await sb.from('profiles').upsert({ id: user.id, updated_at: new Date() });
+  alert("Snapshot synced to cloud!");
 }
 
 async function checkUser() {
   const { data: { user } } = await sb.auth.getUser();
-  if(user) {
-    document.getElementById('nav-auth').innerHTML = `
-      <span style="font-size: 13px; font-weight: 800; color: var(--muted);">${user.email}</span>
-      <button class="btn-secondary" style="padding: 8px 15px; margin-left: 10px; font-size: 12px;" onclick="sb.auth.signOut().then(()=>location.reload())">Sign Out</button>
-    `;
-  }
+  if(user) document.getElementById('nav-auth').innerHTML = `<span style="font-size: 13px; font-weight: 800;">${user.email}</span><button class="btn-secondary" style="padding: 8px 15px; margin-left: 10px;" onclick="sb.auth.signOut().then(()=>location.reload())">Sign Out</button>`;
 }
+
 runCalc();
 checkUser();
 </script>
