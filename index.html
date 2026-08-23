@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ClearSpend — The Financial Command Center</title>
+<title>ClearSpend — Know Before You Swipe</title>
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF9LHLEGR5"></script>
@@ -20,9 +20,8 @@
 :root {
   --indigo: #4f46e5; --violet: #7c3aed; --cyan: #0891b2;
   --navy: #0f172a; 
-  /* UPDATED VIBRANT GRADIENT */
   --bg-top: #ffffff;
-  --bg-bottom: #d0e7ff; 
+  --bg-bottom: #dbeafe; /* Slightly deeper blue for visibility */
   --card: #ffffff; 
   --text: #0f172a; --muted: #64748b; --line: #e2e8f0; 
   --green: #10b981; --amber: #f59e0b; --red: #ef4444;
@@ -31,7 +30,6 @@
 
 * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
 
-/* GRADIENT FIX: Forces background to fill the whole screen */
 html, body {
   min-height: 100vh;
   margin: 0;
@@ -44,21 +42,28 @@ body {
   line-height: 1.5; 
 }
 
-/* REFINED NAVIGATION */
+/* NAVIGATION & ENLARGED LOGO */
 nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 50px; max-width: 1400px; margin: auto; }
-.logo-container { display: flex; align-items: center; gap: 12px; cursor: pointer; text-decoration: none; }
-.logo-vault { width: 55px; height: 55px; }
-.logo-text { font-size: 32px; font-weight: 950; letter-spacing: -2px; color: var(--navy); }
+.logo-container { display: flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none; }
+.logo-vault { width: 65px; height: 65px; } /* Enlarged as requested */
+.logo-text { font-size: 36px; font-weight: 950; letter-spacing: -2px; color: var(--navy); margin-left: -4px; }
 .logo-text span { color: var(--indigo); }
 
-/* HERO SECTION */
+/* HERO & COLLISION FIX */
 .container { max-width: 1300px; margin: auto; padding: 0 20px 100px; }
 .hero { text-align: center; padding: 60px 0 80px; }
-.hero h1 { font-size: 82px; font-weight: 900; letter-spacing: -5px; line-height: 0.85; margin-bottom: 25px; color: var(--navy); }
+.hero h1 { 
+    font-size: 82px; 
+    font-weight: 900; 
+    letter-spacing: -5px; 
+    line-height: 1.05; /* FIX: Added line-height to prevent "y" and "f" collision */
+    margin-bottom: 25px; 
+    color: var(--navy); 
+}
 .hero h1 span { background: linear-gradient(to bottom right, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hero p { font-size: 22px; color: var(--muted); max-width: 800px; margin: auto; font-weight: 500; }
 
-/* BENTO DASHBOARD GRID */
+/* BENTO DASHBOARD */
 .dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
 .card { 
     background: var(--card); border: 1px solid var(--line); border-radius: var(--r); 
@@ -71,7 +76,7 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .col-4 { grid-column: span 4; }
 .col-12 { grid-column: span 12; }
 
-/* TRAFFIC LIGHT SOFT HALO */
+/* TRAFFIC LIGHT HALO */
 .burn-card { border-top: 12px solid var(--line); }
 .halo-green { border-top-color: var(--green); box-shadow: 0 0 50px rgba(16, 185, 129, 0.15); }
 .halo-yellow { border-top-color: var(--amber); box-shadow: 0 0 50px rgba(245, 158, 11, 0.15); }
@@ -81,7 +86,7 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .big-money { font-size: 110px; font-weight: 950; letter-spacing: -8px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
 .status-text { font-size: 28px; font-weight: 900; margin-top: 20px; }
 
-/* UI ELEMENTS */
+/* UI */
 input { 
     width: 100%; padding: 18px; border-radius: 16px; border: 1px solid var(--line); 
     margin: 8px 0 20px; font-size: 17px; background: #f8fafc; 
@@ -91,10 +96,9 @@ input:focus { border-color: var(--indigo); background: #fff; box-shadow: 0 0 0 4
 
 button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 16px; }
 .btn-primary { background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; }
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(79, 70, 229, 0.3); }
 .btn-secondary { background: #f1f5f9; color: var(--navy); }
 
-/* SNEAK PEEK GLASS */
+/* OVERLAYS */
 .glass-lock {
     position: absolute; inset: 0; background: rgba(255, 255, 255, 0.5); 
     backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 10;
@@ -106,11 +110,11 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
 .price-card { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); text-align: left; }
 .price-card.featured { border: 3px solid var(--indigo); transform: scale(1.05); }
 
-/* AUTH MODAL */
+/* MODAL */
 #auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-.modal-box { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); width: 100%; max-width: 460px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+.modal-box { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); width: 100%; max-width: 460px; text-align: center; }
 
-@media (max-width: 1000px) { .col-8, .col-4 { grid-column: span 12; } .hero h1 { font-size: 52px; } }
+@media (max-width: 1000px) { .col-8, .col-4 { grid-column: span 12; } .hero h1 { font-size: 48px; line-height: 1.2; } }
 </style>
 </head>
 <body>
@@ -131,7 +135,6 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
 
 <nav>
   <div class="logo-container" onclick="location.reload()">
-    <!-- THE CRYSTAL VAULT LOGO -->
     <svg class="logo-vault" viewBox="0 0 100 100">
         <defs>
             <linearGradient id="vaultG" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -159,8 +162,6 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
   </header>
 
   <div class="dashboard-grid">
-    
-    <!-- MAIN RESULTS (Halo Effect) -->
     <section class="card col-8 burn-card" id="main-card">
       <span class="label">Live Disposable Cash Balance</span>
       <div class="big-money" id="display-safe">$0</div>
@@ -168,7 +169,6 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
       <div id="status-desc" style="font-weight: 600; color: var(--muted); margin-top: 10px;">Ready for your financial snapshot...</div>
     </section>
 
-    <!-- THE SNAPSHOT -->
     <section class="card col-4">
       <h2 style="margin-top: 0; font-size: 28px; letter-spacing: -1px; color: var(--navy);">The Snapshot</h2>
       <label class="label">Next Cash In (Net)</label>
@@ -180,7 +180,6 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%">Secure Snapshot</button>
     </section>
 
-    <!-- TEASER: GHOST CUSHION -->
     <section class="card col-4">
         <span class="label">The Ghost Cushion</span>
         <div style="margin-top: 20px;">
@@ -195,7 +194,6 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
         <div class="glass-lock"><div class="upgrade-tag">Starter Tier Required</div></div>
     </section>
 
-    <!-- TEASER: MOMENTUM -->
     <section class="card col-4">
       <span class="label">3-Month Momentum</span>
       <div style="height: 100px; display: flex; align-items: flex-end; gap: 12px; margin-top: 20px;">
@@ -206,7 +204,6 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
       <div class="glass-lock"><div class="upgrade-tag">Unlock History</div></div>
     </section>
 
-    <!-- TEASER: DEBT ESCAPE -->
     <section class="card col-4">
         <span class="label">The Debt Escape Plan</span>
         <div style="margin-top: 20px; text-align: center;">
@@ -218,11 +215,10 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
         <div class="glass-lock"><div class="upgrade-tag">Unlock Pro Escape Date</div></div>
     </section>
 
-    <!-- PRICING -->
     <section class="col-12 pricing-section" id="pricing">
         <div class="label" style="color: var(--indigo)">Founding Member Deals</div>
         <h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; margin-bottom: 60px; color: var(--navy);">One payment. Lifetime access.</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1100px; margin: auto;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: auto;">
             <div class="price-card">
                 <div class="label">Starter Lifetime</div>
                 <div style="font-size: 52px; font-weight: 900; margin: 10px 0;">$29</div>
@@ -276,28 +272,10 @@ function runCalc() {
 
 function openAuth(mode) {
   currentMode = mode;
-  const title = document.getElementById('modal-title');
-  const sub = document.getElementById('modal-subtext');
-  const toggle = document.getElementById('auth-toggle-link');
-  const passLabel = document.getElementById('pass-label');
-  const passInput = document.getElementById('auth-password');
-
-  if(mode === 'signin') {
-    title.innerText = "Welcome Back";
-    sub.innerText = "Access your private financial vault.";
-    toggle.innerText = "Need an account? Join Free";
-    passLabel.innerText = "Enter Password";
-    passInput.placeholder = "Enter your password";
-  } else {
-    title.innerText = "Join ClearSpend";
-    sub.innerText = "Sync your financial profile to the cloud.";
-    toggle.innerText = "Already have an account? Sign In";
-    passLabel.innerText = "Create Password";
-    passInput.placeholder = "Minimum 8 characters";
-  }
+  document.getElementById('modal-title').innerText = mode === 'signin' ? "Welcome Back" : "Join ClearSpend";
+  document.getElementById('pass-label').innerText = mode === 'signin' ? "Enter Password" : "Create Password";
   document.getElementById('auth-modal').style.display = 'flex';
 }
-
 function closeAuth() { document.getElementById('auth-modal').style.display = 'none'; }
 function toggleAuthMode() { currentMode = (currentMode === 'signup') ? 'signin' : 'signup'; openAuth(currentMode); }
 
