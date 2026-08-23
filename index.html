@@ -27,18 +27,17 @@
 * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
 body { margin: 0; background: var(--bg); color: var(--text); line-height: 1.5; }
 
-/* REFINED LOGO: MATCHING YOUR IMAGE */
+/* LOGO REBUILT TO MATCH IMAGE EXACTLY */
 nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 40px; max-width: 1400px; margin: auto; }
-.logo-container { display: flex; align-items: center; gap: 4px; text-decoration: none; cursor: pointer; }
-.logo-icon { width: 75px; height: 75px; } /* Enlarged */
-.logo-text { font-size: 38px; font-weight: 900; letter-spacing: -2px; color: var(--navy); margin-left: -5px; }
+.logo-container { display: flex; align-items: center; gap: 0; text-decoration: none; cursor: pointer; }
+.logo-icon { width: 80px; height: 80px; margin-right: -5px; } /* Large & Tight Spacing */
+.logo-text { font-size: 42px; font-weight: 950; letter-spacing: -2.5px; color: var(--navy); }
 .logo-text span { color: var(--blue); }
 
 /* HERO */
 .container { max-width: 1200px; margin: auto; padding: 0 20px 100px; }
 .hero { text-align: center; padding: 40px 0; }
-.hero h1 { font-size: 64px; font-weight: 950; letter-spacing: -4px; line-height: 0.95; margin-bottom: 20px; }
-.hero h1 span { color: var(--blue); }
+.hero h1 { font-size: 68px; font-weight: 950; letter-spacing: -4px; line-height: 0.95; margin-bottom: 20px; }
 .hero p { font-size: 20px; color: var(--muted); max-width: 800px; margin: auto; font-weight: 600; }
 
 /* DASHBOARD GRID */
@@ -49,21 +48,20 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); }
 .big-money { font-size: 110px; font-weight: 950; letter-spacing: -7px; margin: 5px 0; line-height: 0.8; color: var(--navy); }
 
-/* TRAFFIC LIGHT DAILY LIMIT */
-.burn-card { transition: 0.4s ease; border-left: 12px solid var(--line); }
+/* TRAFFIC LIGHT SYSTEM */
+.burn-card { transition: 0.4s ease; border-left: 14px solid var(--line); }
 .status-text { font-size: 26px; font-weight: 900; margin-top: 15px; }
 
 /* CRYSTAL GLASS OVERLAYS */
 .glass-lock {
-    position: absolute; inset: 0; background: rgba(255, 255, 255, 0.05); 
-    backdrop-filter: blur(1.5px); display: flex; align-items: center; justify-content: center; z-index: 10;
+    position: absolute; inset: 0; background: rgba(255, 255, 255, 0.02); 
+    backdrop-filter: blur(1px); display: flex; align-items: center; justify-content: center; z-index: 10;
 }
 .upgrade-tag {
     background: white; color: var(--blue); padding: 10px 20px; border-radius: 40px; 
     font-weight: 900; font-size: 12px; box-shadow: var(--shadow); border: 1px solid var(--line);
 }
 
-/* DATA ROWS */
 .data-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--line); font-weight: 700; }
 input { width: 100%; padding: 16px; border-radius: 14px; border: 1px solid var(--line); margin: 8px 0 16px; font-size: 16px; background: #f9fafb; font-weight: 600; }
 
@@ -71,41 +69,44 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
 .btn-primary { background: var(--blue); color: #fff; }
 .btn-secondary { background: #f1f5f9; color: var(--navy); }
 
-/* PRICING SECTION */
-.pricing-section { padding: 100px 0; text-align: center; background: #fff; border-top: 1px solid var(--line); margin-top: 60px; }
+/* AUTH MODAL FIXES */
+#auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(12px); }
+.modal-box { background: #fff; padding: 48px; border-radius: var(--r); width: 100%; max-width: 440px; text-align: center; }
 
 @media (max-width: 900px) { .hero h1 { font-size: 48px; } .dashboard-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
-<div id="auth-modal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(12px);">
-  <div style="background: #fff; padding: 48px; border-radius: var(--r); width: 100%; max-width: 440px; text-align: center;">
+<div id="auth-modal">
+  <div class="modal-box">
     <h2 id="modal-title" style="font-size: 36px; font-weight: 900;">Join ClearSpend</h2>
-    <input type="email" id="auth-email" placeholder="name@email.com" style="width:100%; padding:15px; border-radius:12px; border:1px solid #ddd; margin-top:20px;">
-    <input type="password" id="auth-password" placeholder="••••••••" style="width:100%; padding:15px; border-radius:12px; border:1px solid #ddd; margin-top:10px;">
-    <button class="btn-primary" style="width: 100%; margin-top:20px;" onclick="handleAuth()">Continue</button>
-    <div id="auth-toggle-link" style="margin-top: 20px; font-weight: 800; color: var(--blue); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div>
+    <p id="modal-subtext" style="color: var(--muted); margin-bottom: 24px;">Start your journey to financial clarity.</p>
+    <div style="text-align: left;"><label class="label">Email Address</label></div>
+    <input type="email" id="auth-email" placeholder="name@email.com">
+    <div style="text-align: left;"><label class="label" id="pass-label">Create Password</label></div>
+    <input type="password" id="auth-password" placeholder="••••••••">
+    <button class="btn-primary" style="width: 100%;" onclick="handleAuth()">Continue</button>
+    <div id="auth-toggle-link" style="margin-top: 24px; font-weight: 800; color: var(--blue); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div>
     <button class="btn-secondary" style="width: 100%; margin-top: 12px;" onclick="closeAuth()">Cancel</button>
   </div>
 </div>
 
 <nav>
   <div class="logo-container" onclick="location.reload()">
-    <!-- REFINED ENLARGED LOGO WITH GRADIENT TO MATCH IMAGE -->
+    <!-- SVG LOGO MATCHING YOUR ATTACHED IMAGE -->
     <svg class="logo-icon" viewBox="0 0 120 120">
       <defs>
-        <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" style="stop-color:#0f172a" />
           <stop offset="100%" style="stop-color:#2563eb" />
         </linearGradient>
       </defs>
-      <!-- Swoosh ending in arrow -->
-      <path d="M20 70 Q 20 100 60 100 Q 100 100 100 60 L 100 40" fill="none" stroke="url(#iconGrad)" stroke-width="14" stroke-linecap="round"/>
-      <path d="M88 55 L 100 35 L 112 55" fill="none" stroke="url(#iconGrad)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-      <!-- Dollar Sign -->
-      <path d="M25 45 C 25 35 45 35 45 45 C 45 55 25 55 25 65 C 25 75 45 75 45 65" fill="none" stroke="url(#iconGrad)" stroke-width="8" stroke-linecap="round"/>
-      <path d="M35 35 V 75" stroke="url(#iconGrad)" stroke-width="6" stroke-linecap="round"/>
+      <!-- The 'S' Swoop and Arrow -->
+      <path d="M40 45 C 40 30, 80 30, 80 45 C 80 60, 40 60, 40 75 C 40 90, 80 90, 80 75" fill="none" stroke="url(#logoGradient)" stroke-width="12" stroke-linecap="round"/>
+      <path d="M60 20 V 90" stroke="url(#logoGradient)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M50 85 Q 85 85 95 45" fill="none" stroke="#2563eb" stroke-width="12" stroke-linecap="round"/>
+      <path d="M85 55 L 95 35 L 105 55" fill="none" stroke="#2563eb" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
     <div class="logo-text">Clear<span>Spend</span></div>
   </div>
@@ -118,17 +119,17 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
 <div class="container">
   <header class="hero">
     <h1>Know your <span>"Safe-to-Spend"</span><br>number before you swipe.</h1>
-    <p>The financial bridge between today's balance and your next payday. Stop guessing and start growing your cushion.</p>
+    <p>ClearSpend connects today's cash flow with tomorrow's decisions so you can see what is safe to spend and what happens if you do it.</p>
   </header>
 
   <div class="dashboard-grid">
     
     <!-- MAIN RESULTS (TRAFFIC LIGHT) -->
     <section class="card burn-card" id="main-card">
-      <span class="label">Disposable Cash Balance</span>
+      <span class="label">Total Safe-to-Spend Room</span>
       <div class="big-money" id="display-safe">$0</div>
       <div class="status-text" id="status-text">The Daily Limit: $0.00</div>
-      <div id="status-desc" style="font-weight: 600; color: var(--muted); margin-top: 5px;">Ready for your snapshot...</div>
+      <div id="status-desc" style="font-weight: 600; color: var(--muted); margin-top: 5px;">Input your snapshot to begin...</div>
     </section>
 
     <!-- THE SNAPSHOT (INPUTS) -->
@@ -137,7 +138,7 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
       <label class="label">Next Cash In (Net Pay)</label>
       <input type="number" id="in-income" value="2500" oninput="runCalc()">
       
-      <label class="label">Living Bills (Food, Rent, Gas)</label>
+      <label class="label">The Friction (Living Bills)</label>
       <input type="number" id="in-bills" value="1200" oninput="runCalc()">
 
       <label class="label">The Weight (Debt Min-Pays)</label>
@@ -149,57 +150,44 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 800; c
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%">Secure Snapshot to Cloud</button>
     </section>
 
-    <!-- MOMENTUM GRAPH (STARTER SNEAK PEEK) -->
+    <!-- TEASER GRAPHS -->
     <section class="card">
-      <span class="label">3-Month Money Momentum</span>
-      <div style="height: 120px; display: flex; align-items: flex-end; gap: 10px; margin-top: 20px;">
-          <div style="flex:1; height:45%; background: var(--line); border-radius: 6px;"></div>
-          <div style="flex:1; height:75%; background: var(--line); border-radius: 6px;"></div>
-          <div style="flex:1; height:60%; background: var(--blue); border-radius: 6px;"></div>
+      <span class="label">3-Month Momentum</span>
+      <div style="height: 100px; display: flex; align-items: flex-end; gap: 8px; margin-top: 20px;">
+          <div style="flex:1; height:40%; background: var(--line); border-radius: 4px;"></div>
+          <div style="flex:1; height:70%; background: var(--line); border-radius: 4px;"></div>
+          <div style="flex:1; height:55%; background: var(--blue); border-radius: 4px;"></div>
       </div>
-      <div class="glass-lock"><div class="upgrade-tag">Starter: Unlock History Bar Chart</div></div>
+      <div class="glass-lock"><div class="upgrade-tag">Starter: Unlock History</div></div>
     </section>
 
-    <!-- DEBT ESCAPE (PRO SNEAK PEEK) -->
     <section class="card">
-      <span class="label">The Debt Escape Date</span>
+      <span class="label">Debt Escape Path</span>
       <div style="margin-top: 20px; text-align: center;">
-          <div style="font-size: 42px; font-weight: 900; color: var(--navy);">MARCH 2027</div>
-          <div style="height: 8px; background: var(--line); border-radius: 20px; margin-top: 15px; width: 80%; margin-inline: auto;">
-              <div style="width: 55%; height: 100%; background: var(--green); border-radius: 20px;"></div>
+          <div style="font-size: 32px; font-weight: 950; color: var(--navy);">MARCH 2027</div>
+          <div style="height: 8px; background: var(--line); border-radius: 20px; margin-top: 15px;">
+              <div style="width: 50%; height: 100%; background: var(--green); border-radius: 20px;"></div>
           </div>
       </div>
-      <div class="glass-lock"><div class="upgrade-tag">Pro: Unlock Debt-Free Visuals</div></div>
-    </section>
-
-    <!-- CRYSTAL BALL (PRO SNEAK PEEK) -->
-    <section class="card full">
-      <span class="label">12-Month Crystal Ball Projection</span>
-      <div style="height: 150px; border-bottom: 2px solid var(--line); border-left: 2px solid var(--line); margin-top: 20px; position: relative;">
-          <!-- Mock line graph -->
-          <svg viewBox="0 0 500 100" style="width: 100%; height: 100%; overflow: visible;">
-              <path d="M0 80 L100 70 L200 75 L300 40 L400 30 L500 10" fill="none" stroke="var(--blue)" stroke-width="4" stroke-linecap="round"/>
-          </svg>
-      </div>
-      <div class="glass-lock"><div class="upgrade-tag">Pro: Unlock Future Wealth Projection</div></div>
+      <div class="glass-lock"><div class="upgrade-tag">Pro: Unlock Debt Timeline</div></div>
     </section>
 
     <!-- PRICING -->
-    <section class="full pricing-section" id="pricing">
+    <section class="full" id="pricing" style="padding: 100px 0; text-align: center;">
         <div class="label" style="color: var(--blue)">Founding Member Deals</div>
         <h2 style="font-size: 48px; font-weight: 950; letter-spacing: -3px; margin-bottom: 40px;">One payment. Lifetime access.</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1100px; margin: auto;">
             <div class="card" style="text-align: left;">
                 <div class="label">Starter Lifetime</div>
                 <div style="font-size: 42px; font-weight: 900; margin: 10px 0;">$29</div>
-                <p style="color: var(--muted); font-size: 14px; line-height: 1.8;">✓ <b>3-Month</b> History Graph<br>✓ <b>Ghost Cushion</b> (10% Safety)<br>✓ Smart Payday Splitter<br>✓ Saved Snapshot Cloud Sync</p>
+                <p style="color: var(--muted); font-size: 14px; line-height: 1.8;">✓ <b>The Interest Saver</b> Graph<br>✓ <b>Ghost Cushion</b> (10% Safety)<br>✓ Smart Payday Splitter<br>✓ Multi-device Sync</p>
                 <button class="btn-secondary" style="width: 100%; margin-top: 20px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
             </div>
             <div class="card" style="text-align: left; border: 3px solid var(--blue);">
                 <div style="background: var(--blue); color: #fff; padding: 4px 15px; border-radius: 20px; font-size: 11px; font-weight: 900; display: inline-block; margin-bottom: 10px;">BEST VALUE</div>
                 <div class="label">Founding Pro Pass</div>
                 <div style="font-size: 42px; font-weight: 900; margin: 10px 0;">$49</div>
-                <p style="color: var(--muted); font-size: 14px; line-height: 1.8;">✓ <b>12-Month</b> Wealth Projection<br>✓ <b>Debt Escape</b> Timeline Visuals<br>✓ Payday Automated Map<br>✓ Priority Support & Feature Voting</p>
+                <p style="color: var(--muted); font-size: 14px; line-height: 1.8;">✓ <b>Debt Escape Date</b> Visuals<br>✓ <b>The Payday Map</b> (Automated)<br>✓ 12-Month Wealth Projection<br>✓ Priority Pro Support</p>
                 <button class="btn-primary" style="width: 100%; margin-top: 20px;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro Forever</button>
             </div>
         </div>
@@ -220,7 +208,7 @@ function runCalc() {
   const debt = +document.getElementById('in-debt').value || 0;
   const days = +document.getElementById('in-days').value || 1;
   const safe = inc - bill - debt;
-  const burn = safe / days;
+  const burn = safe / (days || 1);
 
   document.getElementById('display-safe').innerText = '$' + safe.toLocaleString();
   const statusT = document.getElementById('status-text');
@@ -229,13 +217,12 @@ function runCalc() {
 
   statusT.innerText = 'The Daily Limit: $' + burn.toFixed(2);
 
-  // TRAFFIC LIGHT COLOR LOGIC
   if (burn > 100) {
     statusT.style.color = "var(--green)"; card.style.borderLeftColor = "var(--green)";
-    statusD.innerText = "Safe to spend. You're outrunning your bills.";
+    statusD.innerText = "Comfortable. Your cushion is growing.";
   } else if (burn > 40) {
     statusT.style.color = "var(--amber)"; card.style.borderLeftColor = "var(--amber)";
-    statusD.innerText = "Caution. Monitor your swipes carefully.";
+    statusD.innerText = "Tight. Monitor your daily swipes.";
   } else {
     statusT.style.color = "var(--red)"; card.style.borderLeftColor = "var(--red)";
     statusD.innerText = "Critical. Minimize non-essential spending.";
@@ -244,9 +231,25 @@ function runCalc() {
 
 function openAuth(mode) {
   currentMode = mode;
-  document.getElementById('modal-title').innerText = mode === 'signin' ? "Welcome Back" : "Join ClearSpend";
+  const title = document.getElementById('modal-title');
+  const sub = document.getElementById('modal-subtext');
+  const toggle = document.getElementById('auth-toggle-link');
+  const passLabel = document.getElementById('pass-label');
+
+  if(mode === 'signin') {
+    title.innerText = "Welcome Back";
+    sub.innerText = "Sign in to access your financial profile.";
+    toggle.innerText = "Need an account? Join Free";
+    passLabel.innerText = "Enter Password";
+  } else {
+    title.innerText = "Join ClearSpend";
+    sub.innerText = "Protect your data with a cloud profile.";
+    toggle.innerText = "Already have an account? Sign In";
+    passLabel.innerText = "Create Password";
+  }
   document.getElementById('auth-modal').style.display = 'flex';
 }
+
 function closeAuth() { document.getElementById('auth-modal').style.display = 'none'; }
 function toggleAuthMode() { currentMode = (currentMode === 'signup') ? 'signin' : 'signup'; openAuth(currentMode); }
 
