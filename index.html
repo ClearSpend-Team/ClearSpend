@@ -38,37 +38,36 @@ body {
   line-height: 1.5; 
 }
 
-/* NAVIGATION & LOGO */
+/* NAVIGATION & LOGO (Enlarged 65px) */
 nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 50px; max-width: 1400px; margin: auto; }
 .logo-container { display: flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none; }
 .logo-vault { width: 65px; height: 65px; }
 .logo-text { font-size: 36px; font-weight: 950; letter-spacing: -2px; color: var(--navy); margin-left: -4px; }
 .logo-text span { color: var(--indigo); }
 
-/* HERO */
+/* HERO - COLLISION FIX */
 .container { max-width: 1300px; margin: auto; padding: 0 20px 100px; }
 .hero { text-align: center; padding: 60px 0 80px; }
 .hero h1 { 
     font-size: 76px; 
     font-weight: 900; 
-    letter-spacing: -1.5px; /* FIXED: Prevent dash/letter overlap */
+    letter-spacing: -1.5px; 
     line-height: 1.1; 
     margin-bottom: 25px; color: var(--navy); 
 }
 .hero h1 span { background: linear-gradient(to bottom right, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hero p { font-size: 22px; color: var(--muted); max-width: 800px; margin: auto; font-weight: 500; }
 
-/* DASHBOARD - REBALANCED BENTO GRID */
+/* DASHBOARD BENTO GRID */
 .dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
 .card { 
     background: var(--card); border: 1px solid var(--line); border-radius: var(--r); 
     padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden;
-    display: flex; flex-direction: column; justify-content: center;
+    display: flex; flex-direction: column;
 }
 
-/* Sizing Logic */
-.col-8 { grid-column: span 8; } /* Main Balance */
-.col-4 { grid-column: span 4; } /* Snapshot & Teasers */
+.col-8 { grid-column: span 8; }
+.col-4 { grid-column: span 4; }
 .col-12 { grid-column: span 12; }
 
 /* TRAFFIC LIGHT HALO */
@@ -81,7 +80,7 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .big-money { font-size: 90px; font-weight: 950; letter-spacing: -6px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
 .status-text { font-size: 24px; font-weight: 900; margin-top: 10px; }
 
-/* CRYSTAL GLASS OVERLAYS */
+/* TEASER OVERLAYS (Crystal Frost) */
 .glass-lock {
     position: absolute; inset: 0; background: rgba(255, 255, 255, 0.15); 
     backdrop-filter: blur(0.5px); 
@@ -90,9 +89,9 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .upgrade-tag { background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 40px; font-weight: 900; font-size: 10px; box-shadow: var(--shadow); cursor: pointer; }
 
 /* UI */
-input { 
-    width: 100%; padding: 16px; border-radius: 16px; border: 1px solid var(--line); 
-    margin: 6px 0 14px; font-size: 16px; background: #f8fafc; 
+input, select { 
+    width: 100%; padding: 14px; border-radius: 16px; border: 1px solid var(--line); 
+    margin: 6px 0 14px; font-size: 15px; background: #f8fafc; 
     color: var(--navy); font-weight: 600; outline: none;
 }
 button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 16px; }
@@ -176,55 +175,64 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%; padding: 12px; font-size: 14px;">Secure Sync</button>
     </section>
 
-    <!-- ROW 2 - BALANCED TEASERS -->
-    <section class="card col-4" style="min-height: 180px;">
+    <!-- ROW 2 - TEASERS -->
+    <section class="card col-4" style="min-height: 220px;">
         <span class="label">Ghost Cushion</span>
         <div style="margin-top: 15px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <span style="font-weight: 800; font-size: 13px;">10% Safety Buffer</span>
                 <div style="width: 40px; height: 22px; background: var(--line); border-radius: 20px;"></div>
             </div>
             <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--muted);"><span>Hidden:</span><span>$130.00</span></div>
         </div>
-        <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Starter Tier</div></div>
+        <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Ghost Cushion</div></div>
     </section>
 
-    <section class="card col-4" style="min-height: 180px;">
-      <span class="label">3-Month Momentum</span>
-      <div style="height: 60px; display: flex; align-items: flex-end; gap: 8px; margin-top: 15px;">
-          <div style="flex:1; height:40%; background: var(--line); border-radius: 4px;"></div>
-          <div style="flex:1; height:70%; background: var(--line); border-radius: 4px;"></div>
-          <div style="flex:1; height:55%; background: var(--indigo); border-radius: 4px;"></div>
-      </div>
-      <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock History</div></div>
+    <section class="card col-4" style="min-height: 220px;">
+        <span class="label">Recurring Smart Map</span>
+        <div style="margin-top: 10px;">
+            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                <input disabled placeholder="Phone" style="margin:0; padding:8px; font-size:12px;">
+                <select disabled style="margin:0; padding:8px; font-size:12px; width:100px;"><option>Monthly</option></select>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <input disabled placeholder="Groceries" style="margin:0; padding:8px; font-size:12px;">
+                <select disabled style="margin:0; padding:8px; font-size:12px; width:100px;"><option>Weekly</option></select>
+            </div>
+            <p style="font-size: 11px; color: var(--muted); margin-top: 10px; font-weight: bold;">Smart Allocator: Set aside $85.00/paycheck</p>
+        </div>
+        <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Bill Architect</div></div>
     </section>
 
-    <section class="card col-4" style="min-height: 180px;">
+    <section class="card col-4" style="min-height: 220px;">
         <span class="label">Debt Escape Plan</span>
         <div style="margin-top: 15px; text-align: center;">
             <div style="font-size: 24px; font-weight: 950; color: var(--navy);">MARCH 2027</div>
             <div style="height: 8px; background: var(--line); border-radius: 20px; margin-top: 10px; overflow: hidden;">
                 <div style="width: 45%; height: 100%; background: var(--green);"></div>
             </div>
+            <p style="font-size: 11px; color: var(--muted); margin-top: 10px; font-weight: bold;">Debt Burden: 18 mins / hour worked</p>
         </div>
-        <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Pro Escape Date</div></div>
+        <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Pro Escape Date</div></div>
     </section>
 
-    <!-- ROW 3 -->
+    <!-- PRICING -->
     <section class="col-12 pricing-section" id="pricing">
-        <div class="label" style="color: var(--indigo)">Founding Member Deals</div>
-        <h2 style="font-size: 48px; font-weight: 950; letter-spacing: -3px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2>
+        <div class="pricing-header">
+            <div class="label" style="color: var(--indigo)">Founding Member Deals</div>
+            <h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2>
+        </div>
         <div class="pricing-grid">
             <div class="price-card">
                 <div class="label">Starter Lifetime</div>
                 <div style="font-size: 52px; font-weight: 900; margin: 10px 0;">$29</div>
-                <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ <b>Ghost Cushion</b> safety toggle<br>✓ <b>3-Month</b> history visuals<br>✓ Smart Payday Splitter<br>✓ Cloud Snapshot Storage</p>
+                <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ <b>Ghost Cushion</b> safety toggle<br>✓ <b>Smart Recurring</b> bill mapper<br>✓ 3-Month history visuals<br>✓ Cloud Snapshot Storage</p>
                 <button class="btn-secondary" style="width: 100%; margin-top: 30px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
             </div>
             <div class="price-card featured">
                 <div class="label" style="color: var(--indigo)">Founding Pro Pass</div>
                 <div style="font-size: 52px; font-weight: 900; margin: 10px 0;">$49</div>
-                <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ <b>Debt Escape Date</b> visuals<br>✓ <b>Payday Map</b> automation<br>✓ 12-Month Wealth Projection<br>✓ Priority Pro Support</p>
+                <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ <b>Debt Escape Date</b> visuals<br>✓ <b>Payday Map</b> auto-allocation<br>✓ 12-Month Wealth Projection<br>✓ Priority Pro Support</p>
                 <button class="btn-primary" style="width: 100%; margin-top: 30px;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro Forever</button>
             </div>
         </div>
