@@ -26,7 +26,7 @@
 }
 
 * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
-html, body { min-height: 100vh; margin: 0; padding: 0; width: 100%; }
+html, body { min-height: 100vh; margin: 0; }
 body { background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%); background-attachment: fixed; color: var(--text); line-height: 1.5; overflow-x: hidden; }
 
 /* NAVIGATION */
@@ -41,8 +41,8 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .hero h1 { font-size: 76px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 25px; color: var(--navy); }
 .hero h1 span { background: linear-gradient(to bottom right, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-/* DASHBOARD GRID */
-.dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; margin-bottom: 80px; }
+/* BENTO DASHBOARD GRID */
+.dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; margin-bottom: 50px; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; min-height: 240px; transition: 0.3s; }
 .col-8 { grid-column: span 8; } .col-4 { grid-column: span 4; }
 
@@ -58,27 +58,23 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .unlocked .glass-lock { display: none !important; }
 .upgrade-tag { background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 40px; font-weight: 900; font-size: 10px; box-shadow: var(--shadow); cursor: pointer; }
 
-/* DEBT STACK ITEM */
+/* DATA UI */
+.input-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 5px; display: block; }
 .debt-item { display: flex; justify-content: space-between; align-items: center; padding: 14px; background: #f8fafc; border-radius: 14px; margin-bottom: 10px; border: 1px solid var(--line); font-weight: 700; }
 .remove-btn { color: var(--red); font-size: 20px; font-weight: 900; margin-left: 15px; cursor: pointer; opacity: 0.5; }
 
-/* UI ELEMENTS */
-.input-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 5px; display: block; }
-input, select { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--line); margin-bottom: 15px; font-size: 15px; background: #f8fafc; color: var(--navy); font-weight: 600; outline: none; }
-button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 14px; }
-.btn-primary { background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; }
-.btn-secondary { background: #f1f5f9; color: var(--navy); }
-
-/* PRICING SECTION - THE ALIGNMENT SHIELD */
+/* PRICING ALIGNMENT SHIELD */
 .pricing-outer-shield { width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 20px; border-top: 1px solid var(--line); background: rgba(255,255,255,0.4); margin-top: 50px; }
 .pricing-header { text-align: center; margin-bottom: 50px; }
 .pricing-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%; max-width: 1000px; }
 .price-card { background: #fff; border: 1px solid var(--line); padding: 35px; border-radius: var(--r); text-align: left; width: 100%; max-width: 320px; box-shadow: var(--shadow); position: relative; transition: 0.3s; flex: 1; min-width: 280px; }
 .price-card.featured { border: 3px solid var(--indigo); transform: scale(1.03); }
-.price-card h3 { margin: 0 0 5px; font-size: 18px; font-weight: 900; }
-.price-tag { font-size: 32px; font-weight: 950; margin-bottom: 15px; color: var(--navy); }
-.feature-list { list-style: none; padding: 0; margin: 15px 0; font-size: 13px; line-height: 1.8; color: var(--muted); }
-.feature-list li::before { content: "✓ "; color: var(--green); font-weight: 900; }
+
+/* UI */
+input, select { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--line); margin-bottom: 15px; font-size: 15px; background: #f8fafc; color: var(--navy); font-weight: 600; outline: none; }
+button { border: 0; border-radius: 16px; padding: 16px 24px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 14px; }
+.btn-primary { background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; }
+.btn-secondary { background: #f1f5f9; color: var(--navy); }
 
 /* MODALS */
 .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
@@ -89,7 +85,6 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; c
 </head>
 <body>
 
-<!-- AUTH MODAL -->
 <div id="auth-modal" class="modal-overlay">
   <div class="modal-box">
     <h2 id="modal-title" style="font-size: 32px; font-weight: 950; letter-spacing: -1px;">Join ClearSpend</h2>
@@ -119,13 +114,14 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; c
   <div class="hero"><h1>Know your <span>Safe-to-Spend</span><br>before you swipe.</h1><p>Professional financial command center. Stop guessing and start outrunning your debt.</p></div>
   
   <div class="dashboard-grid">
-    <!-- ROW 1 -->
+    <!-- RESULTS -->
     <section class="card col-8 burn-card" id="main-card">
       <span class="input-label">Live Disposable Balance</span>
       <div class="big-money" id="display-safe">$0</div>
       <div class="status-text" id="status-text">Daily Limit: $0.00</div>
     </section>
 
+    <!-- THE SNAPSHOT -->
     <section class="card col-4">
       <h2 style="margin:0; font-size:24px; color:var(--navy);">The Snapshot</h2>
       <label class="input-label" style="margin-top:10px;">Next Cash In (Net)</label>
@@ -148,19 +144,23 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; c
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%; padding: 12px; font-size: 14px;">Secure Sync</button>
     </section>
 
-    <!-- ROW 2 -->
+    <!-- THE ANNUAL VELOCITY (WITH SALARY INPUT) -->
     <section class="card col-4" id="annual-velocity-box">
         <span class="input-label">The Annual Velocity</span>
         <div style="margin-top: 15px;">
-            <div id="ratio-label" style="font-weight: 900; font-size: 18px;">---</div>
-            <div style="height:10px; background:var(--line); border-radius:10px; margin:10px 0; overflow:hidden;">
+            <label class="input-label">Yearly Gross Salary</label>
+            <input type="number" id="in-annual" value="55000" oninput="runCalc()">
+            
+            <div id="ratio-label" style="font-weight: 900; font-size: 18px; margin-top:10px;">Ratio: ---</div>
+            <div style="height:12px; background:var(--line); border-radius:10px; margin:10px 0; overflow:hidden; border:1px solid var(--line);">
                 <div id="ratio-bar" style="height:100%; width:0%; transition:1s;"></div>
             </div>
-            <p id="ratio-msg" style="font-size: 11px; color:var(--muted)">Pro: Unlock Stress Analytics</p>
+            <p id="ratio-msg" style="font-size: 11px; color:var(--muted)">Debt to Income Stress Gauge</p>
         </div>
         <div class="glass-lock"><div class="upgrade-tag">Pro Pass Required</div></div>
     </section>
 
+    <!-- DEBT STACK -->
     <section class="card col-8 pro-feat">
         <span class="input-label">Pro: The Debt Stack</span>
         <div style="display: flex; gap: 10px; margin: 15px 0;">
@@ -174,29 +174,26 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; c
   </div>
 </div>
 
-<!-- PRICING ALIGNMENT SHIELD -->
+<!-- PRICING - ISOLATED & CENTERED -->
 <div class="pricing-outer-shield" id="pricing">
     <div class="pricing-header">
         <div class="input-label" style="color: var(--indigo)">Choose Your Founding Status</div>
         <h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2>
     </div>
     <div class="pricing-grid">
-        <!-- FREE -->
         <div class="price-card">
             <h3>Essential Pass</h3><div class="price-tag" style="color:var(--muted)">$0</div>
-            <ul class="feature-list"><li>Safe-to-Spend Calc</li><li>Daily Spend Limit</li><li>Manual Payday Countdown</li></ul>
-            <button class="btn-secondary" style="width: 100%; margin-top: 20px;" onclick="openAuth('signup')">Claim Essential Pass</button>
+            <ul class="feature-list"><li>Safe-to-Spend Calc</li><li>Daily Spend Limit</li><li>Manual Countdown</li></ul>
+            <button class="btn-secondary" style="width: 100%; margin-top: 20px;" onclick="openAuth('signup')">Claim Pass</button>
         </div>
-        <!-- STARTER -->
         <div class="price-card">
             <h3>Founding Starter</h3><div class="price-tag">$29</div>
-            <ul class="feature-list"><li><b>Pay Frequency</b> Automation</li><li>Ghost Cushion toggle</li><li>3-Month History Graph</li><li>Cloud Sync Profile</li></ul>
+            <ul class="feature-list"><li><b>Pay Frequency</b> Automation</li><li>Ghost Cushion toggle</li><li>Full Cloud Profile Sync</li></ul>
             <button class="btn-secondary" style="width: 100%; margin-top: 20px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
         </div>
-        <!-- PRO -->
         <div class="price-card featured">
             <h3>Founding Pro</h3><div class="price-tag">$49</div>
-            <ul class="feature-list"><li><b>Annual Velocity</b> Engine</li><li>Stress Gauge Analytics</li><li>Unlimited Debt Stack</li><li>Negotiation Scripts</li></ul>
+            <ul class="feature-list"><li><b>Annual Velocity</b> Engine</li><li>Stress Gauge Analytics</li><li>Unlimited Debt Stack</li></ul>
             <button class="btn-primary" style="width: 100%; margin-top: 20px;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro</button>
         </div>
     </div>
@@ -209,8 +206,7 @@ const sb = supabase.createClient(SB_URL, SB_KEY);
 let debts = [];
 
 function updateFreq() {
-    const val = document.getElementById('in-freq').value;
-    document.getElementById('in-days').value = val;
+    document.getElementById('in-days').value = document.getElementById('in-freq').value;
     runCalc();
 }
 
@@ -228,19 +224,22 @@ function renderDebts() {
 
 function runCalc() {
   const inc = +document.getElementById('in-income').value || 0;
+  const yearly = +document.getElementById('in-annual').value || 0;
   const bill = +document.getElementById('in-bills').value || 0;
   const days = +document.getElementById('in-days').value || 1;
   const safe = inc - bill; const burn = safe / days;
+  
   document.getElementById('display-safe').innerText = '$' + safe.toLocaleString();
   const statusT = document.getElementById('status-text'); const card = document.getElementById('main-card');
   statusT.innerText = 'Daily Limit: $' + burn.toFixed(2);
+  
   card.classList.remove('halo-green', 'halo-yellow', 'halo-red');
   if (burn > 100) { statusT.style.color = "var(--green)"; card.classList.add('halo-green'); }
   else if (burn > 40) { statusT.style.color = "var(--amber)"; card.classList.add('halo-yellow'); }
   else { statusT.style.color = "var(--red)"; card.classList.add('halo-red'); }
   
   const totalDebt = debts.reduce((acc, curr) => acc + curr.amt, 0);
-  const ratio = (totalDebt / (inc * 12 || 1)) * 100;
+  const ratio = (totalDebt / (yearly || 1)) * 100;
   const bar = document.getElementById('ratio-bar'); const label = document.getElementById('ratio-label');
   bar.style.width = Math.min(100, ratio * 2) + "%";
   if(ratio < 15) { bar.style.background = "var(--green)"; label.innerText="Healthy Ratio"; }
@@ -260,7 +259,8 @@ async function handleAuth() {
 
 async function saveToCloud() {
   const { data: { user } } = await sb.auth.getUser(); if(!user) { openAuth('signup'); return; }
-  await sb.from('profiles').upsert({ id: user.id, updated_at: new Date() }); alert("Vault Synced!");
+  await sb.from('profiles').upsert({ id: user.id, income: +document.getElementById('in-income').value, bills: +document.getElementById('in-bills').value, updated_at: new Date() }); 
+  alert("Vault Synced!");
 }
 
 async function checkUser() {
