@@ -41,12 +41,12 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .hero h1 { font-size: 76px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 25px; color: var(--navy); }
 .hero h1 span { background: linear-gradient(to bottom right, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-/* BENTO DASHBOARD */
+/* DASHBOARD GRID */
 .dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; margin-bottom: 50px; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; min-height: 240px; transition: 0.3s; }
-.col-8 { grid-column: span 8; } .col-4 { grid-column: span 4; } .col-12 { grid-column: span 12; }
+.col-8 { grid-column: span 8; } .col-4 { grid-column: span 4; }
 
-/* TRAFFIC LIGHT HALO */
+/* STATUS EFFECTS */
 .burn-card { border-top: 12px solid var(--line); transition: 0.3s; }
 .halo-green { border-top-color: var(--green); box-shadow: 0 0 50px rgba(16, 185, 129, 0.15); }
 .halo-yellow { border-top-color: var(--amber); box-shadow: 0 0 50px rgba(245, 158, 11, 0.15); }
@@ -57,15 +57,15 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .status-text { font-size: 24px; font-weight: 900; margin-top: 10px; }
 
 /* LOCKING */
-.glass-lock { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(0.5px); display: flex; align-items: center; justify-content: center; z-index: 10; opacity: 1; }
-.unlocked .glass-lock { opacity: 0; pointer-events: none; visibility: hidden; }
+.glass-lock { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(0.5px); display: flex; align-items: center; justify-content: center; z-index: 10; }
+.unlocked .glass-lock { display: none !important; }
 .upgrade-tag { background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 40px; font-weight: 900; font-size: 10px; box-shadow: var(--shadow); cursor: pointer; }
 
 /* DATA ROWS */
 .data-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 14px; }
-.tips { font-size: 11px; color: var(--muted); background: #f8fafc; padding: 10px; border-radius: 12px; margin-top: 10px; }
+.tips { font-size: 11px; color: var(--muted); background: #f8fafc; padding: 12px; border-radius: 14px; margin-top: 15px; border: 1px solid var(--line); }
 
-/* PRICING SECTION - FIXED CENTER */
+/* PRICING SECTION - FORCED CENTER */
 .pricing-global-shield { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 120px 20px; border-top: 1px solid var(--line); background: rgba(255,255,255,0.4); }
 .pricing-header { text-align: center; max-width: 800px; margin-bottom: 60px; }
 .pricing-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; width: 100%; max-width: 1100px; }
@@ -94,10 +94,8 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
 <div class="container">
   <div class="hero"><h1>Know your <span>Safe-to-Spend</span><br>before you swipe.</h1><p>The first-ever financial command center with built-in debt negotiation assistance.</p></div>
   <div class="dashboard-grid">
-    <!-- MAIN DISPLAY -->
     <section class="card col-8 burn-card" id="main-card"><span class="label">Live Disposable Balance</span><div class="big-money" id="display-safe">$0</div><div class="status-text" id="status-text">Daily Limit: $0.00</div></section>
 
-    <!-- SNAPSHOT -->
     <section class="card col-4">
       <h2 style="margin:0; font-size:24px; color:var(--navy);">The Snapshot</h2>
       <label class="label" style="margin: 10px 0 0;">Net Paycheck In</label><input type="number" id="in-income" value="2500" oninput="runCalc()">
@@ -107,21 +105,19 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%; padding: 12px; font-size: 14px;">Secure Sync</button>
     </section>
 
-    <!-- PRO: DEBT NEGOTIATOR -->
+    <!-- PRO: DEBT NEGOTIATOR (ZADDY NAME REMOVED) -->
     <section class="card col-4 pro-feat">
         <span class="label">Pro: Collection Negotiator</span>
         <div style="margin-top: 15px;">
             <div class="data-row"><span>Total Collection</span><span id="neg-total">$0</span></div>
             <div class="data-row" style="color:var(--green)"><span>Offer to Close (40%)</span><span id="neg-offer">$0</span></div>
-            <div class="tips">💡 <b>Zaddy Tip:</b> Request a "Pay for Delete" letter before sending money to clear your credit report.</div>
+            <div class="tips">💡 <b>ClearSpend Tip:</b> Request a "Pay for Delete" letter before sending any payment to ensure your credit report is cleared.</div>
         </div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Negotiator</div></div>
     </section>
 
-    <!-- PRO: PAYDAY MAP -->
     <section class="card col-4 pro-feat"><span class="label">Pro: The Payday Map</span><div style="margin-top:15px;"><div class="data-row"><span>Transfer to Bills</span><span id="map-bills">$0</span></div><div class="data-row"><span>Debt Attack</span><span id="map-debt" style="color:var(--green)">$0</span></div><div class="data-row" style="color:var(--indigo); border:0;"><span>Spending Pocket</span><span id="map-pocket">$0</span></div></div><div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Payday Map</div></div></section>
 
-    <!-- PRO: DEBT ESCAPE -->
     <section class="card col-4 pro-feat"><span class="label">Pro: Debt Escape Path</span><div style="margin-top:15px; text-align: center;"><div style="font-size: 12px; font-weight: 800; color: var(--muted);">ESTIMATED FREEDOM DATE</div><div style="font-size: 28px; font-weight: 950; color: var(--navy); margin: 5px 0;" id="escape-date">---</div><div style="height: 10px; background: var(--line); border-radius: 20px; margin-top: 15px; overflow: hidden;"><div id="debt-bar" style="width: 45%; height: 100%; background: var(--green);"></div></div></div><div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Escape Date</div></div></section>
   </div>
 </div>
@@ -151,6 +147,7 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
 const SB_URL = 'https://chbfgkguxkdadnevqthk.supabase.co'; 
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNoYmZna2d1eGtkYWRuZXZxdGhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczMTcxOTUsImV4cCI6MjEwMjg5MzE5NX0.hemyiyKpJXt7CvxReNOzX4AVajM7V_LHl0SOJNAutcw'; 
 const sb = supabase.createClient(SB_URL, SB_KEY);
+
 function runCalc() {
   const inc = +document.getElementById('in-income').value || 0;
   const bill = +document.getElementById('in-bills').value || 0;
@@ -165,7 +162,6 @@ function runCalc() {
   else if (burn > 40) { statusT.style.color = "var(--amber)"; card.classList.add('halo-yellow'); }
   else { statusT.style.color = "var(--red)"; card.classList.add('halo-red'); }
   
-  // PRO LOGIC
   document.getElementById('neg-total').innerText = '$' + debtT.toLocaleString();
   document.getElementById('neg-offer').innerText = '$' + (debtT * 0.4).toLocaleString();
   document.getElementById('map-bills').innerText = '$' + bill.toLocaleString();
@@ -174,21 +170,25 @@ function runCalc() {
   const d = new Date(); d.setMonth(d.getUTCMonth() + 18);
   document.getElementById('escape-date').innerText = d.toLocaleString('default', { month: 'short', year: 'numeric' }).toUpperCase();
 }
+
 function openAuth(mode) { window.currentMode = mode; document.getElementById('auth-modal').style.display = 'flex'; }
 function closeAuth() { document.getElementById('auth-modal').style.display = 'none'; }
 function toggleAuthMode() { openAuth(window.currentMode === 'signup' ? 'signin' : 'signup'); }
+
 async function handleAuth() {
   const email = document.getElementById('auth-email').value;
   const password = document.getElementById('auth-password').value;
   const { error } = window.currentMode === 'signin' ? await sb.auth.signInWithPassword({ email, password }) : await sb.auth.signUp({ email, password });
   if(error) alert(error.message); else location.reload();
 }
+
 async function saveToCloud() {
   const { data: { user } } = await sb.auth.getUser();
   if(!user) { openAuth('signup'); return; }
   await sb.from('profiles').upsert({ id: user.id, income: +document.getElementById('in-income').value, bills: +document.getElementById('in-bills').value, debt_total: +document.getElementById('in-debt-total').value, days_until: +document.getElementById('in-days').value, updated_at: new Date() });
   alert("Snapshot secured!");
 }
+
 async function checkUser() {
   const { data: { user } } = await sb.auth.getUser();
   if(user) {
