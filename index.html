@@ -42,18 +42,24 @@ body {
 nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 50px; max-width: 1400px; margin: auto; }
 .logo-container { display: flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none; }
 .logo-vault { width: 65px; height: 65px; }
-.logo-text { font-size: 36px; font-weight: 950; letter-spacing: -2px; color: var(--navy); margin-left: -4px; }
+.logo-text { font-size: 36px; font-weight: 950; letter-spacing: -1.5px; color: var(--navy); margin-left: -4px; }
 .logo-text span { color: var(--indigo); }
 
-/* HERO */
+/* HERO - FIXED OVERLAPPING DASHES */
 .container { max-width: 1300px; margin: auto; padding: 0 20px 100px; }
 .hero { text-align: center; padding: 60px 0 80px; }
 .hero h1 { 
-    font-size: 82px; font-weight: 900; letter-spacing: -5px; 
-    line-height: 1.1; /* PREVENTS "y" and "f" COLLISION */
+    font-size: 82px; 
+    font-weight: 900; 
+    letter-spacing: -2px; /* REDUCED TO PREVENT CHARACTER COLLISION */
+    line-height: 1.2; 
     margin-bottom: 25px; color: var(--navy); 
 }
-.hero h1 span { background: linear-gradient(to bottom right, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero h1 span { 
+    background: linear-gradient(to bottom right, var(--indigo), var(--cyan)); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+}
 .hero p { font-size: 22px; color: var(--muted); max-width: 800px; margin: auto; font-weight: 500; }
 
 /* DASHBOARD */
@@ -65,7 +71,6 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 }
 .col-8 { grid-column: span 8; }
 .col-4 { grid-column: span 4; }
-.col-12 { grid-column: span 12; }
 
 /* TRAFFIC LIGHT HALO */
 .burn-card { border-top: 12px solid var(--line); }
@@ -74,13 +79,13 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .halo-red { border-top-color: var(--red); box-shadow: 0 0 50px rgba(239, 68, 68, 0.15); }
 
 .label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); display: block; margin-bottom: 10px; }
-.big-money { font-size: 110px; font-weight: 950; letter-spacing: -8px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
+.big-money { font-size: 110px; font-weight: 950; letter-spacing: -6px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
 .status-text { font-size: 28px; font-weight: 900; margin-top: 20px; }
 
 /* TEASER OVERLAYS (CRYSTAL CLEAR) */
 .glass-lock {
-    position: absolute; inset: 0; background: rgba(255, 255, 255, 0.2); 
-    backdrop-filter: blur(0.5px); /* ALMOST NO BLUR PER REQUEST */
+    position: absolute; inset: 0; background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(0.5px); 
     display: flex; align-items: center; justify-content: center; z-index: 10;
 }
 .upgrade-tag { background: var(--navy); color: #fff; padding: 10px 20px; border-radius: 40px; font-weight: 900; font-size: 11px; box-shadow: var(--shadow); cursor: pointer; }
@@ -96,6 +101,13 @@ input:focus { border-color: var(--indigo); background: #fff; }
 button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 16px; }
 .btn-primary { background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; }
 .btn-secondary { background: #f1f5f9; color: var(--navy); }
+
+/* PRICING SECTION - FIXED CENTERING */
+.pricing-section { padding: 120px 0; text-align: center; border-top: 1px solid var(--line); margin-top: 80px; width: 100%; }
+.pricing-header { text-align: center; margin-bottom: 60px; }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto; }
+.price-card { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); text-align: left; }
+.price-card.featured { border: 3px solid var(--indigo); }
 
 /* AUTH MODAL */
 #auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
@@ -153,7 +165,7 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
       <span class="label">Live Disposable Cash Balance</span>
       <div class="big-money" id="display-safe">$0</div>
       <div class="status-text" id="status-text">The Daily Limit: $0.00</div>
-      <div id="status-desc" style="font-weight: 600; color: var(--muted); margin-top: 10px;">Ready for your snapshot...</div>
+      <div id="status-desc" style="font-weight: 600; color: var(--muted); margin-top: 10px;">Ready for your financial snapshot...</div>
     </section>
 
     <section class="card col-4">
@@ -167,6 +179,7 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%">Secure Snapshot</button>
     </section>
 
+    <!-- TEASERS -->
     <section class="card col-4">
         <span class="label">The Ghost Cushion</span>
         <div style="margin-top: 20px;">
@@ -203,16 +216,18 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
     </section>
 
     <section class="col-12 pricing-section" id="pricing">
-        <div class="label" style="color: var(--indigo)">Founding Member Deals</div>
-        <h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; margin-bottom: 60px;">One payment. Lifetime access.</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1100px; margin: auto;">
-            <div class="card" style="text-align: left;">
+        <div class="pricing-header">
+            <div class="label" style="color: var(--indigo)">Founding Member Deals</div>
+            <h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2>
+        </div>
+        <div class="pricing-grid">
+            <div class="price-card">
                 <div class="label">Starter Lifetime</div>
                 <div style="font-size: 52px; font-weight: 900; margin: 10px 0;">$29</div>
                 <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ <b>Ghost Cushion</b> safety toggle<br>✓ <b>3-Month</b> history visuals<br>✓ Smart Payday Splitter<br>✓ Cloud Snapshot Storage</p>
                 <button class="btn-secondary" style="width: 100%; margin-top: 30px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
             </div>
-            <div class="card" style="text-align: left; border: 3px solid var(--indigo);">
+            <div class="price-card featured">
                 <div class="label" style="color: var(--indigo)">Founding Pro Pass</div>
                 <div style="font-size: 52px; font-weight: 900; margin: 10px 0;">$49</div>
                 <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ <b>Debt Escape Date</b> visuals<br>✓ <b>Payday Map</b> automation<br>✓ 12-Month Wealth Projection<br>✓ Priority Pro Support</p>
