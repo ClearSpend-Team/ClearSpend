@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ClearSpend — Know Before You Swipe</title>
+<title>ClearSpend — The Financial Command Center</title>
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF9LHLEGR5"></script>
@@ -19,26 +19,17 @@
 <style>
 :root {
   --indigo: #4f46e5; --violet: #7c3aed; --cyan: #0891b2;
-  --navy: #0f172a; 
-  --bg-top: #ffffff; --bg-bottom: #dbeafe; 
-  --card: #ffffff; 
-  --text: #0f172a; --muted: #64748b; --line: #e2e8f0; 
+  --navy: #0f172a; --bg-top: #ffffff; --bg-bottom: #dbeafe; 
+  --card: #ffffff; --text: #0f172a; --muted: #64748b; --line: #e2e8f0; 
   --green: #10b981; --amber: #f59e0b; --red: #ef4444;
   --shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.08); --r: 28px;
 }
 
 * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
-
 html, body { min-height: 100vh; margin: 0; }
+body { background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%); background-attachment: fixed; color: var(--text); line-height: 1.5; }
 
-body { 
-  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
-  background-attachment: fixed;
-  color: var(--text); 
-  line-height: 1.5; 
-}
-
-/* NAVIGATION & LOGO */
+/* NAVIGATION */
 nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 50px; max-width: 1400px; margin: auto; }
 .logo-container { display: flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none; }
 .logo-vault { width: 65px; height: 65px; }
@@ -46,24 +37,19 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .logo-text span { color: var(--indigo); }
 
 /* HERO */
-.container { max-width: 1300px; margin: auto; padding: 0 20px 100px; }
-.hero { text-align: center; padding: 60px 0 80px; }
-.hero h1 { 
-    font-size: 76px; font-weight: 900; letter-spacing: -1.5px; 
-    line-height: 1.1; margin-bottom: 25px; color: var(--navy); 
-}
+.container { max-width: 1300px; margin: auto; padding: 0 20px 60px; }
+.hero { text-align: center; padding: 60px 0 60px; }
+.hero h1 { font-size: 76px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 25px; color: var(--navy); }
 .hero h1 span { background: linear-gradient(to bottom right, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hero p { font-size: 22px; color: var(--muted); max-width: 800px; margin: auto; font-weight: 500; }
 
-/* BENTO DASHBOARD */
-.dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
-.card { 
-    background: var(--card); border: 1px solid var(--line); border-radius: var(--r); 
-    padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden;
-    display: flex; flex-direction: column;
-}
+/* DASHBOARD GRID */
+.dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; margin-bottom: 50px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
+
 .col-8 { grid-column: span 8; }
 .col-4 { grid-column: span 4; }
+.col-12 { grid-column: span 12; }
 
 /* TRAFFIC LIGHT HALO */
 .burn-card { border-top: 12px solid var(--line); transition: 0.3s; }
@@ -75,40 +61,27 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .big-money { font-size: 90px; font-weight: 950; letter-spacing: -6px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
 .status-text { font-size: 24px; font-weight: 900; margin-top: 10px; }
 
-/* GLASSMISM */
+/* LOCKING SYSTEM */
 .glass-lock { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(0.5px); display: flex; align-items: center; justify-content: center; z-index: 10; }
 .unlocked .glass-lock { display: none !important; }
 .upgrade-tag { background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 40px; font-weight: 900; font-size: 10px; box-shadow: var(--shadow); cursor: pointer; }
 
-/* PRICING - RE-CENTERED VERSION */
-.pricing-section { 
-    width: 100%; margin-top: 100px; padding: 100px 20px; border-top: 1px solid var(--line); 
-    display: flex; flex-direction: column; align-items: center; /* THE FIX FOR CENTERING */
-}
-.pricing-header { text-align: center; margin-bottom: 50px; }
-.pricing-grid { 
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; 
-    width: 100%; max-width: 1000px; margin: 0 auto; 
-}
-.price-card { 
-    background: #fff; border: 1px solid var(--line); padding: 48px; 
-    border-radius: var(--r); text-align: left; width: 100%; max-width: 450px;
-    box-shadow: var(--shadow);
-}
-.price-card.featured { 
-    border: 3px solid var(--indigo); 
-    border-radius: var(--r); /* ENSURES ROUNDED CORNERS ON PRO BOX */
-    transform: scale(1.03); 
-}
+/* PRICING SECTION - FORCED CENTERING */
+.pricing-section { width: 100%; padding: 100px 0; border-top: 1px solid var(--line); background: rgba(255,255,255,0.3); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.pricing-header { text-align: center; margin-bottom: 60px; }
+.pricing-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; width: 100%; max-width: 1100px; margin: 0 auto; }
+.price-card { background: #fff; border: 1px solid var(--line); padding: 48px; border-radius: var(--r); text-align: left; width: 100%; max-width: 480px; flex: 1; min-width: 320px; box-shadow: var(--shadow); transition: 0.3s; position: relative; }
+.price-card.featured { border: 3px solid var(--indigo); transform: scale(1.03); }
 
-/* AUTH MODAL */
-#auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-.modal-box { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); width: 100%; max-width: 460px; text-align: center; }
-
-input, select { width: 100%; padding: 16px; border-radius: 16px; border: 1px solid var(--line); margin: 6px 0 14px; font-size: 16px; background: #f8fafc; color: var(--navy); font-weight: 600; outline: none; }
+/* UI ELEMENTS */
+input { width: 100%; padding: 16px; border-radius: 16px; border: 1px solid var(--line); margin: 6px 0 14px; font-size: 16px; background: #f8fafc; color: var(--navy); font-weight: 600; outline: none; }
 button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 16px; }
 .btn-primary { background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; }
 .btn-secondary { background: #f1f5f9; color: var(--navy); }
+
+/* AUTH MODAL */
+#auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+.modal-box { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); width: 100%; max-width: 460px; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
 
 @media (max-width: 1000px) { .col-8, .col-4 { grid-column: span 12; } .hero h1 { font-size: 48px; } .price-card.featured { transform: none; } }
 </style>
@@ -160,7 +133,7 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
     </section>
 
     <section class="card col-4">
-      <h2 style="margin-top: 0; font-size: 28px; letter-spacing: -1px; color: var(--navy);">The Snapshot</h2>
+      <h2 style="margin-top: 0; font-size: 24px; letter-spacing: -1px; color: var(--navy);">The Snapshot</h2>
       <label class="label" style="margin-bottom:0;">Next Cash In (Net)</label>
       <input type="number" id="in-income" value="2500" oninput="runCalc()">
       <label class="label" style="margin-bottom:0;">Friction (Bills + Debt)</label>
@@ -199,30 +172,30 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
         </div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Escape Date</div></div>
     </section>
-
-    <!-- PRICING SECTION - RE-CENTERED -->
-    <section class="pricing-section" id="pricing">
-        <div class="pricing-header">
-            <div class="label" style="color: var(--indigo)">Founding Member Deals</div>
-            <h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2>
-        </div>
-        <div class="pricing-grid">
-            <div class="price-card">
-                <div class="label">Starter Lifetime</div>
-                <div style="font-size: 52px; font-weight: 900; margin: 10px 0;">$29</div>
-                <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ <b>Ghost Cushion</b> safety toggle<br>✓ <b>3-Month</b> history visuals<br>✓ Smart Payday Splitter<br>✓ Cloud Snapshot Storage</p>
-                <button class="btn-secondary" style="width: 100%; margin-top: 30px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
-            </div>
-            <div class="price-card featured">
-                <div class="label" style="color: var(--indigo)">Founding Pro Pass</div>
-                <div style="font-size: 52px; font-weight: 900; margin: 10px 0;">$49</div>
-                <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ <b>Debt Escape Date</b> visuals<br>✓ <b>Payday Map</b> automation<br>✓ 12-Month Wealth Projection<br>✓ Priority Pro Support</p>
-                <button class="btn-primary" style="width: 100%; margin-top: 30px;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro Forever</button>
-            </div>
-        </div>
-    </section>
   </div>
 </div>
+
+<!-- PRICING SECTION MOVED OUTSIDE FOR PERFECT CENTERING -->
+<section class="pricing-section" id="pricing">
+    <div class="pricing-header">
+        <div class="label" style="color: var(--indigo)">Founding Member Deals</div>
+        <h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2>
+    </div>
+    <div class="pricing-grid">
+        <div class="price-card">
+            <div class="label">Starter Lifetime</div>
+            <div style="font-size: 52px; font-weight: 900; margin: 10px 0;">$29</div>
+            <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ <b>Ghost Cushion</b> safety toggle<br>✓ <b>3-Month</b> history visuals<br>✓ Smart Payday Splitter<br>✓ Cloud Snapshot Storage</p>
+            <button class="btn-secondary" style="width: 100%; margin-top: 30px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
+        </div>
+        <div class="price-card featured">
+            <div class="label" style="color: var(--indigo)">Founding Pro Pass</div>
+            <div style="font-size: 52px; font-weight: 900; margin: 10px 0;">$49</div>
+            <p style="color: var(--muted); font-size: 15px; line-height: 1.8;">✓ <b>Debt Escape Date</b> visuals<br>✓ <b>Payday Map</b> automation<br>✓ 12-Month Wealth Projection<br>✓ Priority Pro Support</p>
+            <button class="btn-primary" style="width: 100%; margin-top: 30px;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro Forever</button>
+        </div>
+    </div>
+</section>
 
 <script>
 const SB_URL = 'https://chbfgkguxkdadnevqthk.supabase.co'; 
@@ -250,15 +223,15 @@ function runCalc() {
 
 function openAuth(mode) {
   window.currentMode = mode;
+  document.getElementById('auth-form-inputs').style.display = 'block';
   const title = document.getElementById('modal-title');
   const sub = document.getElementById('modal-subtext');
   const link = document.getElementById('auth-toggle-link');
   const passL = document.getElementById('pass-label');
-  const passI = document.getElementById('auth-password');
   if(mode === 'signin') {
-    title.innerText = "Welcome Back"; sub.innerText = "Access your private financial vault."; link.innerText = "Need an account? Join Free"; passL.innerText = "Enter Password"; passI.placeholder = "Enter your password";
+    title.innerText = "Welcome Back"; sub.innerText = "Access your private vault."; link.innerText = "Need an account? Join Free"; passL.innerText = "Enter Password";
   } else {
-    title.innerText = "Join ClearSpend"; sub.innerText = "Sync your profile to the cloud."; link.innerText = "Already have an account? Sign In"; passL.innerText = "Create Password"; passI.placeholder = "Min. 6 characters";
+    title.innerText = "Join ClearSpend"; sub.innerText = "Sync your profile to the cloud."; link.innerText = "Already have an account? Sign In"; passL.innerText = "Create Password";
   }
   document.getElementById('auth-modal').style.display = 'flex';
 }
