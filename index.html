@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ClearSpend — The Pro Command Center</title>
+<title>ClearSpend — Pro Command Center</title>
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF9LHLEGR5"></script>
@@ -40,11 +40,11 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 /* HERO */
 .app-container { max-width: 1300px; margin: auto; padding: 0 20px 60px; }
 .hero { text-align: center; padding: 60px 0 60px; }
-.hero h1 { font-size: 76px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 15px; color: var(--navy); }
+.hero h1 { font-size: 76px; font-weight: 900; letter-spacing: -1px; line-height: 1.1; margin-bottom: 25px; color: var(--navy); }
 .hero h1 span { background: linear-gradient(to bottom right, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.hero p { font-size: 22px; color: var(--muted); max-width: 850px; margin: auto; font-weight: 600; }
+.hero p { font-size: 20px; color: var(--muted); max-width: 850px; margin: auto; font-weight: 600; }
 
-/* DASHBOARD GRID */
+/* BENTO GRID */
 .dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; margin-bottom: 50px; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; min-height: 240px; }
 .col-8 { grid-column: span 8; } .col-4 { grid-column: span 4; } .col-12 { grid-column: span 12; }
@@ -56,20 +56,22 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .halo-red { border-top-color: var(--red); box-shadow: 0 0 50px rgba(239, 68, 68, 0.15); }
 .big-money { font-size: 90px; font-weight: 950; letter-spacing: -6px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
 
-/* BUBBLES */
+/* PROGRESS */
+.bar-track { height: 12px; background: var(--line); border-radius: 20px; margin-top: 10px; overflow: hidden; }
+.bar-fill { height: 100%; transition: 1s; width: 0%; }
 .bubble-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
-.bubble { padding: 8px 16px; background: var(--line); border-radius: 12px; font-size: 11px; font-weight: 900; color: var(--muted); cursor: pointer; transition: 0.2s; border: 1px solid transparent; }
+.bubble { padding: 8px 16px; background: var(--line); border-radius: 12px; font-size: 11px; font-weight: 900; cursor: pointer; }
 .bubble.paid { background: var(--green); color: white; }
 
-/* LOCKING */
+/* GATING */
 .glass-lock { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(0.5px); display: flex; align-items: center; justify-content: center; z-index: 10; }
 .unlocked .glass-lock { display: none !important; }
-.upgrade-tag { background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 40px; font-weight: 950; font-size: 10px; box-shadow: var(--shadow); cursor: pointer; }
+.upgrade-tag { background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 40px; font-weight: 900; font-size: 10px; box-shadow: var(--shadow); cursor: pointer; }
 
-/* PRICING SHIELD (FORCED CENTER) */
-.pricing-outer-shield { width: 100%; border-top: 1px solid var(--line); background: rgba(255,255,255,0.4); padding: 120px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 100%; max-width: 1200px; margin-top: 50px; }
-.price-card { background: #fff; border: 1px solid var(--line); padding: 40px; border-radius: var(--r); text-align: left; box-shadow: var(--shadow); flex: 1; }
+/* PRICING Shield (Centered) */
+.pricing-section { width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 20px; border-top: 1px solid var(--line); background: rgba(255,255,255,0.4); text-align: center; }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 100%; max-width: 1200px; margin-top: 60px; }
+.price-card { background: #fff; border: 1px solid var(--line); padding: 40px; border-radius: var(--r); text-align: left; box-shadow: var(--shadow); position: relative; }
 .price-card.featured { border: 4px solid var(--indigo); transform: scale(1.05); }
 
 /* UI */
@@ -103,7 +105,7 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; c
   <div class="hero">
     <h1>Know your <span>Safe-to-Spend</span><br>before you swipe.</h1>
     <p>Because your bank balance is lying to you.</p>
-    <p style="font-size:16px; margin-top:10px; color:var(--muted)">Professional financial command center. Stop guessing and start outrunning your debt.</p>
+    <p style="font-size:16px; margin-top:10px; color:var(--muted)">Professional financial command center. Stop guessing and outrun your debt.</p>
   </div>
   
   <div class="dashboard-grid">
@@ -112,27 +114,27 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; c
     <section class="card col-4">
       <h2 style="margin:0; font-size:24px; color:var(--navy);">The Snapshot</h2>
       <label class="input-label" style="margin-top:10px;">Next Cash In</label><input type="text" id="in-income" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
-      <div id="freq-area" style="position:relative;"><label class="input-label">Pay Frequency</label><select id="in-freq" onchange="runCalc()"><option value="7">Weekly</option><option value="14" selected>Bi-Weekly</option><option value="30">Monthly</option></select><div class="glass-lock"><div class="upgrade-tag">Starter Required</div></div></div>
-      <label class="input-label">Fixed Bills</label><input type="text" id="in-bills" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
+      <div id="freq-area" style="position:relative;"><label class="input-label">Pay Frequency</label><select id="in-freq" onchange="updateFreq()"><option value="7">Weekly (7 days)</option><option value="14" selected>Bi-Weekly (14 days)</option><option value="30">Monthly (30 days)</option></select><div class="glass-lock"><div class="upgrade-tag">Starter Required</div></div></div>
+      <label class="input-label">Current Bills</label><input type="text" id="in-bills" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
       <label class="input-label">Countdown (Days)</label><input type="number" id="in-days" value="14" oninput="runCalc()">
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%; padding: 12px; font-size: 14px;">Secure Sync</button>
     </section>
 
-    <!-- PRO FEATURES -->
-    <section class="card col-4 pro-feat" id="annual-box"><span class="label">Pro: Annual Velocity</span><div style="margin-top: 15px;"><label class="input-label">Yearly Gross Salary</label><input type="text" id="in-annual" placeholder="$0.00" oninput="formatCurrency(this); runCalc()"><div style="height:12px;background:#f1f5f9;border-radius:10px;margin:10px 0;overflow:hidden;border:1px solid var(--line);"><div id="ratio-bar" style="height:100%;transition:1s;width:0%;background:var(--green)"></div></div></div><div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Pro Required</div></div></section>
-    <section class="card col-8 pro-feat"><span class="label">Pro: The Debt Stack</span><div style="display:flex;gap:10px;margin:15px 0;"><input type="text" id="debt-name" placeholder="Name" style="margin:0;"><input type="text" id="debt-amt" placeholder="$0.00" oninput="formatCurrency(this)" style="margin:0;"><button class="btn-primary" onclick="addDebt()" style="padding:10px 20px;">Add</button></div><div id="debt-list"></div><div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Pro Required</div></div></section>
+    <!-- PRO/STARTER TEASERS -->
+    <section class="card col-4 pro-feat" id="annual-box"><span class="label">Pro: Annual Velocity</span><div style="margin-top: 15px;"><label class="input-label">Yearly Gross Salary</label><input type="text" id="in-annual" placeholder="$0.00" oninput="formatCurrency(this); runCalc()"><label class="input-label">State Cost Index</label><select id="in-state" onchange="runCalc()"><option value="1.3">California (High Cost)</option><option value="1.0" selected>Standard State</option></select><div id="ratio-label" style="font-weight:900;font-size:14px;margin-top:10px;">Ratio: Healthy</div><div class="bar-track"><div id="ratio-bar" class="bar-fill" style="background:var(--green)"></div></div></div><div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Pro Required</div></div></section>
+    <section class="card col-8 pro-feat" id="debt-box"><span class="label">Pro: The Debt Stack</span><div style="display:flex;gap:10px;margin:15px 0;"><input type="text" id="debt-name" placeholder="Name" style="margin:0;"><input type="text" id="debt-amt" placeholder="$0.00" oninput="formatCurrency(this)" style="margin:0;"><button class="btn-primary" onclick="addDebt()" style="padding:10px 20px;">Add</button></div><div id="debt-list"></div><div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Pro Required</div></div></section>
     <section class="card col-12 pro-feat" id="roadmap-box"><span class="label">Pro: Payday Roadmap</span><div style="display:flex;gap:10px;margin:15px 0;"><input type="text" id="bill-name" placeholder="Bill Name" style="margin:0;"><input type="text" id="bill-amt" placeholder="$0.00" oninput="formatCurrency(this)" style="margin:0;"><input type="date" id="bill-due" style="margin:0; width:220px;"><button class="btn-primary" onclick="addBill()">Add Bill</button></div><div id="roadmap-list"></div><div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Pro Required</div></div></section>
   </div>
 </div>
 
-<div class="pricing-outer-shield" id="pricing">
+<section class="pricing-section" id="pricing">
     <div class="pricing-header"><div class="label" style="color: var(--indigo)">Choose Your Founding Status</div><h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2></div>
     <div class="pricing-grid">
-        <div class="price-card"><h3>Essential Pass</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$0</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ Safe-to-Spend Calc</li><li>✓ Daily Limit Analysis</li><li>✓ Basic Snapshot Tools</li></ul><button class="btn-secondary" style="width: 100%; margin-top: 20px;" onclick="openAuth('signup')">Claim Pass</button></div>
-        <div class="price-card"><h3>Founding Starter</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$29</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ Ghost Cushion toggle</li><li>✓ 3-Month visuals</li><li>✓ Cloud Profile Sync</li></ul><button class="btn-secondary" style="width: 100%; margin-top: 20px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button></div>
-        <div class="price-card featured"><h3>Founding Pro</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$49</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ <b>Bill Slicer Roadmap</b></li><li>✓ Annual Stress Gauge</li><li>✓ Debt Manager Suite</li></ul><button class="btn-primary" style="width: 100%; margin-top: 20px;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro</button></div>
+        <div class="price-card"><h3>Essential Pass</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$0</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ Daily Spend Limit</li><li>✓ Manual Snapshot Tool</li><li>✓ Safe-to-Spend Logic</li></ul><button class="btn-secondary" style="width: 100%; margin-top: 20px;" onclick="openAuth('signup')">Claim Pass</button></div>
+        <div class="price-card"><h3>Founding Starter</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$29</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ <b>Pay Frequency</b> Auto</li><li>✓ Cloud Profile Sync</li><li>✓ Ghost Cushion Toggle</li></ul><button class="btn-secondary" style="width: 100%; margin-top: 20px;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button></div>
+        <div class="price-card featured"><h3>Founding Pro</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$49</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ <b>Payday Bill Slicer</b></li><li>✓ State Cost Multiplier</li><li>✓ Debt Manager & Gauge</li></ul><button class="btn-primary" style="width: 100%; margin-top: 20px;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro</button></div>
     </div>
-</div>
+</section>
 
 <script>
 const SB_URL = 'https://chbfgkguxkdadnevqthk.supabase.co'; 
@@ -142,6 +144,7 @@ let roadmapBills = []; let debtList = []; let committed = 0;
 
 function formatCurrency(i){ let v = i.value.replace(/\D/g, ""); v = (v/100).toLocaleString('en-US', { style: 'currency', currency: 'USD' }); i.value = v === '$0.00' ? '' : v; }
 function parseVal(s) { return parseFloat(s.replace(/[$,]/g, "")) || 0; }
+function updateFreq() { document.getElementById('in-days').value = document.getElementById('in-freq').value; runCalc(); }
 
 function addDebt() {
     const n = document.getElementById('debt-name').value; const a = parseVal(document.getElementById('debt-amt').value);
@@ -157,7 +160,7 @@ function renderDebts() {
 function addBill() {
     const n = document.getElementById('bill-name').value; const a = parseVal(document.getElementById('bill-amt').value); const d = document.getElementById('bill-due').value;
     if(!n || !a || !d) return; roadmapBills.push({name:n, amt:a, due:new Date(d), paid:[]});
-    document.getElementById('bill-name').value=''; document.getElementById('bill-amt').value=''; renderRoadmap();
+    document.getElementById('bill-name').value=''; document.getElementById('bill-amt').value=''; renderRoadmap(); runCalc();
 }
 function removeBill(i) { roadmapBills.splice(i, 1); renderRoadmap(); runCalc(); }
 function toggleB(bi, ci) { 
@@ -167,9 +170,10 @@ function toggleB(bi, ci) {
 }
 function renderRoadmap() {
     const list = document.getElementById('roadmap-list'); list.innerHTML = ''; committed = 0;
+    const freq = +document.getElementById('in-freq').value;
     roadmapBills.forEach((b, i) => {
         const days = Math.ceil((new Date(b.due) - new Date()) / (1000*60*60*24));
-        const checks = Math.max(1, Math.floor(days/14)+1); const slice = b.amt / checks;
+        const checks = Math.max(1, Math.floor(days/freq)+1); const slice = b.amt / checks;
         let bubbles = ''; for(let j=0; j<checks; j++) {
             const isP = b.paid.includes(j); if(isP) committed += slice;
             bubbles += `<div class="bubble ${isP?'paid':''}" onclick="toggleB(${i},${j})">$${slice.toFixed(0)}</div>`;
@@ -181,14 +185,19 @@ function renderRoadmap() {
 function runCalc() {
   const inc = parseVal(document.getElementById('in-income').value); const bill = parseVal(document.getElementById('in-bills').value);
   const yearly = parseVal(document.getElementById('in-annual').value); const days = +document.getElementById('in-days').value || 14;
+  const stateB = +document.getElementById('in-state').value;
   const safe = (inc - bill) - committed; const burn = safe / days;
   document.getElementById('display-safe').innerText = '$' + safe.toLocaleString();
   const statusT = document.getElementById('status-text'); const card = document.getElementById('main-card');
   statusT.innerText = 'Daily Limit: $' + burn.toFixed(2);
   card.classList.remove('halo-green', 'halo-yellow', 'halo-red');
-  if (burn > 100) { statusT.style.color = "var(--green)"; card.classList.add('halo-green'); }
-  else if (burn > 40) { statusT.style.color = "var(--amber)"; card.classList.add('halo-yellow'); }
+  if (burn > (100 * stateB)) { statusT.style.color = "var(--green)"; card.classList.add('halo-green'); }
+  else if (burn > (40 * stateB)) { statusT.style.color = "var(--amber)"; card.classList.add('halo-yellow'); }
   else { statusT.style.color = "var(--red)"; card.classList.add('halo-red'); }
+  const totalDebt = debtList.reduce((acc, curr) => acc + curr.amt, 0);
+  const ratio = (totalDebt / (yearly || 1)) * 100;
+  const bar = document.getElementById('ratio-bar'); const label = document.getElementById('ratio-label');
+  if(bar) { bar.style.width = Math.min(100, ratio*2) + "%"; bar.style.background = ratio < 15 ? 'var(--green)' : ratio < 40 ? 'var(--amber)' : 'var(--red)'; label.innerText = ratio < 15 ? "Ratio: Healthy" : "Ratio: Caution"; }
 }
 
 function openAuth(mode) {
@@ -224,10 +233,10 @@ async function saveToCloud() {
 async function checkUser() {
   const { data: { user } } = await sb.auth.getUser();
   if(user) {
-    document.getElementById('plan-badge').style.display = 'block';
     document.getElementById('nav-auth').innerHTML = `<div id="plan-badge" class="status-badge">...</div><span style="font-size:14px;font-weight:800;">${user.email}</span><button style="background:none;font-size:12px;margin-left:10px;" onclick="sb.auth.signOut().then(()=>location.reload())">Sign Out</button>`;
     const { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
     if(profile) {
+      document.getElementById('plan-badge').style.display = 'block';
       document.getElementById('plan-badge').innerText = profile.plan;
       if(profile.plan === 'PRO') document.querySelectorAll('.pro-feat, #annual-box').forEach(el => el.classList.add('unlocked'));
       if(profile.plan === 'STARTER' || profile.plan === 'PRO') document.getElementById('freq-area').classList.add('unlocked');
