@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ClearSpend — Know Before You Swipe</title>
-
+<title>ClearSpend — Pro Command Center</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF9LHLEGR5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -12,9 +11,7 @@
   gtag('js', new Date());
   gtag('config', 'G-JF9LHLEGR5');
 </script>
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
 :root {
   --indigo: #4f46e5; --violet: #7c3aed; --cyan: #0891b2;
@@ -23,12 +20,11 @@
   --green: #10b981; --amber: #f59e0b; --red: #ef4444;
   --shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.08); --r: 28px;
 }
-
-* { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+* { box-sizing: border-box; font-family: 'Inter', sans-serif; }
 html, body { min-height: 100vh; margin: 0; padding: 0; width: 100%; }
 body { background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%); background-attachment: fixed; color: var(--text); line-height: 1.5; overflow-x: hidden; }
 
-/* NAVIGATION & LOGO */
+/* NAVIGATION */
 nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 50px; max-width: 1400px; margin: auto; }
 .logo-container { display: flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none; }
 .logo-vault { width: 65px; height: 65px; }
@@ -36,61 +32,55 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .logo-text span { color: var(--indigo); }
 .status-badge { background: var(--line); padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 900; text-transform: uppercase; color: var(--muted); }
 
-/* HERO SECTION */
+/* HERO */
 .app-container { max-width: 1300px; margin: auto; padding: 0 20px 60px; }
-.hero { text-align: center; padding: 60px 0 60px; }
+.hero { text-align: center; padding: 60px 0 40px; }
 .hero h1 { font-size: 82px; font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 20px; color: var(--navy); }
 .hero h1 span { background: linear-gradient(to bottom right, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .hero p.hook { font-size: 26px; font-weight: 800; color: var(--indigo); margin-bottom: 10px; }
-.hero p.desc { font-size: 19px; color: var(--muted); max-width: 800px; margin: auto; font-weight: 500; }
 
-/* BENTO GRID */
+/* GRID */
 .dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; margin-bottom: 50px; }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; min-height: 240px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; min-height: 240px; transition: 0.3s; }
 .col-8 { grid-column: span 8; } .col-4 { grid-column: span 4; } .col-12 { grid-column: span 12; }
 
-/* MAIN BALANCE (MASSIVE) */
+/* MAIN BALANCE */
 .burn-card { border-top: 14px solid var(--line); transition: 0.3s; justify-content: center; }
 .big-money { font-size: 110px; font-weight: 950; letter-spacing: -7px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
 .status-text { font-size: 28px; font-weight: 900; margin-top: 15px; }
 
-/* DATA UI */
+/* PROGRESS */
+.bar-track { height: 14px; background: #f1f5f9; border-radius: 20px; margin: 10px 0; overflow: hidden; border: 1px solid var(--line); }
+.bar-fill { height: 100%; transition: 1s; width: 0%; }
+.bubble-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.bubble { padding: 10px 16px; background: var(--line); border-radius: 12px; font-size: 11px; font-weight: 900; color: var(--muted); cursor: pointer; text-align: center; }
+.bubble.paid { background: var(--green) !important; color: white !important; }
+.bubble-date { display: block; font-size: 8px; opacity: 0.8; margin-top: 2px; }
+
+/* UI */
 .data-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 14px; align-items: center; }
 .remove-btn { color: var(--red); font-size: 24px; font-weight: 900; cursor: pointer; margin-left: 10px; }
+.input-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 5px; display: block; }
+input, select { width: 100%; padding: 16px; border-radius: 12px; border: 1px solid var(--line); margin-bottom: 15px; font-size: 15px; background: #f8fafc; color: var(--navy); font-weight: 600; outline: none; }
+button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 14px; }
+.btn-primary { background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; }
+.btn-secondary { background: #f1f5f9; color: var(--navy); }
 
 /* GATING */
 .glass-lock { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(0.5px); display: flex; align-items: center; justify-content: center; z-index: 10; }
 .unlocked .glass-lock { display: none !important; }
 .upgrade-tag { background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 40px; font-weight: 900; font-size: 10px; box-shadow: var(--shadow); cursor: pointer; }
 
-/* GAUGE */
-.bar-track { height: 14px; background: #f1f5f9; border-radius: 20px; margin: 10px 0; overflow: hidden; border: 1px solid var(--line); }
-.bar-fill { height: 100%; transition: 1s; width: 0%; }
-
-/* BUBBLES */
-.bubble-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
-.bubble { padding: 10px 16px; background: var(--line); border-radius: 12px; font-size: 11px; font-weight: 900; color: var(--muted); cursor: pointer; text-align: center; }
-.bubble.paid { background: var(--green) !important; color: white !important; }
-.bubble-date { display: block; font-size: 8px; opacity: 0.8; margin-top: 2px; }
-
-/* PRICING */
+/* PRICING (Independent Center) */
 .pricing-section { width: 100%; padding: 120px 0; border-top: 1px solid var(--line); background: rgba(255,255,255,0.4); text-align: center; display: flex; flex-direction: column; align-items: center; }
 .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 100%; max-width: 1200px; padding: 0 40px; margin-top: 60px; }
-.price-card { background: #fff; border: 1px solid var(--line); padding: 48px; border-radius: var(--r); text-align: left; box-shadow: var(--shadow); flex: 1; }
+.price-card { background: #fff; border: 1px solid var(--line); padding: 48px; border-radius: var(--r); text-align: left; box-shadow: var(--shadow); position: relative; }
 .price-card.featured { border: 4px solid var(--indigo); transform: scale(1.05); }
 
-/* UI ELEMENTS */
-.input-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 5px; display: block; }
-input, select { width: 100%; padding: 16px; border-radius: 12px; border: 1px solid var(--line); margin-bottom: 15px; font-size: 16px; background: #f8fafc; color: var(--navy); font-weight: 600; outline: none; }
-button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 14px; }
-.btn-primary { background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; }
-.btn-secondary { background: #f1f5f9; color: var(--navy); }
-
-/* MODAL */
 #auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
 .modal-box { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); width: 100%; max-width: 480px; text-align: center; }
 
-@media (max-width: 1000px) { .dashboard-grid, .pricing-grid { grid-template-columns: 1fr !important; } .hero h1 { font-size: 52px; } .price-card.featured { transform: none; } }
+@media (max-width: 1000px) { .dashboard-grid, .pricing-grid { grid-template-columns: 1fr !important; } .hero h1 { font-size: 48px; } }
 </style>
 </head>
 <body>
@@ -109,27 +99,33 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
   <div class="hero">
     <h1>Know your <span>Safe-to-Spend</span><br>before you swipe.</h1>
     <p class="hook">Because your bank balance is lying to you.</p>
-    <p class="desc">Professional financial command center. Stop guessing and start outrunning your debt.</p>
+    <p style="font-size:19px; color:var(--muted); font-weight:500;">Stop guessing and start outrunning your debt.</p>
   </div>
   
   <div class="dashboard-grid">
-    <section class="card col-8 burn-card" id="main-card">
-        <span class="label">Live Disposable Balance</span>
-        <div class="big-money" id="display-safe">$0</div>
-        <div id="status-text" class="status-text">Daily Limit: $0.00</div>
-    </section>
+    <section class="card col-8 burn-card" id="main-card"><span class="label">Live Disposable Balance</span><div class="big-money" id="display-safe">$0</div><div id="status-text" class="status-text">Daily Limit: $0.00</div></section>
     
     <section class="card col-4">
       <h2 style="margin:0; font-size:24px; color:var(--navy);">The Snapshot</h2>
       <label class="input-label" style="margin-top:10px;">Next Cash In</label><input type="text" id="in-income" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
-      <div id="freq-area" style="position:relative;"><label class="input-label">Pay Frequency</label><select id="in-freq" onchange="updateFreq()"><option value="7">Weekly</option><option value="14" selected>Bi-Weekly</option><option value="15">Semi-Monthly</option><option value="30">Monthly</option></select><div class="glass-lock" id="freq-lock"><div class="upgrade-tag">Starter Required</div></div></div>
-      <label class="input-label">Current Bills</label><input type="text" id="in-bills" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
+      <label class="input-label">Next Payday</label><input type="date" id="in-payday" onchange="runCalc()">
+      <div id="freq-area" style="position:relative;"><label class="input-label">Pay Frequency</label><select id="in-freq" onchange="updateFreq()"><option value="7">Weekly</option><option value="14" selected>Bi-Weekly</option><option value="15">Semi-Monthly</option><option value="30">Monthly</option></select><div class="glass-lock" id="lock-freq"><div class="upgrade-tag">Starter Required</div></div></div>
+      <label class="input-label">Fixed Bills</label><input type="text" id="in-bills" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
       <label class="input-label">Countdown (Days)</label><input type="number" id="in-days" value="14" oninput="runCalc()">
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%; padding: 12px; font-size: 14px;">Secure Sync</button>
     </section>
 
-    <!-- PRO FEATURES -->
-    <section class="card col-4 pro-feat" id="annual-box"><span class="label">Pro: Annual Velocity</span><div style="margin-top: 15px;"><label class="input-label">Yearly Gross Salary</label><input type="text" id="in-annual" placeholder="$0.00" oninput="formatCurrency(this); runCalc()"><label class="input-label">State Index</label><select id="in-state" onchange="runCalc()"><option value="1.3">California</option><option value="1.3">New York</option><option value="1.15">Texas</option><option value="1.0" selected>Standard State</option></select><div id="ratio-label" style="font-weight: 900; font-size: 14px; margin-top:10px;">Status: Healthy</div><div class="bar-track"><div id="ratio-bar" class="bar-fill" style="background:var(--green)"></div></div></div><div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Pro Pass Required</div></div></section>
+    <section class="card col-4 pro-feat" id="annual-box"><span class="label">Pro: Annual Velocity</span><div style="margin-top: 15px;"><label class="input-label">Yearly Gross Salary</label><input type="text" id="in-annual" placeholder="$0.00" oninput="formatCurrency(this); runCalc()"><label class="input-label">State Index</label>
+      <select id="in-state" onchange="runCalc()">
+        <option value="1.0" selected>Standard USA</option>
+        <option value="1.3">California</option>
+        <option value="1.3">New York</option>
+        <option value="1.15">Texas</option>
+        <option value="1.15">Florida</option>
+        <option value="1.2">Washington</option>
+        <option value="0.95">Ohio</option>
+      </select>
+      <div id="ratio-label" style="font-weight: 900; font-size: 14px; margin-top:10px;">Status: Healthy</div><div class="bar-track"><div id="ratio-bar" class="bar-fill" style="background:var(--green)"></div></div></div><div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Pro Pass Required</div></div></section>
     
     <section class="card col-8 pro-feat" id="debt-box"><span class="label">Pro: The Debt Stack</span><div style="display: flex; gap: 10px; margin: 15px 0;"><input type="text" id="debt-name" placeholder="Debt Name" style="margin:0;"><input type="text" id="debt-amt" placeholder="$0.00" oninput="formatCurrency(this)" style="margin:0;"><button class="btn-primary" onclick="addDebt()" style="padding:10px 20px;">Add</button></div><div id="debt-list" style="max-height:140px; overflow-y:auto;"></div><div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Debt Stack</div></div></section>
 
@@ -140,9 +136,9 @@ button { border: 0; border-radius: 16px; padding: 18px 32px; font-weight: 900; c
 <section class="pricing-section" id="pricing">
     <div class="pricing-header"><div class="label" style="color: var(--indigo)">Choose Your Founding Status</div><h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2></div>
     <div class="pricing-grid">
-        <div class="price-card"><h3>Essential Pass</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px; color:var(--muted)">$0</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ Safe-to-Spend Calc</li><li>✓ Daily Limit Analysis</li><li>✓ Basic Snapshot Tools</li></ul><button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="openAuth('signup')">Claim Pass</button></div>
-        <div class="price-card"><h3>Founding Starter</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$29</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ <b>Cloud Profile Sync</b></li><li>✓ 10% Ghost Cushion</li><li>✓ Frequency Automation</li></ul><button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button></div>
-        <div class="price-card featured"><h3>Founding Pro</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$49</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ <b>Bill Slicer Roadmap</b></li><li>✓ State Cost Indexing</li><li>✓ Debt Manager Suite</li></ul><button class="btn-primary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro</button></div>
+        <div class="price-card"><h3>Essential Pass</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px; color:var(--muted)">$0</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ Safe-to-Spend Calc</li><li>✓ Daily Limit Analysis</li><li>✓ Manual Snapshot Tool</li></ul><button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="openAuth('signup')">Claim Pass</button></div>
+        <div class="price-card"><h3>Founding Starter</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$29</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ Cloud Profile Sync</li><li>✓ Frequency Automation</li><li>✓ Ghost Cushion Toggle</li></ul><button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button></div>
+        <div class="price-card featured"><h3>Founding Pro</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$49</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ <b>Interactive Bill Slicer</b></li><li>✓ State Cost Indexing</li><li>✓ Debt Manager Suite</li></ul><button class="btn-primary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro</button></div>
     </div>
 </section>
 
@@ -164,7 +160,7 @@ function addDebt() {
 function removeDebt(i) { debtList.splice(i, 1); renderDebts(); runCalc(); }
 function renderDebts() {
     const list = document.getElementById('debt-list'); list.innerHTML = '';
-    debtList.forEach((d, i) => { list.innerHTML += `<div class="data-row"><span>${d.name}: $${d.amt.toLocaleString()}</span><span class="remove-btn" onclick="removeDebt(${i})">×</span></div>`; });
+    debtList.forEach((d, idx) => { list.innerHTML += `<div class="data-row"><span>${d.name}: $${d.amt.toLocaleString()}</span><span class="remove-btn" onclick="removeDebt(${idx})">×</span></div>`; });
 }
 
 function addBill() {
@@ -174,8 +170,8 @@ function addBill() {
 }
 function removeBill(i) { roadmapBills.splice(i, 1); renderRoadmap(); runCalc(); }
 function toggleB(bi, ci) { 
-    const dStr = new Date().toLocaleDateString('en-US', {month:'short',day:'numeric'});
-    if(!roadmapBills[bi].paid.some(p => p.idx === ci)) roadmapBills[bi].paid.push({idx:ci, date:dStr});
+    const dateStr = new Date().toLocaleDateString('en-US', {month:'short',day:'numeric'});
+    if(!roadmapBills[bi].paid.some(p => p.idx === ci)) roadmapBills[bi].paid.push({idx:ci, date:dateStr});
     else roadmapBills[bi].paid = roadmapBills[bi].paid.filter(p => p.idx !== ci);
     renderRoadmap(); runCalc(); 
 }
@@ -253,8 +249,8 @@ async function checkUser() {
       document.getElementById('plan-badge').style.display = 'block'; document.getElementById('plan-badge').innerText = profile.plan;
       if(profile.plan === 'PRO') document.querySelectorAll('.pro-feat, #annual-box').forEach(el => el.classList.add('unlocked'));
       if(profile.plan === 'STARTER' || profile.plan === 'PRO') {
-          const fl = document.getElementById('freq-lock');
-          if(fl) fl.style.display = 'none';
+          const freqLock = document.getElementById('lock-freq');
+          if(freqLock) freqLock.parentElement.style.display = 'none';
       }
       if(profile.data_vault) { roadmapBills = profile.data_vault.bills || []; debtList = profile.data_vault.debts || []; renderDebts(); renderRoadmap(); }
       runCalc();
