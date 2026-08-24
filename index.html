@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ClearSpend — The Financial Command Center</title>
+<title>ClearSpend — The Pro Command Center</title>
 
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JF9LHLEGR5"></script>
@@ -29,7 +29,7 @@
 html, body { min-height: 100vh; margin: 0; padding: 0; width: 100%; }
 body { background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%); background-attachment: fixed; color: var(--text); line-height: 1.5; overflow-x: hidden; }
 
-/* NAVIGATION & LOGO */
+/* NAVIGATION */
 nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 50px; max-width: 1400px; margin: auto; }
 .logo-container { display: flex; align-items: center; gap: 8px; cursor: pointer; text-decoration: none; }
 .logo-vault { width: 65px; height: 65px; }
@@ -37,67 +37,71 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .logo-text span { color: var(--indigo); }
 
 .app-container { max-width: 1300px; margin: auto; padding: 0 20px 60px; }
-.hero { text-align: center; padding: 60px 0 40px; }
-.hero h1 { font-size: 76px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 15px; color: var(--navy); }
+.hero { text-align: center; padding: 40px 0 60px; }
+.hero h1 { font-size: 76px; font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 25px; color: var(--navy); }
 .hero h1 span { background: linear-gradient(to bottom right, var(--indigo), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.hero p { font-size: 20px; font-weight: 600; color: var(--muted); max-width: 800px; margin: auto; }
 
-/* DASHBOARD GRID */
+/* GRID */
 .dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; margin-bottom: 50px; }
-.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; min-height: 240px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; min-height: 240px; transition: 0.3s; }
 .col-8 { grid-column: span 8; } .col-4 { grid-column: span 4; } .col-12 { grid-column: span 12; }
 
-/* STATUS EFFECTS */
+/* STATUS Halo */
 .burn-card { border-top: 12px solid var(--line); transition: 0.3s; justify-content: center; }
 .halo-green { border-top-color: var(--green); box-shadow: 0 0 50px rgba(16, 185, 129, 0.15); }
 .halo-yellow { border-top-color: var(--amber); box-shadow: 0 0 50px rgba(245, 158, 11, 0.15); }
 .halo-red { border-top-color: var(--red); box-shadow: 0 0 50px rgba(239, 68, 68, 0.15); }
 .big-money { font-size: 90px; font-weight: 950; letter-spacing: -6px; margin: 10px 0; line-height: 0.8; color: var(--navy); }
 
-/* SLICER BUBBLES */
+/* BUBBLES */
 .bubble-row { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-.bubble { padding: 4px 12px; background: var(--line); border-radius: 20px; font-size: 11px; font-weight: 800; color: var(--muted); border: 1px solid rgba(0,0,0,0.05); }
-.bubble.active { background: var(--indigo); color: white; }
+.bubble { padding: 6px 14px; background: var(--line); border-radius: 20px; font-size: 11px; font-weight: 900; color: var(--muted); cursor: pointer; transition: 0.2s; border: 1px solid transparent; }
+.bubble:hover { border-color: var(--indigo); }
+.bubble.paid { background: var(--green); color: white; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.2); }
+
+/* DATA ROWS */
+.data-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); font-weight: 700; font-size: 14px; }
+.remove-btn { color: var(--red); font-size: 18px; font-weight: 900; cursor: pointer; margin-left: 10px; }
 
 /* GATING */
 .glass-lock { position: absolute; inset: 0; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(0.5px); display: flex; align-items: center; justify-content: center; z-index: 10; }
 .unlocked .glass-lock { display: none !important; }
-.upgrade-tag { background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 40px; font-weight: 900; font-size: 10px; box-shadow: var(--shadow); cursor: pointer; }
+.upgrade-tag { background: var(--navy); color: #fff; padding: 8px 16px; border-radius: 40px; font-weight: 950; font-size: 10px; box-shadow: var(--shadow); cursor: pointer; }
 
-/* UI ELEMENTS */
+/* PRICING Shield (Centered) */
+.pricing-section { width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 20px; border-top: 1px solid var(--line); background: rgba(255,255,255,0.4); text-align: center; }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 100%; max-width: 1200px; padding: 0 40px; margin-top: 60px; }
+.price-card { background: #fff; border: 1px solid var(--line); padding: 40px; border-radius: var(--r); text-align: left; box-shadow: var(--shadow); position: relative; }
+.price-card.featured { border: 4px solid var(--indigo); transform: scale(1.05); }
+
+/* UI */
 .input-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 5px; display: block; }
 input, select { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--line); margin-bottom: 15px; font-size: 15px; background: #f8fafc; color: var(--navy); font-weight: 600; outline: none; }
 button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 14px; }
 .btn-primary { background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; }
 .btn-secondary { background: #f1f5f9; color: var(--navy); }
-.remove-btn { color: var(--red); font-size: 18px; font-weight: 900; cursor: pointer; margin-left: 10px; }
 
-/* PRICING SECTION - FORCED 3-COLUMN SYMMETRY */
-.pricing-section { width: 100%; padding: 120px 0; border-top: 1px solid var(--line); background: rgba(255,255,255,0.4); display: flex; flex-direction: column; align-items: center; }
-.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 100%; max-width: 1200px; padding: 0 40px; }
-.price-card { background: #fff; border: 1px solid var(--line); padding: 40px; border-radius: var(--r); text-align: left; box-shadow: var(--shadow); position: relative; display: flex; flex-direction: column; }
-.price-card.featured { border: 4px solid var(--indigo); transform: scale(1.05); }
-
-/* AUTH MODAL */
+/* MODAL */
 #auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-.modal-box { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); width: 100%; max-width: 460px; text-align: center; }
+.modal-box { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); width: 100%; max-width: 480px; text-align: center; }
 
 @media (max-width: 1000px) { .dashboard-grid, .pricing-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 48px; } .price-card.featured { transform: none; } }
 </style>
 </head>
 <body>
 
-<div id="auth-modal" class="modal-overlay">
+<div id="auth-modal">
   <div class="modal-box">
     <h2 id="modal-title" style="font-size: 42px; font-weight: 950; letter-spacing: -2px;">Join ClearSpend</h2>
     <p id="modal-subtext" style="color: var(--muted); margin-bottom: 30px;">Sync your financial profile to the cloud.</p>
     <div id="auth-form-inputs">
         <input type="email" id="auth-email" placeholder="name@email.com">
-        <input type="password" id="auth-password" placeholder="Password (Min. 6 chars)">
+        <div style="text-align: left;"><label class="input-label" id="pass-label">Create Password</label></div>
+        <input type="password" id="auth-password" placeholder="Min. 6 characters">
         <button class="btn-primary" style="width: 100%;" onclick="handleAuth()">Continue to Vault</button>
         <div id="auth-toggle-link" style="margin-top: 25px; font-weight: 800; color: var(--indigo); cursor: pointer;" onclick="toggleAuthMode()">Already have an account? Sign In</div>
     </div>
-    <button class="btn-secondary" style="margin-top: 15px; width: 100%;" onclick="closeAuth()">Cancel</button>
+    <button class="btn-secondary" style="margin-top: 15px; width: 100%; font-size: 13px;" onclick="closeAuth()">Cancel</button>
   </div>
 </div>
 
@@ -113,73 +117,64 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; c
 </nav>
 
 <div class="app-container">
-  <div class="hero"><h1>Know your <span>Safe-to-Spend</span><br>before you swipe.</h1><p>The financial bridge between today's balance and your next payday.</p></div>
+  <div class="hero"><h1>Know your <span>Safe-to-Spend</span><br>before you swipe.</h1><p>The financial command center that aligns your bills with your payday.</p></div>
   
   <div class="dashboard-grid">
-    <!-- ROW 1 -->
+    <!-- RESULTS -->
     <section class="card col-8 burn-card" id="main-card">
       <span class="label">Live Disposable Balance</span>
       <div class="big-money" id="display-safe">$0</div>
-      <div id="status-text" class="status-text">Daily Limit: $0.00</div>
+      <div class="status-text" id="status-text">Daily Limit: $0.00</div>
     </section>
 
+    <!-- SNAPSHOT -->
     <section class="card col-4">
       <h2 style="margin:0; font-size:24px; color:var(--navy);">The Snapshot</h2>
-      <label class="input-label" style="margin-top:10px;">Next Cash In (Net)</label>
+      <label class="input-label" style="margin-top:10px;">Net Paycheck In</label>
       <input type="text" id="in-income" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
       
-      <label class="input-label">Next Payday Date</label>
-      <input type="date" id="in-pay-date" onchange="runCalc()">
-
       <label class="input-label">Pay Frequency</label>
-      <div id="freq-area" style="position:relative;">
-        <select id="in-freq" onchange="runCalc()">
-            <option value="7">Weekly (Every 7 days)</option>
-            <option value="14" selected>Bi-Weekly (Every 14 days)</option>
-            <option value="15">Semi-Monthly (1st & 15th)</option>
-            <option value="30">Monthly (Every 30 days)</option>
-        </select>
-        <div class="glass-lock"><div class="upgrade-tag">Starter</div></div>
-      </div>
+      <select id="in-freq" onchange="updateFreq()">
+        <option value="7">Weekly (7 days)</option>
+        <option value="14" selected>Bi-Weekly (14 days)</option>
+        <option value="15">Semi-Monthly (Twice Monthly)</option>
+        <option value="30">Monthly (30 days)</option>
+      </select>
 
-      <label class="input-label">Total Current Bills</label>
+      <label class="input-label">Monthly Fixed Bills</label>
       <input type="text" id="in-bills" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
+      <label class="input-label">Days Left in Countdown</label>
+      <input type="number" id="in-days" value="14" oninput="runCalc()">
       <button class="btn-primary" onclick="saveToCloud()" style="width: 100%; padding: 12px; font-size: 14px;">Secure Sync</button>
     </section>
 
-    <!-- ROW 2 -->
-    <section class="card col-4" id="annual-velocity-box">
-        <span class="label">Pro: Annual Velocity</span>
+    <!-- ANNUAL VELOCITY -->
+    <section class="card col-4 pro-feat" id="velocity-box">
+        <span class="label">Pro: The Annual Velocity</span>
         <div style="margin-top: 15px;">
-            <label class="input-label">Select Your State</label>
-            <select id="in-state" onchange="runCalc()">
-                <option value="1.3">California (High Cost)</option>
-                <option value="1.3">New York (High Cost)</option>
-                <option value="1.15">Texas (Mid Cost)</option>
-                <option value="1.0" selected>Other State (Standard)</option>
-            </select>
             <label class="input-label">Yearly Gross Salary</label>
             <input type="text" id="in-annual" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
-            <div id="ratio-label" style="font-weight: 900; font-size: 16px;">Ratio: ---</div>
-            <div style="height:10px; background:var(--line); border-radius:10px; margin:8px 0; overflow:hidden;"><div id="ratio-bar" style="height:100%; width:0%; transition:1s;"></div></div>
+            <div id="ratio-label" style="font-weight: 900; font-size: 16px; margin-top:10px;">Ratio: Healthy</div>
+            <div style="height:10px; background:var(--line); border-radius:10px; margin:8px 0; overflow:hidden;"><div id="ratio-bar" style="height:100%; width:0%; transition:1s; background:var(--green)"></div></div>
         </div>
-        <div class="glass-lock"><div class="upgrade-tag">Pro Pass Required</div></div>
+        <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Pro Pass Required</div></div>
     </section>
 
+    <!-- DEBT STACK -->
     <section class="card col-8 pro-feat">
         <span class="label">Pro: The Debt Stack</span>
         <div style="display: flex; gap: 10px; margin: 15px 0;">
-            <input type="text" id="debt-name" placeholder="Debt Name" style="margin:0;">
+            <input type="text" id="debt-name" placeholder="Name" style="margin:0;">
             <input type="text" id="debt-amt" placeholder="$0.00" oninput="formatCurrency(this)" style="margin:0;">
             <button class="btn-primary" onclick="addDebt()" style="padding:10px 20px;">Add</button>
         </div>
-        <div id="debt-list" style="max-height: 150px; overflow-y: auto;"></div>
+        <div id="debt-list" style="max-height:140px; overflow-y:auto;"></div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Debt Stack</div></div>
     </section>
 
     <!-- PAYDAY ROADMAP (SLICER) -->
     <section class="card col-12 pro-feat" id="roadmap-box">
-        <span class="label">Starter: The Payday Roadmap (Bill Slicer)</span>
+        <span class="label">Pro: The Payday Roadmap (Bill Slicer)</span>
         <div style="display: flex; gap: 10px; margin: 15px 0;">
             <input type="text" id="bill-name" placeholder="Bill Name (e.g. Phone)" style="margin:0;">
             <input type="text" id="bill-amt" placeholder="$0.00" oninput="formatCurrency(this)" style="margin:0;">
@@ -194,25 +189,13 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; c
 
 <section class="pricing-section" id="pricing">
     <div class="pricing-header">
-        <div class="label" style="color: var(--indigo)">Choose Your Founding Status</div>
+        <div class="input-label" style="color: var(--indigo)">Choose Your Founding Status</div>
         <h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2>
     </div>
     <div class="pricing-grid">
-        <div class="price-card">
-            <h3>Essential Pass</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px; color:var(--muted)">$0</div>
-            <ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2;"><li>✓ Daily Spend Limit</li><li>✓ Basic Snapshot</li><li>✓ Mobile UI</li></ul>
-            <button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="openAuth('signup')">Claim Pass</button>
-        </div>
-        <div class="price-card">
-            <h3>Founding Starter</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$29</div>
-            <ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2;"><li>✓ <b>Bill Slicer</b> Visuals</li><li>✓ Frequency Automation</li><li>✓ Ghost Cushion toggle</li></ul>
-            <button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button>
-        </div>
-        <div class="price-card featured">
-            <h3>Founding Pro</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$49</div>
-            <ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2;"><li>✓ <b>Auto-Buffer</b> Deductions</li><li>✓ State Stress Index</li><li>✓ Debt Negotiation Suite</li></ul>
-            <button class="btn-primary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro</button>
-        </div>
+        <div class="price-card"><h3>Essential Pass</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px; color:var(--muted)">$0</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2;"><li>✓ Daily Spend Limit</li><li>✓ Basic Snapshot</li><li>✓ Mobile UI</li></ul><button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="openAuth('signup')">Claim Pass</button></div>
+        <div class="price-card"><h3>Founding Starter</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$29</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2;"><li>✓ Saved Cloud Profile</li><li>✓ Ghost Cushion toggle</li><li>✓ 3-Month Momentum</li></ul><button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button></div>
+        <div class="price-card featured"><h3>Founding Pro</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$49</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2;"><li>✓ <b>Payday Roadmap</b> Slicer</li><li>✓ Annual Velocity Index</li><li>✓ Debt Suite & Priority Support</li></ul><button class="btn-primary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro</button></div>
     </div>
 </section>
 
@@ -220,7 +203,7 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; c
 const SB_URL = 'https://chbfgkguxkdadnevqthk.supabase.co'; 
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNoYmZna2d1eGtkYWRuZXZxdGhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczMTcxOTUsImV4cCI6MjEwMjg5MzE5NX0.hemyiyKpJXt7CvxReNOzX4AVajM7V_LHl0SOJNAutcw'; 
 const sb = supabase.createClient(SB_URL, SB_KEY);
-let roadmapBills = []; let debtList = [];
+let roadmapBills = []; let debtList = []; let committedSlices = 0;
 
 function formatCurrency(i) {
     let v = i.value.replace(/\D/g, "");
@@ -229,39 +212,44 @@ function formatCurrency(i) {
 }
 function parseVal(s) { return parseFloat(s.replace(/[$,]/g, "")) || 0; }
 
+function updateFreq() { document.getElementById('in-days').value = document.getElementById('in-freq').value; runCalc(); }
+
 function addBill() {
-    const n = document.getElementById('bill-name').value;
-    const a = parseVal(document.getElementById('bill-amt').value);
-    const d = document.getElementById('bill-due').value;
-    if(!n || !a || !d) return;
-    roadmapBills.push({name: n, amt: a, due: new Date(d)});
-    document.getElementById('bill-name').value=''; document.getElementById('bill-amt').value='';
-    renderRoadmap(); runCalc();
+    const n = document.getElementById('bill-name').value; const a = parseVal(document.getElementById('bill-amt').value); const d = document.getElementById('bill-due').value;
+    if(!n || !a || !d) return; roadmapBills.push({name:n, amt:a, due:new Date(d), paid: false});
+    document.getElementById('bill-name').value=''; document.getElementById('bill-amt').value=''; renderRoadmap(); runCalc();
 }
 function removeBill(i) { roadmapBills.splice(i, 1); renderRoadmap(); runCalc(); }
 
+function toggleBubble(billIdx) {
+    roadmapBills[billIdx].paid = !roadmapBills[billIdx].paid;
+    renderRoadmap(); runCalc();
+}
+
 function renderRoadmap() {
     const list = document.getElementById('roadmap-list'); list.innerHTML = '';
-    const nextPay = new Date(document.getElementById('in-pay-date').value);
     const freq = +document.getElementById('in-freq').value;
+    committedSlices = 0;
 
     roadmapBills.forEach((b, i) => {
         const daysToBill = Math.ceil((b.due - new Date()) / (1000*60*60*24));
-        const paychecksInBetween = Math.max(1, Math.floor(daysToBill / freq) + 1);
-        const slice = b.amt / paychecksInBetween;
+        const checks = Math.max(1, Math.floor(daysToBill / freq) + 1);
+        const slice = b.amt / checks;
+        if(b.paid) committedSlices += slice;
         
         let bubbles = '';
-        for(let j=0; j<paychecksInBetween; j++) {
-            bubbles += `<div class="bubble ${j===0 ? 'active' : ''}">$${slice.toFixed(0)}</div>`;
+        for(let j=0; j<checks; j++) {
+            const isActive = (j===0 && b.paid);
+            bubbles += `<div class="bubble ${isActive?'paid':''}" onclick="toggleBubble(${i})">$${slice.toFixed(0)}</div>`;
         }
 
-        list.innerHTML += `<div class="data-row" style="padding:15px; background:#f8fafc; border-radius:15px; margin-bottom:10px; flex-direction:column; align-items:flex-start;">
+        list.innerHTML += `<div class="data-row" style="flex-direction:column; align-items:flex-start; background:#f8fafc; border-radius:15px; padding:15px; margin-bottom:10px;">
             <div style="display:flex; justify-content:space-between; width:100%;">
                 <b>${b.name} — Due in ${daysToBill} days</b>
                 <span>Total: $${b.amt.toLocaleString()} <span class="remove-btn" onclick="removeBill(${i})">×</span></span>
             </div>
             <div class="bubble-row">${bubbles}</div>
-            <p style="font-size:11px; margin-top:8px; color:var(--muted)">Target for this check: <b style="color:var(--indigo)">$${slice.toFixed(2)}</b></p>
+            <p style="font-size:11px; margin-top:8px;">Target per check: <b style="color:var(--indigo)">$${slice.toFixed(2)}</b> ${b.paid?'(Committed ✓)':''}</p>
         </div>`;
     });
 }
@@ -269,45 +257,37 @@ function renderRoadmap() {
 function addDebt() {
     const n = document.getElementById('debt-name').value; const a = parseVal(document.getElementById('debt-amt').value);
     if(!n || !a) return; debtList.push({name:n, amt:a});
-    document.getElementById('debt-name').value=''; document.getElementById('debt-amt').value='';
-    renderDebts(); runCalc();
+    document.getElementById('debt-name').value=''; document.getElementById('debt-amt').value=''; renderDebts(); runCalc();
 }
 function removeDebt(i) { debtList.splice(i, 1); renderDebts(); runCalc(); }
 function renderDebts() {
     const list = document.getElementById('debt-list'); list.innerHTML = '';
-    debtList.forEach((d, i) => { list.innerHTML += `<div class="data-row"><span>${d.name}</span><span>$${d.amt.toLocaleString()}<span class="remove-btn" onclick="removeDebt(${i})">×</span></span></div>`; });
+    debtList.forEach((d, i) => { list.innerHTML += `<div class="data-row"><span>${d.name}</span><span>$${d.amt.toLocaleString()} <span class="remove-btn" onclick="removeDebt(${i})">×</span></span></div>`; });
 }
 
 function runCalc() {
   const inc = parseVal(document.getElementById('in-income').value);
   const bill = parseVal(document.getElementById('in-bills').value);
-  const yearly = parseVal(document.getElementById('in-annual').value);
-  const stateBuffer = +document.getElementById('in-state').value;
-  const payDate = new Date(document.getElementById('in-pay-date').value);
-  
-  const daysLeft = Math.max(1, Math.ceil((payDate - new Date()) / (1000*60*60*24)));
-  const safe = inc - bill; const burn = safe / daysLeft;
+  const days = +document.getElementById('in-days').value || 1;
+  const safe = (inc - bill) - committedSlices; 
+  const burn = safe / days;
 
   document.getElementById('display-safe').innerText = '$' + safe.toLocaleString(undefined, {minimumFractionDigits: 2});
-  const statusT = document.getElementById('status-text');
+  const statusT = document.getElementById('status-text'); const card = document.getElementById('main-card');
   statusT.innerText = 'Daily Limit: $' + burn.toFixed(2);
-  
-  const card = document.getElementById('main-card');
   card.classList.remove('halo-green', 'halo-yellow', 'halo-red');
-  if (burn > (100 * stateBuffer)) { statusT.style.color="var(--green)"; card.classList.add('halo-green'); }
-  else if (burn > (40 * stateBuffer)) { statusT.style.color="var(--amber)"; card.classList.add('halo-yellow'); }
-  else { statusT.style.color="var(--red)"; card.classList.add('halo-red'); }
-
-  const totalDebt = debtList.reduce((acc, curr) => acc + curr.amt, 0);
-  const ratio = (totalDebt / (yearly || 1)) * 100;
-  const bar = document.getElementById('ratio-bar'); const label = document.getElementById('ratio-label');
-  bar.style.width = Math.min(100, ratio * 2.5) + "%";
-  if(ratio < 15) { bar.style.background = "var(--green)"; label.innerText="Ratio: Healthy"; }
-  else if(ratio < 36) { bar.style.background = "var(--amber)"; label.innerText="Ratio: Caution"; }
-  else { bar.style.background = "var(--red)"; label.innerText="Ratio: Overburdened"; }
+  if (burn > 100) { statusT.style.color = "var(--green)"; card.classList.add('halo-green'); }
+  else if (burn > 40) { statusT.style.color = "var(--amber)"; card.classList.add('halo-yellow'); }
+  else { statusT.style.color = "var(--red)"; card.classList.add('halo-red'); }
 }
 
-function openAuth(mode) { window.currentMode = mode; document.getElementById('auth-modal').style.display = 'flex'; }
+function openAuth(mode) { 
+    window.currentMode = mode; document.getElementById('auth-modal').style.display = 'flex'; 
+    const isSign = mode === 'signin';
+    document.getElementById('modal-title').innerText = isSign ? "Welcome Back" : "Join ClearSpend";
+    document.getElementById('pass-label').innerText = isSign ? "Enter Password" : "Create Password";
+    document.getElementById('auth-toggle-link').innerText = isSign ? "Need an account? Join Free" : "Already have an account? Sign In";
+}
 function closeAuth() { document.getElementById('auth-modal').style.display = 'none'; }
 function toggleAuthMode() { openAuth(window.currentMode === 'signup' ? 'signin' : 'signup'); }
 
@@ -317,17 +297,24 @@ async function handleAuth() {
   if(error) alert(error.message); else location.reload();
 }
 
+async function saveToCloud() {
+  const { data: { user } } = await sb.auth.getUser(); if(!user) { openAuth('signup'); return; }
+  const updates = { id: user.id, income: parseVal(document.getElementById('in-income').value), bills: parseVal(document.getElementById('in-bills').value), data_vault: { bills: roadmapBills, debts: debtList }, updated_at: new Date() };
+  await sb.from('profiles').upsert(updates); alert("Vault Synced!");
+}
+
 async function checkUser() {
   const { data: { user } } = await sb.auth.getUser();
   if(user) {
     document.getElementById('nav-auth').innerHTML = `<span style="font-size:14px;font-weight:800;color:var(--muted)">${user.email}</span><button style="background:none;font-size:12px;margin-left:10px;" onclick="sb.auth.signOut().then(()=>location.reload())">Sign Out</button>`;
-    const { data: profile } = await sb.from('profiles').select('plan').eq('id', user.id).single();
+    const { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
     if(profile) {
-      if(profile.plan === 'STARTER' || profile.plan === 'PRO') {
-          document.getElementById('freq-area').classList.add('unlocked');
-          document.getElementById('roadmap-box').classList.add('unlocked');
-      }
-      if(profile.plan === 'PRO') document.getElementById('annual-velocity-box').classList.add('unlocked');
+      document.getElementById('in-income').value = profile.income ? '$'+profile.income.toLocaleString() : '';
+      document.getElementById('in-bills').value = profile.bills ? '$'+profile.bills.toLocaleString() : '';
+      if(profile.data_vault) { roadmapBills = profile.data_vault.bills || []; debtList = profile.data_vault.debts || []; renderDebts(); renderRoadmap(); }
+      if(profile.plan === 'STARTER' || profile.plan === 'PRO') { document.getElementById('freq-area').classList.add('unlocked'); }
+      if(profile.plan === 'PRO') { document.querySelectorAll('.pro-feat').forEach(el => el.classList.add('unlocked')); document.getElementById('velocity-box').classList.add('unlocked'); }
+      runCalc();
     }
   }
 }
