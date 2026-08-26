@@ -48,9 +48,20 @@
     <section class="card col-4 pro-feat" id="annual-box">
         <span class="label">Pro: The Annual Velocity</span>
         <div style="margin-top: 15px;">
-            <label class="input-label">Yearly Gross Salary</label><input type="text" id="in-annual" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
-            <div id="ratio-label" style="font-weight: 900; font-size: 14px; margin-top:10px;">Ratio: Healthy</div>
+            <label class="input-label">State Cost Index</label>
+            <select id="in-state" onchange="runCalc()">
+                <option value="1.3">California (High Cost)</option>
+                <option value="1.3">New York (High Cost)</option>
+                <option value="1.0" selected>Standard State (USA)</option>
+                <option value="0.85">Ohio (Low Cost)</option>
+                <option value="0.85">Indiana (Low Cost)</option>
+            </select>
+            <label class="input-label">Yearly Gross Salary</label>
+            <input type="text" id="in-annual" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
+            
+            <div id="ratio-label" style="font-weight: 900; font-size: 14px; margin-top:10px;">Ratio: ---</div>
             <div class="bar-track"><div id="ratio-bar" class="bar-fill" style="background:var(--green)"></div></div>
+            <p id="ratio-msg" style="font-size: 11px; color:var(--muted); margin-top: 5px; font-weight: 600;"></p>
         </div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Pro Pass Required</div></div>
     </section>
