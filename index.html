@@ -22,13 +22,12 @@
   <div class="hero">
     <h1>Know your <span>Safe-to-Spend</span><br>before you swipe.</h1>
     <p style="font-size: 26px; font-weight: 800; color: var(--indigo); margin-bottom: 10px;">Because your bank balance is lying to you.</p>
-    <p style="font-size:19px; color:var(--muted); font-weight:500;">Professional financial command center. Stop guessing and outrun your debt.</p>
   </div>
   
   <div class="dashboard-grid">
     <section class="card" id="main-card">
         <span class="label">Live Disposable Balance</span>
-        <div class="big-money" id="display-safe">$0</div>
+        <div class="big-money" id="display-safe">$0.00</div>
         <div id="status-text" class="status-text">Daily Limit: $0.00</div>
     </section>
     
@@ -52,7 +51,7 @@
             </select>
             <label class="input-label">Yearly Gross Salary</label><input type="text" id="in-annual" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
             <div id="ratio-label" style="font-weight: 900; font-size: 14px; margin-top:10px;">Ratio: ---</div>
-            <div class="bar-track"><div id="ratio-bar" class="bar-fill" style="background:var(--green); width:0%;"></div></div>
+            <div style="height:10px; background:var(--line); border-radius:10px; margin:8px 0; overflow:hidden;"><div id="ratio-bar" class="bar-fill" style="background:var(--green); width:0%;"></div></div>
             <p id="ratio-msg" style="font-size: 11px; color:var(--muted); margin-top: 5px; font-weight: 600;"></p>
         </div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Pro Pass Required</div></div>
@@ -68,6 +67,8 @@
                 <label class="switch"><input type="checkbox" id="cushion-toggle" onchange="runCalc()"><span class="slider"></span></label>
             </div>
             <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: var(--muted);"><span>Hidden Reserves:</span><span id="val-cushion">$0.00</span></div>
+            <!-- RESTORED DESCRIPTION -->
+            <p style="font-size: 10px; color: var(--muted); margin-top: 15px; line-height: 1.4;">💡 <b>The Ghost Cushion:</b> Choose your safety percentage. ClearSpend will hide this amount from your daily limit, building a secret safety net.</p>
         </div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Starter Cushion</div></div>
     </section>
@@ -84,7 +85,7 @@
             </div>
             <button class="btn-primary" style="width:100%; margin-top:10px;" onclick="addEssentialBill()">Add Recurring Bill</button>
         </div>
-        <div id="essentials-list" style="margin-top: 20px; max-height: 150px; overflow-y: auto;"></div>
+        <div id="essentials-list" style="max-height: 120px; overflow-y: auto;"></div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Bill List</div></div>
     </section>
   </div>
@@ -93,9 +94,9 @@
 <section class="pricing-section" id="pricing">
     <div class="pricing-header"><div class="label" style="color: var(--indigo)">Choose Your Founding Status</div><h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2></div>
     <div class="pricing-grid">
-        <div class="price-card"><h3>Essential Pass</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px; color:var(--muted)">$0</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ Safe-to-Spend Calc</li><li>✓ Daily Limit Analysis</li><li>✓ Basic Snapshot Tool</li></ul><button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="openAuth('signup')">Claim Pass</button></div>
-        <div class="price-card"><h3>Founding Starter</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$29</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ Cloud Profile Sync</li><li>✓ Ghost Cushion Toggle</li><li>✓ Frequency Automation</li></ul><button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button></div>
-        <div class="price-card featured"><h3>Founding Pro</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$49</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ <b>Interactive Bill Slicer</b></li><li>✓ State Cost Indexing</li><li>✓ Debt Manager Suite</li></ul><button class="btn-primary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro</button></div>
+        <div class="price-card"><h3>Essential Pass</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px; color:var(--muted)">$0</div><button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="openAuth('signup')">Claim Pass</button></div>
+        <div class="price-card"><h3>Founding Starter</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$29</div><button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button></div>
+        <div class="price-card featured"><h3>Founding Pro</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$49</div><button class="btn-primary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro</button></div>
     </div>
 </section>
 
