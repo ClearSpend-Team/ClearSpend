@@ -4,6 +4,7 @@ const sb = supabase.createClient(SB_URL, SB_KEY);
 
 window.essentialBills = []; 
 
+// 1. FORMATTING
 window.formatCurrency = function(i){ 
     let v = i.value.replace(/\D/g, ""); 
     v = (v/100).toLocaleString('en-US', { style: 'currency', currency: 'USD' }); 
@@ -11,6 +12,7 @@ window.formatCurrency = function(i){
 };
 window.parseVal = function(s) { return parseFloat(String(s).replace(/[$,]/g, "")) || 0; };
 
+// 2. SNAPSHOT LOGIC
 window.updateFreq = function() {
     document.getElementById('in-days').value = document.getElementById('in-freq').value;
     window.runCalc();
@@ -23,29 +25,59 @@ window.updateDaysFromDate = function() {
     if (diff >= 0) { document.getElementById('in-days').value = diff; window.runCalc(); }
 };
 
-// FIXED ESSENTIALS STACK LOGIC
+// 3. THE ENGINE (FIXED CUSHION MATH)
+window.runCalc = function() {
+  const inc = parseVal(document.getElementById('in-income').value); 
+  const bill = parseVal(document.getElementById('in-bills').value);
+  const yearly = parseVal(document.getElementById('in-annual').value);
+  const days = +document.getElementById('in-days').value || 14;
+  
+  const isCushionOn = document.getElementById('cushion-toggle').checked;
+  const cushionPercent = parseFloat(document.getElementById('cushion-percent').value);
+
+  // Calculate real safe-to-spend
+  let safe = inc - bill;
+  
+  // Apply dynamic cushion math
+  if (isCushionOn) {
+      const cushionAmt = safe * cushionPercent;
+      document.getElementById('val-cushion').innerText = '$' + cushionAmt.toLocaleString(undefined, {minimumFractionDigits: 2});
+      safe = safe - cushionAmt; 
+  } else {
+      document.getElementById('val-cushion').innerText = '$0.00';
+  }
+
+  const burn = safe / days;
+  document.getElementById('display-safe').innerText = '$' + safe.toLocaleString(undefined, {minimumFractionDigits: 2});
+  const statusT = document.getElementById('status-text'); const card = document.getElementById('main-card');
+  statusT.innerText = 'Daily Limit: $' + burn.toFixed(2);
+  
+  card.classList.remove('halo-green', 'halo-yellow', 'halo-red');
+  if (burn > 100) { statusT.style.color="var(--green)"; card.classList.add('halo-green'); }
+  else if (burn > 40) { statusT.style.color="var(--amber)"; card.classList.add('halo-yellow'); }
+  else { statusT.style.color="var(--red)"; card.classList.add('halo-red'); }
+
+  // Annual Velocity Logic
+  const ratio = (bill * 12 / (yearly || 1)) * 100;
+  const bar = document.getElementById('ratio-bar');
+  const label = document.getElementById('ratio-label');
+  if(bar) {
+      bar.style.width = Math.min(100, ratio * 2) + "%";
+      bar.style.background = ratio < 20 ? 'var(--green)' : ratio < 40 ? 'var(--amber)' : 'var(--red)';
+      label.innerText = "Ratio: " + (ratio < 20 ? "Healthy" : ratio < 40 ? "Caution" : "Heavy");
+  }
+};
+
+// 4. ESSENTIALS STACK (FIXED ADD BUTTON)
 window.addEssentialBill = function() {
-    const nameInput = document.getElementById('bill-item-name');
-    const amtInput = document.getElementById('bill-item-amt');
-    
-    const n = nameInput.value;
-    const a = parseVal(amtInput.value);
-    
-    if(!n || !a) {
-        alert("Please enter both a name and an amount.");
-        return;
-    }
-    
+    const n = document.getElementById('bill-item-name').value;
+    const a = parseVal(document.getElementById('bill-item-amt').value);
+    if(!n || !a) return;
     window.essentialBills.push({name: n, amt: a});
-    
-    // Clear the inputs immediately
-    nameInput.value = '';
-    amtInput.value = '';
-    
-    // Auto-update the "Friction" box in the Snapshot
+    document.getElementById('bill-item-name').value = '';
+    document.getElementById('bill-item-amt').value = '';
     const total = window.essentialBills.reduce((acc, curr) => acc + curr.amt, 0);
     document.getElementById('in-bills').value = '$' + total.toLocaleString(undefined, {minimumFractionDigits: 2});
-    
     renderEssentials();
     window.runCalc();
 };
@@ -66,46 +98,7 @@ function renderEssentials() {
     });
 }
 
-window.runCalc = function() {
-  const inc = parseVal(document.getElementById('in-income').value); 
-  const bill = parseVal(document.getElementById('in-bills').value);
-  const yearly = parseVal(document.getElementById('in-annual').value);
-  const days = +document.getElementById('in-days').value || 14;
-  
-  const isCushionOn = document.getElementById('cushion-toggle').checked;
-  const cushionPercent = parseFloat(document.getElementById('cushion-percent').value);
-
-  let safe = inc - bill;
-  
-  // UPDATED CUSHION LOGIC (USER JUDGMENT)
-  if (isCushionOn) {
-      const cushionAmt = safe * cushionPercent;
-      document.getElementById('val-cushion').innerText = '$' + cushionAmt.toLocaleString(undefined, {minimumFractionDigits: 2});
-      safe = safe - cushionAmt;
-  } else {
-      document.getElementById('val-cushion').innerText = '$0.00';
-  }
-
-  const burn = safe / days;
-  document.getElementById('display-safe').innerText = '$' + safe.toLocaleString(undefined, {minimumFractionDigits: 2});
-  const statusT = document.getElementById('status-text'); const card = document.getElementById('main-card');
-  statusT.innerText = 'Daily Limit: $' + burn.toFixed(2);
-  
-  card.classList.remove('halo-green', 'halo-yellow', 'halo-red');
-  if (burn > 100) { statusT.style.color="var(--green)"; card.classList.add('halo-green'); }
-  else if (burn > 40) { statusT.style.color="var(--amber)"; card.classList.add('halo-yellow'); }
-  else { statusT.style.color="var(--red)"; card.classList.add('halo-red'); }
-
-  const ratio = (bill * 12 / (yearly || 1)) * 100;
-  const bar = document.getElementById('ratio-bar');
-  const label = document.getElementById('ratio-label');
-  if(bar) {
-      bar.style.width = Math.min(100, ratio * 2) + "%";
-      bar.style.background = ratio < 20 ? 'var(--green)' : ratio < 40 ? 'var(--amber)' : 'var(--red)';
-      label.innerText = "Ratio: " + (ratio < 20 ? "Healthy" : ratio < 40 ? "Caution" : "Heavy");
-  }
-};
-
+// 5. AUTH & CLOUD
 window.openAuth = function(mode) {
   window.currentMode = mode; const isSign = mode === 'signin';
   document.getElementById('auth-content').innerHTML = `<h2 style="font-size: 36px; font-weight: 950; letter-spacing: -2px;">${isSign ? 'Welcome Back' : 'Join ClearSpend'}</h2><p style="color: var(--muted); margin-bottom: 30px;">${isSign ? 'Access your private vault.' : 'Sync your profile to the cloud.'}</p><input type="email" id="auth-email" placeholder="name@email.com"><div style="text-align: left;"><label class="input-label">${isSign ? 'Enter Password' : 'Create Password'}</label></div><input type="password" id="auth-password" placeholder="Min. 6 characters"><button class="btn-primary" style="width: 100%;" onclick="handleAuth('${mode}')">${isSign ? 'Sign In' : 'Create Account'}</button><div style="margin-top: 20px; font-weight: 800; color: var(--indigo); cursor: pointer;" onclick="openAuth('${isSign ? 'signup' : 'signin'}')">${isSign ? 'Need an account? Join Free' : 'Already have an account? Sign In'}</div><button class="btn-secondary" style="margin-top: 15px; width: 100%; font-size: 13px;" onclick="closeAuth()">Cancel</button>`;
@@ -123,24 +116,9 @@ window.saveToCloud = async function() {
   const btn = document.getElementById('sync-btn');
   btn.innerText = "Syncing...";
   const { data: { user } } = await sb.auth.getUser(); if(!user) { openAuth('signup'); return; }
-  const updates = { 
-    id: user.id, 
-    income: parseVal(document.getElementById('in-income').value), 
-    bills: parseVal(document.getElementById('in-bills').value), 
-    data_vault: { 
-        cushion: document.getElementById('cushion-toggle').checked,
-        cushionPercent: document.getElementById('cushion-percent').value,
-        annual: parseVal(document.getElementById('in-annual').value),
-        essentials: window.essentialBills
-    },
-    updated_at: new Date() 
-  };
+  const updates = { id: user.id, income: parseVal(document.getElementById('in-income').value), bills: parseVal(document.getElementById('in-bills').value), data_vault: { cushion: document.getElementById('cushion-toggle').checked, cushionPercent: document.getElementById('cushion-percent').value, annual: parseVal(document.getElementById('in-annual').value), essentials: window.essentialBills }, updated_at: new Date() };
   const { error } = await sb.from('profiles').upsert(updates);
-  if(!error) {
-      btn.innerText = "Vault Saved ✓";
-      btn.classList.add('success');
-      setTimeout(() => { btn.innerText = "Secure Sync"; btn.classList.remove('success'); }, 3000);
-  }
+  if(!error) { btn.innerText = "Vault Saved ✓"; btn.classList.add('success'); setTimeout(() => { btn.innerText = "Secure Sync"; btn.classList.remove('success'); }, 3000); }
 }
 
 window.checkUser = async function() {
