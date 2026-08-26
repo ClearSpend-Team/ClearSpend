@@ -23,15 +23,24 @@ window.updateDaysFromDate = function() {
     if (diff >= 0) { document.getElementById('in-days').value = diff; window.runCalc(); }
 };
 
+// --- FIXED RECURRING LOGIC ---
 window.addEssentialBill = function() {
     const nameInput = document.getElementById('bill-item-name');
     const amtInput = document.getElementById('bill-item-amt');
+    const freqInput = document.getElementById('bill-item-freq');
+    
     const n = nameInput.value;
     const a = parseVal(amtInput.value);
+    const f = freqInput.value;
+    
     if(!n || !a) return;
-    window.essentialBills.push({name: n, amt: a});
+    
+    window.essentialBills.push({name: n, amt: a, freq: f});
+    
+    // CLEAR INPUTS
     nameInput.value = '';
     amtInput.value = '';
+    
     updateFrictionBox();
     renderEssentials();
     window.runCalc();
@@ -45,7 +54,10 @@ window.removeEssentialBill = function(i) {
 };
 
 function updateFrictionBox() {
-    const total = window.essentialBills.reduce((acc, curr) => acc + curr.amt, 0);
+    // Calculate total monthly cost based on frequencies (Weekly * 4, Bi-Weekly * 2)
+    const total = window.essentialBills.reduce((acc, curr) => {
+        return acc + (curr.amt * parseFloat(curr.freq));
+    }, 0);
     document.getElementById('in-bills').value = '$' + total.toLocaleString(undefined, {minimumFractionDigits: 2});
 }
 
@@ -53,7 +65,15 @@ function renderEssentials() {
     const list = document.getElementById('essentials-list');
     list.innerHTML = '';
     window.essentialBills.forEach((b, i) => {
-        list.innerHTML += `<div class="stack-row"><span>${b.name}</span><div style="display:flex; align-items:center;"><span>$${b.amt.toLocaleString()}</span><span class="remove-btn" onclick="window.removeEssentialBill(${i})">×</span></div></div>`;
+        const freqText = b.freq == "1" ? "Mo" : b.freq == "4" ? "Wk" : "Bi-Wk";
+        list.innerHTML += `
+            <div class="stack-row">
+                <span>${b.name} (${freqText})</span>
+                <div style="display:flex; align-items:center;">
+                    <span>$${b.amt.toLocaleString()}</span>
+                    <span class="remove-btn" onclick="window.removeEssentialBill(${i})">×</span>
+                </div>
+            </div>`;
     });
 }
 
