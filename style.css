@@ -28,33 +28,38 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 32px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; min-height: 240px; }
 .col-8 { grid-column: span 8; } .col-4 { grid-column: span 4; }
 
-/* REFINED BALANCE CARD (MATCHING IMAGE) */
-#main-card { padding: 40px; justify-content: flex-start; }
+/* REFINED BALANCE CARD (MATCHING IMAGE + SURROUNDING COLOR) */
+#main-card { 
+    padding: 45px; 
+    border-top: 12px solid var(--line); /* The "Above" indicator */
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
 #main-card .label { 
     text-transform: none; 
-    font-size: 24px; 
+    font-size: 26px; 
     font-weight: 600; 
     color: var(--navy); 
-    letter-spacing: -0.5px; 
-    margin-bottom: 8px; 
+    margin-bottom: 10px; 
 }
 #main-card .big-money { 
-    font-size: 48px; 
+    font-size: 52px; 
     font-weight: 700; 
-    letter-spacing: -1px; 
-    margin: 0 0 12px 0; 
+    margin: 0 0 10px 0; 
     color: var(--navy); 
 }
 #main-card .status-text { 
-    font-size: 28px; 
-    font-weight: 500; 
+    font-size: 30px; 
+    font-weight: 600; 
     margin-top: 0; 
 }
 
-/* SUCCESS GREEN BUTTON */
-.btn-primary.success-green { background: var(--green) !important; box-shadow: 0 10px 20px -5px rgba(16, 185, 129, 0.4) !important; }
+/* SURROUNDING HALO STATES */
+.halo-green { border-top-color: var(--green) !important; box-shadow: 0 15px 45px -10px rgba(16, 185, 129, 0.2) !important; }
+.halo-yellow { border-top-color: var(--amber) !important; box-shadow: 0 15px 45px -10px rgba(245, 158, 11, 0.2) !important; }
+.halo-red { border-top-color: var(--red) !important; box-shadow: 0 15px 45px -10px rgba(239, 68, 68, 0.2) !important; }
 
-/* TOGGLE SWITCH */
+/* UI ELEMENTS */
+.btn-primary.success-green { background: var(--green) !important; }
 .switch { position: relative; display: inline-block; width: 50px; height: 24px; }
 .switch input { opacity: 0; width: 0; height: 0; }
 .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--line); transition: .4s; border-radius: 34px; }
@@ -62,7 +67,6 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 input:checked + .slider { background-color: var(--green); }
 input:checked + .slider:before { transform: translateX(26px); }
 
-/* DATA ROWS */
 .stack-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); width: 100%; }
 .remove-btn { color: #ff4d4d !important; font-size: 24px !important; font-weight: 900 !important; cursor: pointer !important; margin-left: 12px; }
 
@@ -71,14 +75,5 @@ input:checked + .slider:before { transform: translateX(26px); }
 .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 100%; max-width: 1200px; padding: 0 40px; margin-top: 60px; }
 .price-card { background: #fff; border: 1px solid var(--line); padding: 40px; border-radius: var(--r); text-align: left; box-shadow: var(--shadow); position: relative; }
 .price-card.featured { border: 4px solid var(--indigo); transform: scale(1.05); }
-
-/* AUTH MODAL */
-#auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
-.modal-box { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); width: 100%; max-width: 460px; text-align: center; display: flex; flex-direction: column; align-items: center; }
-
-input, select { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid var(--line); margin-bottom: 15px; font-size: 15px; background: #f8fafc; color: var(--navy); font-weight: 600; outline: none; }
-button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; cursor: pointer; transition: 0.3s; font-size: 14px; }
-.btn-primary { background: linear-gradient(135deg, var(--indigo), var(--violet)); color: #fff; }
-.btn-secondary { background: #f1f5f9; color: var(--navy); }
 
 @media (max-width: 1000px) { .dashboard-grid, .pricing-grid { grid-template-columns: 1fr !important; } .hero h1 { font-size: 48px; } }
