@@ -23,27 +23,15 @@ window.updateDaysFromDate = function() {
     if (diff >= 0) { document.getElementById('in-days').value = diff; window.runCalc(); }
 };
 
-// --- SMART RECURRING LOGIC ---
 window.addEssentialBill = function() {
     const nameInput = document.getElementById('bill-item-name');
     const amtInput = document.getElementById('bill-item-amt');
-    const freqInput = document.getElementById('bill-item-freq');
-    const dateInput = document.getElementById('bill-item-date');
-    
     const n = nameInput.value;
     const a = parseVal(amtInput.value);
-    const f = freqInput.value;
-    const d = dateInput.value;
-    
     if(!n || !a) return;
-    
-    window.essentialBills.push({name: n, amt: a, freq: f, dueDate: d});
-    
-    // CLEAR INPUTS
+    window.essentialBills.push({name: n, amt: a});
     nameInput.value = '';
     amtInput.value = '';
-    dateInput.value = '';
-    
     updateFrictionBox();
     renderEssentials();
     window.runCalc();
@@ -57,10 +45,7 @@ window.removeEssentialBill = function(i) {
 };
 
 function updateFrictionBox() {
-    // Calculate total monthly cost based on frequencies
-    const total = window.essentialBills.reduce((acc, curr) => {
-        return acc + (curr.amt * parseFloat(curr.freq));
-    }, 0);
+    const total = window.essentialBills.reduce((acc, curr) => acc + curr.amt, 0);
     document.getElementById('in-bills').value = '$' + total.toLocaleString(undefined, {minimumFractionDigits: 2});
 }
 
@@ -68,18 +53,7 @@ function renderEssentials() {
     const list = document.getElementById('essentials-list');
     list.innerHTML = '';
     window.essentialBills.forEach((b, i) => {
-        const freqText = b.freq == "1" ? "Mo" : b.freq == "4" ? "Wk" : "Bi-Wk";
-        list.innerHTML += `
-            <div class="stack-row">
-                <div style="display:flex; flex-direction:column;">
-                    <span style="font-weight:700; font-size:13px;">${b.name}</span>
-                    <span style="font-size:10px; color:var(--muted);">Due: ${b.dueDate || '??'}${b.dueDate?'th':''} (${freqText})</span>
-                </div>
-                <div style="display:flex; align-items:center;">
-                    <span style="font-weight:800; color:var(--navy);">$${b.amt.toLocaleString()}</span>
-                    <span class="remove-btn" onclick="window.removeEssentialBill(${i})">×</span>
-                </div>
-            </div>`;
+        list.innerHTML += `<div class="stack-row"><span>${b.name}</span><div style="display:flex; align-items:center;"><span>$${b.amt.toLocaleString()}</span><span class="remove-btn" onclick="window.removeEssentialBill(${i})">×</span></div></div>`;
     });
 }
 
