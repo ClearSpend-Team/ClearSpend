@@ -2,8 +2,7 @@ const SB_URL = 'https://chbfgkguxkdadnevqthk.supabase.co';
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNoYmZna2d1eGtkYWRuZXZxdGhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODczMTcxOTUsImV4cCI6MjEwMjg5MzE5NX0.hemyiyKpJXt7CvxReNOzX4AVajM7V_LHl0SOJNAutcw'; 
 const sb = supabase.createClient(SB_URL, SB_KEY);
 
-window.roadmapBills = []; 
-window.debtList = []; 
+window.essentialBills = []; 
 
 window.formatCurrency = function(i){ 
     let v = i.value.replace(/\D/g, ""); 
@@ -24,19 +23,65 @@ window.updateDaysFromDate = function() {
     if (diff >= 0) { document.getElementById('in-days').value = diff; window.runCalc(); }
 };
 
+// FIXED ESSENTIALS STACK LOGIC
+window.addEssentialBill = function() {
+    const nameInput = document.getElementById('bill-item-name');
+    const amtInput = document.getElementById('bill-item-amt');
+    
+    const n = nameInput.value;
+    const a = parseVal(amtInput.value);
+    
+    if(!n || !a) {
+        alert("Please enter both a name and an amount.");
+        return;
+    }
+    
+    window.essentialBills.push({name: n, amt: a});
+    
+    // Clear the inputs immediately
+    nameInput.value = '';
+    amtInput.value = '';
+    
+    // Auto-update the "Friction" box in the Snapshot
+    const total = window.essentialBills.reduce((acc, curr) => acc + curr.amt, 0);
+    document.getElementById('in-bills').value = '$' + total.toLocaleString(undefined, {minimumFractionDigits: 2});
+    
+    renderEssentials();
+    window.runCalc();
+};
+
+window.removeEssentialBill = function(i) {
+    window.essentialBills.splice(i, 1);
+    const total = window.essentialBills.reduce((acc, curr) => acc + curr.amt, 0);
+    document.getElementById('in-bills').value = '$' + total.toLocaleString(undefined, {minimumFractionDigits: 2});
+    renderEssentials();
+    window.runCalc();
+};
+
+function renderEssentials() {
+    const list = document.getElementById('essentials-list');
+    list.innerHTML = '';
+    window.essentialBills.forEach((b, i) => {
+        list.innerHTML += `<div class="data-row"><span>${b.name}</span><span>$${b.amt.toLocaleString()}<span class="remove-btn" onclick="removeEssentialBill(${i})">×</span></span></div>`;
+    });
+}
+
 window.runCalc = function() {
   const inc = parseVal(document.getElementById('in-income').value); 
   const bill = parseVal(document.getElementById('in-bills').value);
+  const yearly = parseVal(document.getElementById('in-annual').value);
   const days = +document.getElementById('in-days').value || 14;
+  
   const isCushionOn = document.getElementById('cushion-toggle').checked;
+  const cushionPercent = parseFloat(document.getElementById('cushion-percent').value);
 
   let safe = inc - bill;
   
-  // GHOST CUSHION LOGIC
+  // UPDATED CUSHION LOGIC (USER JUDGMENT)
   if (isCushionOn) {
-      const cushionAmt = safe * 0.1;
+      const cushionAmt = safe * cushionPercent;
       document.getElementById('val-cushion').innerText = '$' + cushionAmt.toLocaleString(undefined, {minimumFractionDigits: 2});
-      safe = safe * 0.9; // Hide 10%
+      safe = safe - cushionAmt;
   } else {
       document.getElementById('val-cushion').innerText = '$0.00';
   }
@@ -50,6 +95,15 @@ window.runCalc = function() {
   if (burn > 100) { statusT.style.color="var(--green)"; card.classList.add('halo-green'); }
   else if (burn > 40) { statusT.style.color="var(--amber)"; card.classList.add('halo-yellow'); }
   else { statusT.style.color="var(--red)"; card.classList.add('halo-red'); }
+
+  const ratio = (bill * 12 / (yearly || 1)) * 100;
+  const bar = document.getElementById('ratio-bar');
+  const label = document.getElementById('ratio-label');
+  if(bar) {
+      bar.style.width = Math.min(100, ratio * 2) + "%";
+      bar.style.background = ratio < 20 ? 'var(--green)' : ratio < 40 ? 'var(--amber)' : 'var(--red)';
+      label.innerText = "Ratio: " + (ratio < 20 ? "Healthy" : ratio < 40 ? "Caution" : "Heavy");
+  }
 };
 
 window.openAuth = function(mode) {
@@ -73,7 +127,12 @@ window.saveToCloud = async function() {
     id: user.id, 
     income: parseVal(document.getElementById('in-income').value), 
     bills: parseVal(document.getElementById('in-bills').value), 
-    data_vault: { cushion: document.getElementById('cushion-toggle').checked },
+    data_vault: { 
+        cushion: document.getElementById('cushion-toggle').checked,
+        cushionPercent: document.getElementById('cushion-percent').value,
+        annual: parseVal(document.getElementById('in-annual').value),
+        essentials: window.essentialBills
+    },
     updated_at: new Date() 
   };
   const { error } = await sb.from('profiles').upsert(updates);
@@ -96,9 +155,16 @@ window.checkUser = async function() {
           document.getElementById('essentials-box').classList.add('unlocked');
           document.getElementById('freq-lock').style.display = 'none';
       }
+      if(profile.plan === 'PRO') { document.getElementById('annual-box').classList.add('unlocked'); }
       document.getElementById('in-income').value = profile.income ? '$'+profile.income.toLocaleString() : '';
       document.getElementById('in-bills').value = profile.bills ? '$'+profile.bills.toLocaleString() : '';
-      if(profile.data_vault) { document.getElementById('cushion-toggle').checked = profile.data_vault.cushion || false; }
+      if(profile.data_vault) { 
+          document.getElementById('cushion-toggle').checked = profile.data_vault.cushion || false; 
+          document.getElementById('cushion-percent').value = profile.data_vault.cushionPercent || "0.10";
+          document.getElementById('in-annual').value = profile.data_vault.annual ? '$'+profile.data_vault.annual.toLocaleString() : '';
+          window.essentialBills = profile.data_vault.essentials || [];
+          renderEssentials();
+      }
       window.runCalc();
     }
   }
