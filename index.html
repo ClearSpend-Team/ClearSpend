@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<div id="auth-modal"><div class="modal-box" id="auth-content"></div></div>
+<div id="auth-modal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.4); z-index:9999; align-items:center; justify-content:center; backdrop-filter:blur(10px);"><div class="modal-box" id="auth-content" style="background:#fff; padding:50px; border-radius:28px; width:460px; text-align:center;"></div></div>
 
 <nav>
   <div class="logo-container" onclick="location.reload()">
@@ -27,13 +27,13 @@
   </div>
   
   <div class="dashboard-grid">
-    <section class="card col-8" id="main-card">
+    <section class="card" id="main-card">
         <span class="label">Live Disposable Balance</span>
         <div class="big-money" id="display-safe">$0</div>
         <div id="status-text" class="status-text">Daily Limit: $0.00</div>
     </section>
     
-    <section class="card col-4">
+    <section class="card">
       <h2 style="margin:0; font-size:24px; color:var(--navy);">The Snapshot</h2>
       <label class="input-label" style="margin-top:10px;">Next Cash In</label><input type="text" id="in-income" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
       <label class="input-label">Next Payday</label><input type="date" id="in-payday" onchange="updateDaysFromDate()">
@@ -43,8 +43,8 @@
       <button class="btn-primary" id="sync-btn" onclick="saveToCloud()">Secure Sync</button>
     </section>
 
-    <section class="card col-4 pro-feat" id="annual-box">
-        <span class="label">Pro: The Annual Velocity</span>
+    <section class="card" id="annual-box">
+        <span class="input-label">Pro: The Annual Velocity</span>
         <div style="margin-top: 15px;">
             <label class="input-label">State Cost Index</label>
             <select id="in-state" onchange="runCalc()">
@@ -53,13 +53,13 @@
             </select>
             <label class="input-label">Yearly Gross Salary</label><input type="text" id="in-annual" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
             <div id="ratio-label" style="font-weight: 900; font-size: 14px; margin-top:10px;">Ratio: ---</div>
-            <div class="bar-track"><div id="ratio-bar" class="bar-fill" style="background:var(--green); width:0%;"></div></div>
+            <div style="height:10px; background:var(--line); border-radius:10px; margin:8px 0; overflow:hidden;"><div id="ratio-bar" style="height:100%; width:0%; transition:1s; background:var(--green)"></div></div>
             <p id="ratio-msg" style="font-size: 11px; color:var(--muted); margin-top: 5px; font-weight: 600;"></p>
         </div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Pro Pass Required</div></div>
     </section>
 
-    <section class="card col-4 pro-feat" id="starter-cushion">
+    <section class="card" id="starter-cushion">
         <span class="label">The Ghost Cushion</span>
         <div style="margin-top: 15px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -69,20 +69,19 @@
                 <label class="switch"><input type="checkbox" id="cushion-toggle" onchange="runCalc()"><span class="slider"></span></label>
             </div>
             <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: var(--muted);"><span>Hidden Reserves:</span><span id="val-cushion">$0.00</span></div>
+            <p style="font-size: 10px; color: var(--muted); margin-top: 15px; line-height: 1.4;">💡 <b>The Ghost Cushion:</b> Choose your safety percentage. ClearSpend will hide this amount from your daily limit.</p>
         </div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Starter Cushion</div></div>
     </section>
 
-    <section class="card col-4 pro-feat" id="essentials-box">
+    <section class="card" id="essentials-box">
         <span class="label">The Essentials Stack</span>
         <div style="margin-top: 15px;">
             <input type="text" id="bill-item-name" placeholder="Bill Name" style="margin-bottom:8px;">
             <div style="display: flex; gap: 8px;">
                 <input type="text" id="bill-item-amt" placeholder="$0.00" oninput="formatCurrency(this)" style="flex: 1;">
                 <select id="bill-item-freq" style="flex: 1;">
-                    <option value="1">Monthly</option>
-                    <option value="4">Weekly</option>
-                    <option value="2">Bi-Weekly</option>
+                    <option value="1">Monthly</option><option value="4">Weekly</option><option value="2">Bi-Weekly</option>
                 </select>
             </div>
             <button class="btn-primary" style="width:100%; margin-top:10px;" onclick="addEssentialBill()">Add Recurring Bill</button>
@@ -96,9 +95,9 @@
 <section class="pricing-section" id="pricing">
     <div class="pricing-header"><div class="label" style="color: var(--indigo)">Choose Your Founding Status</div><h2 style="font-size: 56px; font-weight: 950; letter-spacing: -4px; color: var(--navy); margin-top: 10px;">One payment. Lifetime access.</h2></div>
     <div class="pricing-grid">
-        <div class="price-card"><h3>Essential Pass</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px; color:var(--muted)">$0</div><button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="openAuth('signup')">Claim Pass</button></div>
-        <div class="price-card"><h3>Founding Starter</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$29</div><button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button></div>
-        <div class="price-card featured"><h3>Founding Pro</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$49</div><button class="btn-primary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro</button></div>
+        <div class="price-card"><h3>Essential Pass</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px; color:var(--muted)">$0</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ Safe-to-Spend Calc</li><li>✓ Daily Limit Analysis</li><li>✓ Basic Snapshot Tool</li></ul><button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="openAuth('signup')">Claim Pass</button></div>
+        <div class="price-card"><h3>Founding Starter</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$29</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ Cloud Profile Sync</li><li>✓ Ghost Cushion Toggle</li><li>✓ Frequency Automation</li></ul><button class="btn-secondary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_bJe7sM6YF52021q0qT4ZG02'">Get Starter</button></div>
+        <div class="price-card featured"><h3>Founding Pro</h3><div style="font-size:32px; font-weight:900; margin-bottom:15px;">$49</div><ul style="list-style:none; padding:0; font-size:13px; color:var(--muted); line-height:2; text-align:left;"><li>✓ <b>Interactive Bill Slicer</b></li><li>✓ State Cost Indexing</li><li>✓ Debt Manager Suite</li></ul><button class="btn-primary" style="width: 100%; margin-top: auto;" onclick="location.href='https://buy.stripe.com/test_dRm14o96N2TSbC06Ph4ZG01'">Unlock Pro</button></div>
     </div>
 </section>
 
