@@ -58,7 +58,15 @@ function renderEssentials() {
     list.innerHTML = '';
     window.essentialBills.forEach((b, i) => {
         const freqText = b.freq == "1" ? "Mo" : b.freq == "4" ? "Wk" : "Bi-Wk";
-        list.innerHTML += `<div class="stack-row"><span>${b.name} (${freqText})</span><div style="display:flex; align-items:center;"><span>$${b.amt.toLocaleString()}</span><span class="remove-btn" onclick="window.removeEssentialBill(${i})">×</span></div></div>`;
+        // FORCED RED X STRUCTURE
+        list.innerHTML += `
+            <div class="stack-row">
+                <span style="font-weight:700;">${b.name} (${freqText})</span>
+                <div style="display:flex; align-items:center;">
+                    <span style="font-weight:800; color:var(--navy);">$${b.amt.toLocaleString()}</span>
+                    <span class="remove-btn" onclick="window.removeEssentialBill(${i})">×</span>
+                </div>
+            </div>`;
     });
 }
 
