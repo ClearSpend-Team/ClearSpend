@@ -64,3 +64,4 @@ button { border: 0; border-radius: 14px; padding: 16px 24px; font-weight: 900; c
 
 #auth-modal { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
 .modal-box { background: #fff; border: 1px solid var(--line); padding: 50px; border-radius: var(--r); width: 100%; max-width: 480px; text-align: center; }
+.btn-primary.success { background: var(--green) !important; }
