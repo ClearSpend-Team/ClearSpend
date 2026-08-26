@@ -23,7 +23,7 @@ window.updateDaysFromDate = function() {
     if (diff >= 0) { document.getElementById('in-days').value = diff; window.runCalc(); }
 };
 
-// --- FIXED ESSENTIALS STACK ---
+// --- FIXED RENDERER (NO MORE BUNCHED TEXT) ---
 window.addEssentialBill = function() {
     const nameInput = document.getElementById('bill-item-name');
     const amtInput = document.getElementById('bill-item-amt');
@@ -59,12 +59,12 @@ function renderEssentials() {
     const list = document.getElementById('essentials-list');
     list.innerHTML = '';
     window.essentialBills.forEach((b, i) => {
-        // HARD-CODED RED X FOR VERIFICATION
+        // NEW FLEXBOX STRUCTURE FOR CLARITY
         list.innerHTML += `
-            <div class="data-row">
-                <span>${b.name}</span>
+            <div class="stack-row">
+                <span style="font-weight:700;">${b.name}</span>
                 <div style="display:flex; align-items:center;">
-                    <span>$${b.amt.toLocaleString()}</span>
+                    <span style="font-weight:800; color:var(--navy);">$${b.amt.toLocaleString()}</span>
                     <span class="remove-btn" onclick="window.removeEssentialBill(${i})">×</span>
                 </div>
             </div>`;
