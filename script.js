@@ -24,16 +24,13 @@ window.updateDaysFromDate = function() {
 };
 
 window.addEssentialBill = function() {
-    const nameInput = document.getElementById('bill-item-name');
-    const amtInput = document.getElementById('bill-item-amt');
-    const freqInput = document.getElementById('bill-item-freq');
-    const n = nameInput.value;
-    const a = parseVal(amtInput.value);
-    const f = freqInput.value;
+    const n = document.getElementById('bill-item-name').value;
+    const a = parseVal(document.getElementById('bill-item-amt').value);
+    const f = document.getElementById('bill-item-freq').value;
     if(!n || !a) return;
     window.essentialBills.push({name: n, amt: a, freq: f});
-    nameInput.value = '';
-    amtInput.value = '';
+    document.getElementById('bill-item-name').value = '';
+    document.getElementById('bill-item-amt').value = '';
     updateFrictionBox();
     renderEssentials();
     window.runCalc();
@@ -58,15 +55,7 @@ function renderEssentials() {
     list.innerHTML = '';
     window.essentialBills.forEach((b, i) => {
         const freqText = b.freq == "1" ? "Mo" : b.freq == "4" ? "Wk" : "Bi-Wk";
-        // FORCED RED X STRUCTURE
-        list.innerHTML += `
-            <div class="stack-row">
-                <span style="font-weight:700;">${b.name} (${freqText})</span>
-                <div style="display:flex; align-items:center;">
-                    <span style="font-weight:800; color:var(--navy);">$${b.amt.toLocaleString()}</span>
-                    <span class="remove-btn" onclick="window.removeEssentialBill(${i})">×</span>
-                </div>
-            </div>`;
+        list.innerHTML += `<div class="stack-row"><span>${b.name} (${freqText})</span><div style="display:flex; align-items:center;"><span>$${b.amt.toLocaleString(undefined, {minimumFractionDigits: 2})}</span><span class="remove-btn" onclick="window.removeEssentialBill(${i})">×</span></div></div>`;
     });
 }
 
@@ -82,16 +71,18 @@ window.runCalc = function() {
   let safe = inc - bill;
   if (isCushionOn) {
       const cushionAmt = safe * cushionPercent;
-      document.getElementById('val-cushion').innerText = '$' + cushionAmt.toLocaleString(undefined, {minimumFractionDigits: 2});
+      document.getElementById('val-cushion').innerText = '$' + cushionAmt.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
       safe = safe - cushionAmt;
   } else {
       document.getElementById('val-cushion').innerText = '$0.00';
   }
 
   const burn = safe / days;
-  document.getElementById('display-safe').innerText = '$' + safe.toLocaleString(undefined, {minimumFractionDigits: 2});
+  document.getElementById('display-safe').innerText = '$' + safe.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
   const statusT = document.getElementById('status-text');
-  statusT.innerText = 'Daily Limit: $' + burn.toLocaleString(undefined, {minimumFractionDigits: 2});
+  
+  // FIXED: 2 Decimal Places only
+  statusT.innerText = 'Daily Limit: $' + burn.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
   
   const card = document.getElementById('main-card');
   card.classList.remove('halo-green', 'halo-yellow', 'halo-red');
