@@ -8,7 +8,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-
 <div id="auth-modal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.4); z-index:9999; align-items:center; justify-content:center; backdrop-filter:blur(10px);"><div class="modal-box" id="auth-content" style="background:#fff; padding:50px; border-radius:28px; width:460px; text-align:center;"></div></div>
 
 <nav>
@@ -43,8 +42,8 @@
       <button class="btn-primary" id="sync-btn" onclick="saveToCloud()">Secure Sync</button>
     </section>
 
-    <section class="card" id="annual-box">
-        <span class="input-label">Pro: The Annual Velocity</span>
+    <section class="card pro-feat" id="annual-box">
+        <span class="label">Pro: The Annual Velocity</span>
         <div style="margin-top: 15px;">
             <label class="input-label">State Cost Index</label>
             <select id="in-state" onchange="runCalc()">
@@ -53,13 +52,13 @@
             </select>
             <label class="input-label">Yearly Gross Salary</label><input type="text" id="in-annual" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
             <div id="ratio-label" style="font-weight: 900; font-size: 14px; margin-top:10px;">Ratio: ---</div>
-            <div style="height:10px; background:var(--line); border-radius:10px; margin:8px 0; overflow:hidden;"><div id="ratio-bar" style="height:100%; width:0%; transition:1s; background:var(--green)"></div></div>
+            <div class="bar-track"><div id="ratio-bar" class="bar-fill" style="background:var(--green); width:0%;"></div></div>
             <p id="ratio-msg" style="font-size: 11px; color:var(--muted); margin-top: 5px; font-weight: 600;"></p>
         </div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Pro Pass Required</div></div>
     </section>
 
-    <section class="card" id="starter-cushion">
+    <section class="card pro-feat" id="starter-cushion">
         <span class="label">The Ghost Cushion</span>
         <div style="margin-top: 15px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -69,12 +68,11 @@
                 <label class="switch"><input type="checkbox" id="cushion-toggle" onchange="runCalc()"><span class="slider"></span></label>
             </div>
             <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: var(--muted);"><span>Hidden Reserves:</span><span id="val-cushion">$0.00</span></div>
-            <p style="font-size: 10px; color: var(--muted); margin-top: 15px; line-height: 1.4;">💡 <b>The Ghost Cushion:</b> Choose your safety percentage. ClearSpend will hide this amount from your daily limit.</p>
         </div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Starter Cushion</div></div>
     </section>
 
-    <section class="card" id="essentials-box">
+    <section class="card pro-feat" id="essentials-box">
         <span class="label">The Essentials Stack</span>
         <div style="margin-top: 15px;">
             <input type="text" id="bill-item-name" placeholder="Bill Name" style="margin-bottom:8px;">
@@ -86,7 +84,7 @@
             </div>
             <button class="btn-primary" style="width:100%; margin-top:10px;" onclick="addEssentialBill()">Add Recurring Bill</button>
         </div>
-        <div id="essentials-list" style="max-height: 120px; overflow-y: auto;"></div>
+        <div id="essentials-list" style="margin-top: 20px; max-height: 150px; overflow-y: auto;"></div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Bill List</div></div>
     </section>
   </div>
