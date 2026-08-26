@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<div id="auth-modal" style="display:none; position:fixed; inset:0; background:rgba(15,23,42,0.4); z-index:9999; align-items:center; justify-content:center; backdrop-filter:blur(10px);"><div class="modal-box" id="auth-content" style="background:#fff; padding:50px; border-radius:28px; width:460px; text-align:center;"></div></div>
+<div id="auth-modal"><div class="modal-box" id="auth-content"></div></div>
 
 <nav>
   <div class="logo-container" onclick="location.reload()">
@@ -23,16 +23,17 @@
   <div class="hero">
     <h1>Know your <span>Safe-to-Spend</span><br>before you swipe.</h1>
     <p style="font-size: 26px; font-weight: 800; color: var(--indigo); margin-bottom: 10px;">Because your bank balance is lying to you.</p>
+    <p style="font-size:19px; color:var(--muted); font-weight:500;">Professional financial command center. Stop guessing and outrun your debt.</p>
   </div>
   
   <div class="dashboard-grid">
-    <section class="card col-6" id="main-card">
+    <section class="card col-8" id="main-card">
         <span class="label">Live Disposable Balance</span>
         <div class="big-money" id="display-safe">$0</div>
         <div id="status-text" class="status-text">Daily Limit: $0.00</div>
     </section>
     
-    <section class="card col-6">
+    <section class="card col-4">
       <h2 style="margin:0; font-size:24px; color:var(--navy);">The Snapshot</h2>
       <label class="input-label" style="margin-top:10px;">Next Cash In</label><input type="text" id="in-income" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
       <label class="input-label">Next Payday</label><input type="date" id="in-payday" onchange="updateDaysFromDate()">
@@ -49,7 +50,6 @@
             <select id="in-state" onchange="runCalc()">
                 <option value="1.0" selected>Standard USA</option>
                 <option value="1.3">California</option><option value="1.3">New York</option><option value="1.1">Texas</option><option value="1.1">Florida</option>
-                <option value="1.2">Washington</option><option value="1.1">Illinois</option><option value="1.05">Pennsylvania</option><option value="0.9">Ohio</option>
             </select>
             <label class="input-label">Yearly Gross Salary</label><input type="text" id="in-annual" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
             <div id="ratio-label" style="font-weight: 900; font-size: 14px; margin-top:10px;">Ratio: ---</div>
@@ -69,17 +69,23 @@
                 <label class="switch"><input type="checkbox" id="cushion-toggle" onchange="runCalc()"><span class="slider"></span></label>
             </div>
             <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: var(--muted);"><span>Hidden Reserves:</span><span id="val-cushion">$0.00</span></div>
-            <p style="font-size: 10px; color: var(--muted); margin-top: 15px; line-height: 1.4;">💡 <b>The Ghost Cushion:</b> Choose your safety percentage. ClearSpend will hide this amount from your daily limit.</p>
         </div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Starter Cushion</div></div>
     </section>
 
     <section class="card col-4 pro-feat" id="essentials-box">
         <span class="label">The Essentials Stack</span>
-        <div style="display: flex; gap: 10px; margin: 15px 0;">
-            <input type="text" id="bill-item-name" placeholder="Rent, Phone..." style="margin:0;">
-            <input type="text" id="bill-item-amt" placeholder="$0.00" oninput="formatCurrency(this)" style="margin:0;">
-            <button class="btn-primary" style="padding:10px 20px;" onclick="addEssentialBill()">Add</button>
+        <div style="margin-top: 15px;">
+            <input type="text" id="bill-item-name" placeholder="Bill Name" style="margin-bottom:8px;">
+            <div style="display: flex; gap: 8px;">
+                <input type="text" id="bill-item-amt" placeholder="$0.00" oninput="formatCurrency(this)" style="flex: 1;">
+                <select id="bill-item-freq" style="flex: 1;">
+                    <option value="1">Monthly</option>
+                    <option value="4">Weekly</option>
+                    <option value="2">Bi-Weekly</option>
+                </select>
+            </div>
+            <button class="btn-primary" style="width:100%; margin-top:10px;" onclick="addEssentialBill()">Add Recurring Bill</button>
         </div>
         <div id="essentials-list" style="max-height: 120px; overflow-y: auto;"></div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Bill List</div></div>
