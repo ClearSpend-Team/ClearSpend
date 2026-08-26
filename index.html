@@ -27,7 +27,12 @@
   </div>
   
   <div class="dashboard-grid">
-    <section class="card col-8 burn-card" id="main-card"><span class="label">Live Disposable Balance</span><div class="big-money" id="display-safe">$0</div><div id="status-text" class="status-text">Daily Limit: $0.00</div></section>
+    <!-- ROW 1 -->
+    <section class="card col-8 burn-card" id="main-card">
+        <span class="input-label">Live Disposable Balance</span>
+        <div class="big-money" id="display-safe">$0</div>
+        <div id="status-text" class="status-text">Daily Limit: $0.00</div>
+    </section>
     
     <section class="card col-4">
       <h2 style="margin:0; font-size:24px; color:var(--navy);">The Snapshot</h2>
@@ -39,31 +44,46 @@
       <button class="btn-primary" id="sync-btn" onclick="saveToCloud()">Secure Sync</button>
     </section>
 
-    <!-- GHOST CUSHION (WITH TOGGLE) -->
+    <!-- ROW 2 -->
+    <section class="card col-4 pro-feat" id="annual-box">
+        <span class="label">Pro: The Annual Velocity</span>
+        <div style="margin-top: 15px;">
+            <label class="input-label">Yearly Gross Salary</label><input type="text" id="in-annual" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
+            <div id="ratio-label" style="font-weight: 900; font-size: 14px; margin-top:10px;">Ratio: Healthy</div>
+            <div class="bar-track"><div id="ratio-bar" class="bar-fill" style="background:var(--green)"></div></div>
+        </div>
+        <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Pro Pass Required</div></div>
+    </section>
+
     <section class="card col-4 pro-feat" id="starter-cushion">
         <span class="label">The Ghost Cushion</span>
         <div style="margin-top: 15px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                <span style="font-weight: 800; font-size: 14px;">10% Safety Buffer</span>
+                <select id="cushion-percent" onchange="runCalc()" style="width: 120px; margin: 0; padding: 8px;">
+                    <option value="0.05">5% Buffer</option>
+                    <option value="0.10" selected>10% Buffer</option>
+                    <option value="0.15">15% Buffer</option>
+                    <option value="0.20">20% Buffer</option>
+                </select>
                 <label class="switch">
                     <input type="checkbox" id="cushion-toggle" onchange="runCalc()">
                     <span class="slider"></span>
                 </label>
             </div>
             <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: var(--muted);"><span>Hidden Reserves:</span><span id="val-cushion">$0.00</span></div>
+            <p style="font-size: 10px; color: var(--muted); margin-top: 15px; line-height: 1.4;">💡 <b>Judgment:</b> Choose your safety percentage. ClearSpend will hide this amount from your daily limit.</p>
         </div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Starter Cushion</div></div>
     </section>
 
-    <!-- THE ESSENTIALS STACK (NEW) -->
-    <section class="card col-8 pro-feat" id="essentials-box">
+    <section class="card col-4 pro-feat" id="essentials-box">
         <span class="label">The Essentials Stack</span>
         <div style="display: flex; gap: 10px; margin: 15px 0;">
-            <input type="text" id="bill-item-name" placeholder="Rent, Phone, etc." style="margin:0;">
+            <input type="text" id="bill-item-name" placeholder="Rent, Phone..." style="margin:0;">
             <input type="text" id="bill-item-amt" placeholder="$0.00" oninput="formatCurrency(this)" style="margin:0;">
-            <button class="btn-primary" style="padding:10px 20px;">Add</button>
+            <button class="btn-primary" style="padding:10px 20px;" onclick="addEssentialBill()">Add</button>
         </div>
-        <p style="font-size: 12px; color: var(--muted); text-align: center; margin-top: 20px;">Starter: Build your itemized bill list here.</p>
+        <div id="essentials-list" style="max-height: 120px; overflow-y: auto;"></div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Unlock Bill List</div></div>
     </section>
   </div>
