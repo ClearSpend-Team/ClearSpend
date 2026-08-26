@@ -23,24 +23,14 @@ window.updateDaysFromDate = function() {
     if (diff >= 0) { document.getElementById('in-days').value = diff; window.runCalc(); }
 };
 
-// --- FIXED RECURRING LOGIC ---
 window.addEssentialBill = function() {
-    const nameInput = document.getElementById('bill-item-name');
-    const amtInput = document.getElementById('bill-item-amt');
-    const freqInput = document.getElementById('bill-item-freq');
-    
-    const n = nameInput.value;
-    const a = parseVal(amtInput.value);
-    const f = freqInput.value;
-    
+    const n = document.getElementById('bill-item-name').value;
+    const a = parseVal(document.getElementById('bill-item-amt').value);
+    const f = document.getElementById('bill-item-freq').value;
     if(!n || !a) return;
-    
     window.essentialBills.push({name: n, amt: a, freq: f});
-    
-    // CLEAR INPUTS
-    nameInput.value = '';
-    amtInput.value = '';
-    
+    document.getElementById('bill-item-name').value = '';
+    document.getElementById('bill-item-amt').value = '';
     updateFrictionBox();
     renderEssentials();
     window.runCalc();
@@ -54,7 +44,6 @@ window.removeEssentialBill = function(i) {
 };
 
 function updateFrictionBox() {
-    // Calculate total monthly cost based on frequencies (Weekly * 4, Bi-Weekly * 2)
     const total = window.essentialBills.reduce((acc, curr) => {
         return acc + (curr.amt * parseFloat(curr.freq));
     }, 0);
@@ -66,14 +55,7 @@ function renderEssentials() {
     list.innerHTML = '';
     window.essentialBills.forEach((b, i) => {
         const freqText = b.freq == "1" ? "Mo" : b.freq == "4" ? "Wk" : "Bi-Wk";
-        list.innerHTML += `
-            <div class="stack-row">
-                <span>${b.name} (${freqText})</span>
-                <div style="display:flex; align-items:center;">
-                    <span>$${b.amt.toLocaleString()}</span>
-                    <span class="remove-btn" onclick="window.removeEssentialBill(${i})">×</span>
-                </div>
-            </div>`;
+        list.innerHTML += `<div class="stack-row"><span>${b.name} (${freqText})</span><div style="display:flex; align-items:center;"><span>$${b.amt.toLocaleString()}</span><span class="remove-btn" onclick="window.removeEssentialBill(${i})">×</span></div></div>`;
     });
 }
 
@@ -83,7 +65,6 @@ window.runCalc = function() {
   const yearly = parseVal(document.getElementById('in-annual').value);
   const days = +document.getElementById('in-days').value || 14;
   const stateMultiplier = parseFloat(document.getElementById('in-state').value);
-  
   const isCushionOn = document.getElementById('cushion-toggle').checked;
   const cushionPercent = parseFloat(document.getElementById('cushion-percent').value);
 
@@ -137,7 +118,11 @@ window.saveToCloud = async function() {
   const { data: { user } } = await sb.auth.getUser(); if(!user) { openAuth('signup'); return; }
   const updates = { id: user.id, income: parseVal(document.getElementById('in-income').value), bills: parseVal(document.getElementById('in-bills').value), data_vault: { cushion: document.getElementById('cushion-toggle').checked, cushionPercent: document.getElementById('cushion-percent').value, annual: parseVal(document.getElementById('in-annual').value), essentials: window.essentialBills, state: document.getElementById('in-state').value }, updated_at: new Date() };
   const { error } = await sb.from('profiles').upsert(updates);
-  if(!error) { btn.innerText = "Vault Saved ✓"; btn.classList.add('success'); setTimeout(() => { btn.innerText = "Secure Sync"; btn.classList.remove('success'); }, 3000); }
+  if(!error) { 
+      btn.innerText = "Vault Saved ✓"; 
+      btn.classList.add('success-green'); 
+      setTimeout(() => { btn.innerText = "Secure Sync"; btn.classList.remove('success-green'); }, 3000); 
+  }
 }
 
 window.checkUser = async function() {
