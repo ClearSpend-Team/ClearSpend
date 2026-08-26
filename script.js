@@ -132,15 +132,27 @@ window.checkUser = async function() {
   const { data: { user } } = await sb.auth.getUser();
   if(user) {
     document.getElementById('nav-auth').innerHTML = `<div id="plan-badge" class="status-badge">...</div><span style="font-size:14px;font-weight:800;">${user.email}</span><button style="background:none;font-size:12px;margin-left:10px;" onclick="sb.auth.signOut().then(()=>location.reload())">Sign Out</button>`;
+    
     const { data: profile } = await sb.from('profiles').select('*').eq('id', user.id).single();
+    
     if(profile) {
-      document.getElementById('plan-badge').style.display = 'block'; document.getElementById('plan-badge').innerText = profile.plan;
+      document.getElementById('plan-badge').style.display = 'block'; 
+      document.getElementById('plan-badge').innerText = profile.plan;
+
+      // THE MASTER UNLOCK LOGIC
       if(profile.plan === 'PRO' || profile.plan === 'STARTER') {
+          // Unlock Starter features
           document.getElementById('starter-cushion').classList.add('unlocked');
           document.getElementById('essentials-box').classList.add('unlocked');
-          document.getElementById('freq-lock').style.display = 'none';
+          if(document.getElementById('freq-lock')) document.getElementById('freq-lock').style.display = 'none';
       }
-      if(profile.plan === 'PRO') { document.getElementById('annual-box').classList.add('unlocked'); }
+      
+      if(profile.plan === 'PRO') { 
+          // Unlock Pro features
+          document.getElementById('annual-box').classList.add('unlocked'); 
+      }
+
+      // Load Data
       document.getElementById('in-income').value = profile.income ? '$'+profile.income.toLocaleString() : '';
       document.getElementById('in-bills').value = profile.bills ? '$'+profile.bills.toLocaleString() : '';
       if(profile.data_vault) { 
@@ -154,5 +166,4 @@ window.checkUser = async function() {
       window.runCalc();
     }
   }
-}
-window.runCalc(); window.checkUser();
+};
