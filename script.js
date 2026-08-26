@@ -23,13 +23,24 @@ window.updateDaysFromDate = function() {
     if (diff >= 0) { document.getElementById('in-days').value = diff; window.runCalc(); }
 };
 
+// --- FIXED RECURRING LOGIC ---
 window.addEssentialBill = function() {
-    const n = document.getElementById('bill-item-name').value;
-    const a = parseVal(document.getElementById('bill-item-amt').value);
+    const nameInput = document.getElementById('bill-item-name');
+    const amtInput = document.getElementById('bill-item-amt');
+    const freqInput = document.getElementById('bill-item-freq');
+    
+    const n = nameInput.value;
+    const a = parseVal(amtInput.value);
+    const f = freqInput.value;
+    
     if(!n || !a) return;
-    window.essentialBills.push({name: n, amt: a});
-    document.getElementById('bill-item-name').value = '';
-    document.getElementById('bill-item-amt').value = '';
+    
+    window.essentialBills.push({name: n, amt: a, freq: f});
+    
+    // CLEAR INPUTS
+    nameInput.value = '';
+    amtInput.value = '';
+    
     updateFrictionBox();
     renderEssentials();
     window.runCalc();
@@ -43,7 +54,10 @@ window.removeEssentialBill = function(i) {
 };
 
 function updateFrictionBox() {
-    const total = window.essentialBills.reduce((acc, curr) => acc + curr.amt, 0);
+    // Calculate total monthly cost based on frequencies (Weekly * 4, Bi-Weekly * 2)
+    const total = window.essentialBills.reduce((acc, curr) => {
+        return acc + (curr.amt * parseFloat(curr.freq));
+    }, 0);
     document.getElementById('in-bills').value = '$' + total.toLocaleString(undefined, {minimumFractionDigits: 2});
 }
 
@@ -51,7 +65,8 @@ function renderEssentials() {
     const list = document.getElementById('essentials-list');
     list.innerHTML = '';
     window.essentialBills.forEach((b, i) => {
-        list.innerHTML += `<div class="stack-row"><span>${b.name}</span><div style="display:flex; align-items:center;"><span>$${b.amt.toLocaleString()}</span><span class="remove-btn" onclick="window.removeEssentialBill(${i})">×</span></div></div>`;
+        const freqText = b.freq == "1" ? "Mo" : b.freq == "4" ? "Wk" : "Bi-Wk";
+        list.innerHTML += `<div class="stack-row"><span>${b.name} (${freqText})</span><div style="display:flex; align-items:center;"><span>$${b.amt.toLocaleString()}</span><span class="remove-btn" onclick="window.removeEssentialBill(${i})">×</span></div></div>`;
     });
 }
 
@@ -61,7 +76,6 @@ window.runCalc = function() {
   const yearly = parseVal(document.getElementById('in-annual').value);
   const days = +document.getElementById('in-days').value || 14;
   const stateMultiplier = parseFloat(document.getElementById('in-state').value);
-  
   const isCushionOn = document.getElementById('cushion-toggle').checked;
   const cushionPercent = parseFloat(document.getElementById('cushion-percent').value);
 
@@ -76,13 +90,22 @@ window.runCalc = function() {
 
   const burn = safe / days;
   document.getElementById('display-safe').innerText = '$' + safe.toLocaleString(undefined, {minimumFractionDigits: 2});
-  const statusT = document.getElementById('status-text'); const card = document.getElementById('main-card');
+  const statusT = document.getElementById('status-text');
+  
   statusT.innerText = 'Daily Limit: $' + burn.toLocaleString(undefined, {minimumFractionDigits: 2});
   
+  const card = document.getElementById('main-card');
   card.classList.remove('halo-green', 'halo-yellow', 'halo-red');
-  if (burn > (100 * stateMultiplier)) { statusT.style.color="var(--green)"; card.classList.add('halo-green'); }
-  else if (burn > (40 * stateMultiplier)) { statusT.style.color="var(--amber)"; card.classList.add('halo-yellow'); }
-  else { statusT.style.color="var(--red)"; card.classList.add('halo-red'); }
+  if (burn > (100 * stateMultiplier)) { 
+      statusT.style.color="var(--green)"; 
+      card.classList.add('halo-green'); 
+  } else if (burn > (40 * stateMultiplier)) { 
+      statusT.style.color="var(--amber)"; 
+      card.classList.add('halo-yellow'); 
+  } else { 
+      statusT.style.color="var(--red)"; 
+      card.classList.add('halo-red'); 
+  }
 
   const ratio = (bill * 12 / (yearly || 1)) * 100;
   const bar = document.getElementById('ratio-bar');
@@ -115,7 +138,11 @@ window.saveToCloud = async function() {
   const { data: { user } } = await sb.auth.getUser(); if(!user) { openAuth('signup'); return; }
   const updates = { id: user.id, income: parseVal(document.getElementById('in-income').value), bills: parseVal(document.getElementById('in-bills').value), data_vault: { cushion: document.getElementById('cushion-toggle').checked, cushionPercent: document.getElementById('cushion-percent').value, annual: parseVal(document.getElementById('in-annual').value), essentials: window.essentialBills, state: document.getElementById('in-state').value }, updated_at: new Date() };
   const { error } = await sb.from('profiles').upsert(updates);
-  if(!error) { btn.innerText = "Vault Saved ✓"; btn.classList.add('success-green'); setTimeout(() => { btn.innerText = "Secure Sync"; btn.classList.remove('success-green'); }, 3000); }
+  if(!error) { 
+      btn.innerText = "Vault Saved ✓"; 
+      btn.classList.add('success-green'); 
+      setTimeout(() => { btn.innerText = "Secure Sync"; btn.classList.remove('success-green'); }, 3000); 
+  }
 }
 
 window.checkUser = async function() {
