@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<div id="auth-modal" class="modal-overlay"><div class="modal-box" id="auth-content"></div></div>
+<div id="auth-modal"><div class="modal-box" id="auth-content"></div></div>
 
 <nav>
   <div class="logo-container" onclick="location.reload()">
@@ -27,9 +27,9 @@
   </div>
   
   <div class="dashboard-grid">
-    <!-- ROW 1 -->
-    <section class="card col-8 burn-card" id="main-card">
-        <span class="input-label">Live Disposable Balance</span>
+    <!-- ROW 1: MATCHED TO IMAGE -->
+    <section class="card col-8" id="main-card">
+        <span class="label">Live Disposable Balance</span>
         <div class="big-money" id="display-safe">$0</div>
         <div id="status-text" class="status-text">Daily Limit: $0.00</div>
     </section>
@@ -51,20 +51,11 @@
             <label class="input-label">State Cost Index</label>
             <select id="in-state" onchange="runCalc()">
                 <option value="1.0" selected>Standard USA</option>
-                <option value="1.3">California (High)</option>
-                <option value="1.3">New York (High)</option>
-                <option value="1.1">Texas</option>
-                <option value="1.1">Florida</option>
-                <option value="1.2">Washington</option>
-                <option value="1.1">Illinois</option>
-                <option value="1.05">Pennsylvania</option>
-                <option value="0.9">Ohio (Low)</option>
-                <option value="1.0">Georgia</option>
-                <option value="1.0">North Carolina</option>
+                <option value="1.3">California (High)</option><option value="1.3">New York (High)</option><option value="1.1">Texas</option><option value="1.1">Florida</option>
             </select>
             <label class="input-label">Yearly Gross Salary</label><input type="text" id="in-annual" placeholder="$0.00" oninput="formatCurrency(this); runCalc()">
             <div id="ratio-label" style="font-weight: 900; font-size: 14px; margin-top:10px;">Ratio: ---</div>
-            <div class="bar-track"><div id="ratio-bar" class="bar-fill" style="background:var(--green)"></div></div>
+            <div style="height:10px; background:var(--line); border-radius:10px; margin:8px 0; overflow:hidden;"><div id="ratio-bar" style="height:100%; width:0%; transition:1s; background:var(--green)"></div></div>
             <p id="ratio-msg" style="font-size: 11px; color:var(--muted); margin-top: 5px; font-weight: 600;"></p>
         </div>
         <div class="glass-lock" onclick="document.getElementById('pricing').scrollIntoView()"><div class="upgrade-tag">Pro Pass Required</div></div>
@@ -75,10 +66,7 @@
         <div style="margin-top: 15px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                 <select id="cushion-percent" onchange="runCalc()" style="width: 120px; margin: 0; padding: 8px;">
-                    <option value="0.05">5% Buffer</option>
-                    <option value="0.10" selected>10% Buffer</option>
-                    <option value="0.15">15% Buffer</option>
-                    <option value="0.20">20% Buffer</option>
+                    <option value="0.05">5% Buffer</option><option value="0.10" selected>10% Buffer</option><option value="0.20">20% Buffer</option>
                 </select>
                 <label class="switch"><input type="checkbox" id="cushion-toggle" onchange="runCalc()"><span class="slider"></span></label>
             </div>
@@ -95,9 +83,7 @@
             <div style="display: flex; gap: 8px;">
                 <input type="text" id="bill-item-amt" placeholder="$0.00" oninput="formatCurrency(this)" style="flex: 1;">
                 <select id="bill-item-freq" style="flex: 1;">
-                    <option value="1">Monthly</option>
-                    <option value="4">Weekly</option>
-                    <option value="2">Bi-Weekly</option>
+                    <option value="1">Monthly</option><option value="4">Weekly</option><option value="2">Bi-Weekly</option>
                 </select>
             </div>
             <button class="btn-primary" style="width:100%; margin-top:10px;" onclick="addEssentialBill()">Add Recurring Bill</button>
