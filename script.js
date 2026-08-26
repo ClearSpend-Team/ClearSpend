@@ -23,7 +23,7 @@ window.updateDaysFromDate = function() {
     if (diff >= 0) { document.getElementById('in-days').value = diff; window.runCalc(); }
 };
 
-// FIXED ESSENTIALS STACK LOGIC WITH RED X
+// --- FIXED ESSENTIALS STACK ---
 window.addEssentialBill = function() {
     const nameInput = document.getElementById('bill-item-name');
     const amtInput = document.getElementById('bill-item-amt');
@@ -34,7 +34,7 @@ window.addEssentialBill = function() {
     
     window.essentialBills.push({name: n, amt: a});
     
-    // CLEAR INPUTS IMMEDIATELY
+    // CLEAR INPUTS
     nameInput.value = '';
     amtInput.value = '';
     
@@ -59,7 +59,15 @@ function renderEssentials() {
     const list = document.getElementById('essentials-list');
     list.innerHTML = '';
     window.essentialBills.forEach((b, i) => {
-        list.innerHTML += `<div class="data-row"><span>${b.name}</span><span>$${b.amt.toLocaleString()}<span class="remove-btn" onclick="removeEssentialBill(${i})">×</span></span></div>`;
+        // HARD-CODED RED X FOR VERIFICATION
+        list.innerHTML += `
+            <div class="data-row">
+                <span>${b.name}</span>
+                <div style="display:flex; align-items:center;">
+                    <span>$${b.amt.toLocaleString()}</span>
+                    <span class="remove-btn" onclick="window.removeEssentialBill(${i})">×</span>
+                </div>
+            </div>`;
     });
 }
 
@@ -74,7 +82,6 @@ window.runCalc = function() {
   const cushionPercent = parseFloat(document.getElementById('cushion-percent').value);
 
   let safe = inc - bill;
-  
   if (isCushionOn) {
       const cushionAmt = safe * cushionPercent;
       document.getElementById('val-cushion').innerText = '$' + cushionAmt.toLocaleString(undefined, {minimumFractionDigits: 2});
@@ -88,36 +95,20 @@ window.runCalc = function() {
   const statusT = document.getElementById('status-text'); const card = document.getElementById('main-card');
   statusT.innerText = 'Daily Limit: $' + burn.toFixed(2);
   
-  // STATE-BASED TRAFFIC LIGHT LOGIC
   card.classList.remove('halo-green', 'halo-yellow', 'halo-red');
   if (burn > (100 * stateMultiplier)) { statusT.style.color="var(--green)"; card.classList.add('halo-green'); }
   else if (burn > (40 * stateMultiplier)) { statusT.style.color="var(--amber)"; card.classList.add('halo-yellow'); }
   else { statusT.style.color="var(--red)"; card.classList.add('halo-red'); }
 
-  // ANNUAL VELOCITY LOGIC
   const ratio = (bill * 12 / (yearly || 1)) * 100;
   const bar = document.getElementById('ratio-bar');
   const label = document.getElementById('ratio-label');
   const msg = document.getElementById('ratio-msg');
-
   if(bar && msg) {
       bar.style.width = Math.min(100, ratio * 2) + "%";
-      if(ratio < 20) {
-          bar.style.background = "var(--green)";
-          label.innerText = "Ratio: " + ratio.toFixed(1) + "% (Elite)";
-          msg.innerText = "Status: Secure. Your income far exceeds your fixed costs.";
-          msg.style.color = "var(--green)";
-      } else if(ratio < 40) {
-          bar.style.background = "var(--amber)";
-          label.innerText = "Ratio: " + ratio.toFixed(1) + "% (Stable)";
-          msg.innerText = "Status: Caution. Fixed costs are weighing on your year.";
-          msg.style.color = "var(--amber)";
-      } else {
-          bar.style.background = "var(--red)";
-          label.innerText = "Ratio: " + ratio.toFixed(1) + "% (Heavy)";
-          msg.innerText = "Status: Overburdened. High friction detected.";
-          msg.style.color = "var(--red)";
-      }
+      if(ratio < 20) { bar.style.background = "var(--green)"; label.innerText = "Ratio: " + ratio.toFixed(1) + "% (Elite)"; msg.innerText = "Status: Secure."; msg.style.color = "var(--green)"; }
+      else if(ratio < 40) { bar.style.background = "var(--amber)"; label.innerText = "Ratio: " + ratio.toFixed(1) + "% (Stable)"; msg.innerText = "Status: Caution."; msg.style.color = "var(--amber)"; }
+      else { bar.style.background = "var(--red)"; label.innerText = "Ratio: " + ratio.toFixed(1) + "% (Heavy)"; msg.innerText = "Status: Overburdened."; msg.style.color = "var(--red)"; }
   }
 };
 
