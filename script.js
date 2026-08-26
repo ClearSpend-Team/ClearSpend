@@ -80,14 +80,22 @@ window.runCalc = function() {
   const burn = safe / days;
   document.getElementById('display-safe').innerText = '$' + safe.toLocaleString(undefined, {minimumFractionDigits: 2});
   const statusT = document.getElementById('status-text');
+  const card = document.getElementById('main-card');
   
-  // MATCHED TO IMAGE: "Daily Limit: $855.00"
   statusT.innerText = 'Daily Limit: $' + burn.toLocaleString(undefined, {minimumFractionDigits: 2});
   
-  const card = document.getElementById('main-card');
-  if (burn > (100 * stateMultiplier)) { statusT.style.color="var(--green)"; }
-  else if (burn > (40 * stateMultiplier)) { statusT.style.color="var(--amber)"; }
-  else { statusT.style.color="var(--red)"; }
+  // APPLY SURROUNDING COLOR (HALO)
+  card.classList.remove('halo-green', 'halo-yellow', 'halo-red');
+  if (burn > (100 * stateMultiplier)) { 
+      statusT.style.color="var(--green)"; 
+      card.classList.add('halo-green'); 
+  } else if (burn > (40 * stateMultiplier)) { 
+      statusT.style.color="var(--amber)"; 
+      card.classList.add('halo-yellow'); 
+  } else { 
+      statusT.style.color="var(--red)"; 
+      card.classList.add('halo-red'); 
+  }
 
   const ratio = (bill * 12 / (yearly || 1)) * 100;
   const bar = document.getElementById('ratio-bar');
