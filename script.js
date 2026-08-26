@@ -23,24 +23,17 @@ window.updateDaysFromDate = function() {
     if (diff >= 0) { document.getElementById('in-days').value = diff; window.runCalc(); }
 };
 
-// --- FIXED RECURRING LOGIC ---
 window.addEssentialBill = function() {
     const nameInput = document.getElementById('bill-item-name');
     const amtInput = document.getElementById('bill-item-amt');
     const freqInput = document.getElementById('bill-item-freq');
-    
     const n = nameInput.value;
     const a = parseVal(amtInput.value);
     const f = freqInput.value;
-    
     if(!n || !a) return;
-    
     window.essentialBills.push({name: n, amt: a, freq: f});
-    
-    // CLEAR INPUTS
     nameInput.value = '';
     amtInput.value = '';
-    
     updateFrictionBox();
     renderEssentials();
     window.runCalc();
@@ -54,7 +47,6 @@ window.removeEssentialBill = function(i) {
 };
 
 function updateFrictionBox() {
-    // Calculate total monthly cost based on frequencies (Weekly * 4, Bi-Weekly * 2)
     const total = window.essentialBills.reduce((acc, curr) => {
         return acc + (curr.amt * parseFloat(curr.freq));
     }, 0);
@@ -91,21 +83,13 @@ window.runCalc = function() {
   const burn = safe / days;
   document.getElementById('display-safe').innerText = '$' + safe.toLocaleString(undefined, {minimumFractionDigits: 2});
   const statusT = document.getElementById('status-text');
-  
   statusT.innerText = 'Daily Limit: $' + burn.toLocaleString(undefined, {minimumFractionDigits: 2});
   
   const card = document.getElementById('main-card');
   card.classList.remove('halo-green', 'halo-yellow', 'halo-red');
-  if (burn > (100 * stateMultiplier)) { 
-      statusT.style.color="var(--green)"; 
-      card.classList.add('halo-green'); 
-  } else if (burn > (40 * stateMultiplier)) { 
-      statusT.style.color="var(--amber)"; 
-      card.classList.add('halo-yellow'); 
-  } else { 
-      statusT.style.color="var(--red)"; 
-      card.classList.add('halo-red'); 
-  }
+  if (burn > (100 * stateMultiplier)) { statusT.style.color="var(--green)"; card.classList.add('halo-green'); }
+  else if (burn > (40 * stateMultiplier)) { statusT.style.color="var(--amber)"; card.classList.add('halo-yellow'); }
+  else { statusT.style.color="var(--red)"; card.classList.add('halo-red'); }
 
   const ratio = (bill * 12 / (yearly || 1)) * 100;
   const bar = document.getElementById('ratio-bar');
